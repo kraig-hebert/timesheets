@@ -7,6 +7,7 @@ import * as client from '../api/client';
 
 const initialState = { entities: {} };
 
+// fetch list of timeshee entries from db.json
 export const fetchEntries = createAsyncThunk(
   'entries/fetchEntries',
   async () => {
@@ -30,8 +31,10 @@ const entriesSlice = createSlice({
   },
 });
 
+// select all entry entities
 export const selectEntryEntities = (state) => state.entries.entities;
 
+// select entries with dateObjects instead of JSON strings
 export const selectEntries = createSelector(selectEntryEntities, (entities) => {
   const entryList = Object.values(entities);
   const entryListWithDateObjects = entryList.map((entry) => {
