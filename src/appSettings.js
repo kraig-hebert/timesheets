@@ -16,18 +16,19 @@ export const rightColumnSX = {
 };
 
 export const boxSX = {
-  margin: '5px',
+  margin: '2px',
   padding: '10px',
   border: '1px solid',
   borderColor: 'primary.main',
   borderRadius: '15px',
   color: 'primary.main',
+  backgroundColor: 'rgba(255,255,255, 0.1)',
 };
 
 export const logoSX = {
   height: '100px',
   display: 'flex',
-  justifyContent: 'space-around',
+  justifyContent: 'center',
   alignItems: 'center',
 };
 
