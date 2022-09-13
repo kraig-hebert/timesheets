@@ -1,6 +1,6 @@
 export const containerSX = {
   height: '100vh',
-  backgroundColor: 'black',
+  backgroundColor: 'primary.main',
 };
 
 export const leftColumnSX = {
@@ -16,13 +16,13 @@ export const rightColumnSX = {
 };
 
 export const boxSX = {
-  margin: '2px',
-  padding: '10px',
-  border: '1px solid',
-  borderColor: 'primary.main',
-  borderRadius: '15px',
+  margin: '10px',
+  padding: '1px',
+  border: '2px solid',
+  borderColor: 'rgba(0, 0, 0)',
+  borderRadius: '9px',
   color: 'primary.main',
-  backgroundColor: 'rgba(255,255,255, 0.1)',
+  backgroundColor: 'rgba(0, 0, 0, .7)',
 };
 
 export const logoSX = {
@@ -40,6 +40,9 @@ export const sideBarSX = {
 
 export const headerSX = {
   height: '100px',
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
 };
 
 export const mainSX = {

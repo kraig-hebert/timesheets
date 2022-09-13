@@ -6,8 +6,11 @@ const Logo = () => {
   return (
     <>
       <CalendarMonthTwoTone sx={{ fontSize: '50px' }} />
-      <Typography variant="h4" sx={{ alignItems: 'center', paddingTop: '7px' }}>
-        Timesheets
+      <Typography
+        variant="h4"
+        sx={{ alignItems: 'center', margin: '7px 0 0 7px' }}
+      >
+        TimeSheets
       </Typography>
     </>
   );
