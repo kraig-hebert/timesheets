@@ -12,3 +12,7 @@ export const textFieldSX = {
     backgroundColor: 'primary.textInput',
   },
 };
+
+export const selectSX = {
+  width: '300px',
+};
