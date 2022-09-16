@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { buttonYearSX } from '../sideBar';
 import MonthButton from '../monthButton/MonthButton';
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { LastPage } from '@mui/icons-material';
 
 const YearButton = (props) => {
@@ -40,7 +40,7 @@ const YearButton = (props) => {
         }}
         startIcon={props.year === props.activeYear && <LastPage />}
       >
-        {props.year}
+        <Typography variant="h6">{props.year}</Typography>
       </Button>
       {props.year === props.activeYear && <Stack>{renderedMonthList}</Stack>}
     </>

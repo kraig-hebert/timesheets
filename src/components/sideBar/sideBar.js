@@ -1,6 +1,5 @@
 export const buttonYearSX = {
   height: '30px',
-  fontSize: '20px',
   display: 'flex',
   justifyContent: 'flex-start',
   paddingLeft: '25px',
@@ -12,7 +11,6 @@ export const buttonYearSX = {
 export const buttonMonthSX = {
   width: '100%',
   height: '30px',
-  fontSize: '15px',
   display: 'flex',
   justifyContent: 'flex-start',
   paddingLeft: '50px',
