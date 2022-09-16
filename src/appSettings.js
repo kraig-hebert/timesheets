@@ -35,7 +35,7 @@ export const logoSX = {
 export const sideBarSX = {
   height: '100%',
   display: 'flex',
-  justifyContent: 'space-around',
+  justifyContent: 'flex-start',
 };
 
 export const headerSX = {

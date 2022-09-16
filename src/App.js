@@ -35,18 +35,18 @@ function App() {
       >
         <Grid container spacing={0}>
           <Grid item xs={2} sx={SX.leftColumnSX}>
-            <Box sx={[SX.logoSX, SX.boxSX]}>
+            <Box sx={[SX.boxSX, SX.logoSX]}>
               <Logo />
             </Box>
-            <Box sx={[SX.sideBarSX, SX.boxSX]}>
+            <Box sx={[SX.boxSX, SX.sideBarSX]}>
               <SideBar />
             </Box>
           </Grid>
           <Grid item xs={10} sx={SX.rightColumnSX}>
-            <Box sx={[SX.headerSX, SX.boxSX]}>
+            <Box sx={[SX.boxSX, SX.headerSX]}>
               <Header />
             </Box>
-            <Box sx={[SX.mainSX, SX.boxSX]}>
+            <Box sx={[SX.boxSX, SX.mainSX]}>
               <Main />
             </Box>
           </Grid>
