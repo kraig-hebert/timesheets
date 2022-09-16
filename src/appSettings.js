@@ -22,7 +22,7 @@ export const boxSX = {
   borderColor: 'rgba(0, 0, 0)',
   borderRadius: '9px',
   color: 'primary.main',
-  backgroundColor: 'rgba(0, 0, 0, .7)',
+  backgroundColor: 'tertiary.main',
 };
 
 export const logoSX = {

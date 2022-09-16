@@ -9,5 +9,8 @@ export const theme = createTheme({
     secondary: {
       main: 'rgba(123, 299, 150)',
     },
+    tertiary: {
+      main: 'rgba(0, 0, 0, .7)',
+    },
   },
 });
