@@ -1,19 +1,28 @@
-import React from 'react';
-import { Button } from '@mui/material';
-import { KeyboardArrowRight } from '@mui/icons-material';
-import * as SX from './sideBar';
+import React, { useState } from 'react';
+import YearButton from './yearButton/YearButton';
+import { stackSX } from './sideBar';
+import { Stack } from '@mui/material';
 
 const SideBar = () => {
+  const YEARS = ['2022', '2021', '2020'];
+
+  const [activeYear, setActiveYear] = useState('2022');
+
+  const renderedYearList = YEARS.map((year) => {
+    return (
+      <YearButton
+        year={year}
+        activeYear={activeYear}
+        setActiveYear={setActiveYear}
+        key={year}
+      />
+    );
+  });
+
   return (
-    <>
-      <Button
-        sx={SX.buttonSX}
-        onClick={() => {}}
-        startIcon={<KeyboardArrowRight />}
-      >
-        2022
-      </Button>
-    </>
+    <Stack sx={stackSX} spacing={0}>
+      {renderedYearList}
+    </Stack>
   );
 };
 

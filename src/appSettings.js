@@ -36,6 +36,7 @@ export const sideBarSX = {
   height: '100%',
   display: 'flex',
   justifyContent: 'flex-start',
+  paddingTop: '5px',
 };
 
 export const headerSX = {
