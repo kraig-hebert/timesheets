@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import { buttonMonthSX } from '../sideBar';
+import { buttonMonthSX } from '../sideBarSX';
 
 const MonthButton = (props) => {
   const activeButtonMonthSX = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { buttonYearSX } from '../sideBar';
+import { buttonYearSX } from '../sideBarSX';
 import MonthButton from '../monthButton/MonthButton';
 import { Button, Stack, Typography } from '@mui/material';
 import { LastPage } from '@mui/icons-material';
@@ -16,7 +16,7 @@ const YearButton = (props) => {
     'August',
     'September',
     'October',
-    'Novemer',
+    'November',
     'December',
   ];
   const [activeMonth, setActiveMonth] = useState('January');

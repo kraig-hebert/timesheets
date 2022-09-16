@@ -48,4 +48,5 @@ export const headerSX = {
 
 export const mainSX = {
   height: '100%',
+  paddingTop: '20px',
 };

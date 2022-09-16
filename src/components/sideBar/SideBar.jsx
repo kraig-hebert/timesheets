@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import YearButton from './yearButton/YearButton';
-import { stackSX } from './sideBar';
+import { stackSX } from './sideBarSX';
 import { Stack } from '@mui/material';
 
 const SideBar = () => {

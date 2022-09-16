@@ -9,7 +9,7 @@ export const textFieldSX = {
   '& .MuiFilledInput-input': {
     borderBottom: '2px solid',
     borderColor: 'secondary.main',
-    backgroundColor: 'primary.textInput',
+    backgroundColor: 'primary.bg',
   },
 };
 
@@ -19,7 +19,7 @@ export const labelSX = {
 
 export const selectSX = {
   width: '300px',
-  backgroundColor: 'primary.textInput',
+  backgroundColor: 'primary.bg',
   '&:hover': {
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: 'secondary.main',
