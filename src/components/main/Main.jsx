@@ -11,7 +11,7 @@ import {
   Paper,
 } from '@mui/material';
 import * as SX from './mainSX';
-import { getMonthName } from '../../helpers/dateHelpers';
+import * as dh from '../../helpers/dateHelpers';
 
 const Main = () => {
   const entries = useSelector(selectEntries);
@@ -40,7 +40,7 @@ const Main = () => {
 
   const setDate = (dateObject) => {
     const monthNum = dateObject.getMonth();
-    return `${getMonthName(monthNum)} ${dateObject.getDate()}`;
+    return `${dh.getMonthName(monthNum)} ${dateObject.getDate()}`;
   };
 
   const tableRowSX = (id) => {
@@ -71,6 +71,7 @@ const Main = () => {
             <TableCell>Type</TableCell>
             <TableCell>Start Time</TableCell>
             <TableCell>End Time</TableCell>
+            <TableCell>Total Hours</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -80,8 +81,9 @@ const Main = () => {
               <TableCell>{row.location}</TableCell>
               <TableCell>{row.comments}</TableCell>
               <TableCell>{row.type}</TableCell>
-              <TableCell>{row.startTime.toDateString()}</TableCell>
-              <TableCell>{row.endTime.toDateString()}</TableCell>
+              <TableCell>{dh.getTimeString(row.startTime)}</TableCell>
+              <TableCell>{dh.getTimeString(row.endTime)}</TableCell>
+              <TableCell>{dh.getHours(row.endTime - row.startTime)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

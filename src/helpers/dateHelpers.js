@@ -15,3 +15,13 @@ export const getMonthName = (monthNum) => {
   ];
   return MONTHS[monthNum];
 };
+
+export const getTimeString = (dateObject) => {
+  return dateObject.toLocaleTimeString();
+};
+
+export const getHours = (milliseconds) => {
+  const minutes = Math.floor((milliseconds / 1000 / 60) % 60);
+  const hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
+  return [hours.toString(), minutes.toString().padStart(2, '0')].join(':');
+};
