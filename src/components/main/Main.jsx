@@ -44,15 +44,24 @@ const Main = () => {
   };
 
   const tableRowSX = (id) => {
+    // set styling for every other row
     if (id % 2 === 0) {
       return {
-        backgroundColor: 'primary.main',
+        backgroundColor: 'secondary.bg',
+        '& .MuiTableCell-root': {
+          color: 'white',
+        },
       };
     }
-    return { '& .MuiTableCell-root': { color: 'secondary.main' } };
+    return {
+      backgroundColor: 'tertiary.main',
+      '& .MuiTableCell-root': {
+        color: 'secondary.main',
+      },
+    };
   };
   return (
-    <TableContainer componant={Paper} sx={SX.tableContainerSX}>
+    <TableContainer componant={Paper}>
       <Table size="small" sx={SX.tableSX}>
         <TableHead>
           <TableRow sx={SX.tableHeadSX}>
@@ -66,7 +75,7 @@ const Main = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id} sx={[SX.tableRowSX, tableRowSX(row.id)]}>
+            <TableRow key={row.id} sx={tableRowSX(row.id)}>
               <TableCell>{setDate(row.startTime)}</TableCell>
               <TableCell>{row.location}</TableCell>
               <TableCell>{row.comments}</TableCell>
