@@ -16,18 +16,33 @@ export const fetchEntries = createAsyncThunk(
   }
 );
 
+export const saveNewEntry = createAsyncThunk(
+  'entries/saveNewEntry',
+  async (entry) => {
+    const response = await client.saveNewEntry(entry);
+    if (response.status === 201) {
+      return entry;
+    }
+  }
+);
+
 const entriesSlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchEntries.fulfilled, (state, action) => {
-      const newEntries = {};
-      action.payload.forEach((entry) => {
-        newEntries[entry.id] = entry;
+    builder
+      .addCase(fetchEntries.fulfilled, (state, action) => {
+        const newEntries = {};
+        action.payload.forEach((entry) => {
+          newEntries[entry.id] = entry;
+        });
+        state.entities = newEntries;
+      })
+      .addCase(saveNewEntry.fulfilled, (state, action) => {
+        const entry = action.payload;
+        state.entities[entry.id] = entry;
       });
-      state.entities = newEntries;
-    });
   },
 });
 

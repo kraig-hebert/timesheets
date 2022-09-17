@@ -10,3 +10,15 @@ export const getEntryList = async () => {
 
   return await response.json();
 };
+
+export const saveNewEntry = async (entry) => {
+  const response = fetch(API_URL, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(entry),
+  });
+  return response;
+};
