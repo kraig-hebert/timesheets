@@ -83,7 +83,9 @@ const Main = () => {
               <TableCell>{row.type}</TableCell>
               <TableCell>{dh.getTimeString(row.startTime)}</TableCell>
               <TableCell>{dh.getTimeString(row.endTime)}</TableCell>
-              <TableCell>{dh.getHours(row.endTime - row.startTime)}</TableCell>
+              <TableCell>
+                {dh.getTotalHours(row.endTime - row.startTime)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
