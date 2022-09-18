@@ -68,7 +68,7 @@ const Main = () => {
   };
 
   useEffect(() => {
-    // filter entries by month
+    // filter entries by month when activeMonth is updated onClick()
     setFilteredEntries(
       entries.filter((entry) => {
         if (
