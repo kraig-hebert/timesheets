@@ -7,9 +7,27 @@ export const tableSX = {
 };
 
 export const tableHeadSX = {
-  backgroundColor: 'primary.main',
+  backgroundColor: 'primary.bg',
   height: '50px',
   '& .MuiTableCell-root': {
     color: 'white',
   },
+};
+
+export const tableRowSX = (id) => {
+  // set styling for every other row
+  if (id % 2 === 0) {
+    return {
+      backgroundColor: 'secondary.bg',
+      '& .MuiTableCell-root': {
+        color: 'white',
+      },
+    };
+  }
+  return {
+    backgroundColor: 'tertiary.main',
+    '& .MuiTableCell-root': {
+      color: 'secondary.main',
+    },
+  };
 };

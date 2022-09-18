@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { buttonYearSX } from '../sideBarSX';
 import MonthButton from '../monthButton/MonthButton';
 import { Button, Stack, Typography } from '@mui/material';
 import { LastPage } from '@mui/icons-material';
+import { MONTHS } from '../../../helpers/dateHelpers';
 
 const YearButton = (props) => {
-  const MONTHS = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  const { year, activeYear, setActiveYear } = props;
   const [activeMonth, setActiveMonth] = useState('January');
   const renderedMonthList = MONTHS.map((month) => {
     return (
@@ -36,15 +25,21 @@ const YearButton = (props) => {
       <Button
         sx={buttonYearSX}
         onClick={() => {
-          props.setActiveYear(props.year);
+          setActiveYear(year);
         }}
-        startIcon={props.year === props.activeYear && <LastPage />}
+        startIcon={year === activeYear && <LastPage />}
       >
-        <Typography variant="h6">{props.year}</Typography>
+        <Typography variant="h6">{year}</Typography>
       </Button>
-      {props.year === props.activeYear && <Stack>{renderedMonthList}</Stack>}
+      {year === activeYear && <Stack>{renderedMonthList}</Stack>}
     </>
   );
+};
+
+YearButton.propTypes = {
+  year: PropTypes.string,
+  activeYear: PropTypes.string,
+  setActiveYear: PropTypes.func,
 };
 
 export default YearButton;

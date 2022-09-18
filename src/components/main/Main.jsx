@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectEntries, saveNewEntry } from '../../reducers/entriesSlice';
 import {
@@ -17,6 +17,8 @@ import * as dh from '../../helpers/dateHelpers';
 const Main = () => {
   const dispatch = useDispatch();
   const entries = useSelector(selectEntries);
+
+  // set table data
   const createData = (
     id,
     date,
@@ -40,6 +42,7 @@ const Main = () => {
     );
   });
 
+  // dummy data for testing saveNewEntry()
   const handleAdd = () => {
     const newEntry = {
       id: 5,
@@ -52,31 +55,15 @@ const Main = () => {
     dispatch(saveNewEntry(newEntry));
   };
 
-  const setDate = (dateObject) => {
+  // return date in "Month date" format for table
+  const setTableDate = (dateObject) => {
     const monthNum = dateObject.getMonth();
     return `${dh.getMonthName(monthNum)} ${dateObject.getDate()}`;
   };
 
-  const tableRowSX = (id) => {
-    // set styling for every other row
-    if (id % 2 === 0) {
-      return {
-        backgroundColor: 'secondary.bg',
-        '& .MuiTableCell-root': {
-          color: 'white',
-        },
-      };
-    }
-    return {
-      backgroundColor: 'tertiary.main',
-      '& .MuiTableCell-root': {
-        color: 'secondary.main',
-      },
-    };
-  };
   return (
     <>
-      <TableContainer componant={Paper}>
+      <TableContainer>
         <Table size="small" sx={SX.tableSX}>
           <TableHead>
             <TableRow sx={SX.tableHeadSX}>
@@ -91,8 +78,8 @@ const Main = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} sx={tableRowSX(row.id)}>
-                <TableCell>{setDate(row.startTime)}</TableCell>
+              <TableRow key={row.id} sx={SX.tableRowSX(row.id)}>
+                <TableCell>{setTableDate(row.startTime)}</TableCell>
                 <TableCell>{row.location}</TableCell>
                 <TableCell>{row.comments}</TableCell>
                 <TableCell>{row.type}</TableCell>
@@ -106,6 +93,7 @@ const Main = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {/* temp button to test saveNewEntry() */}
       <Button
         variant="outlined"
         onClick={() => {

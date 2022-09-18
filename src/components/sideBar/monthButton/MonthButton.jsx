@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Typography } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { buttonMonthSX } from '../sideBarSX';
 
 const MonthButton = (props) => {
+  const { month, activeMonth, setActiveMonth } = props;
   const activeButtonMonthSX = () => {
-    if (props.month === props.activeMonth) {
+    if (month === activeMonth) {
       return {
         color: 'secondary.main',
       };
@@ -14,14 +16,20 @@ const MonthButton = (props) => {
   return (
     <Button
       sx={[buttonMonthSX, activeButtonMonthSX]}
-      startIcon={props.month === props.activeMonth && <KeyboardArrowRight />}
+      startIcon={month === activeMonth && <KeyboardArrowRight />}
       onClick={() => {
-        props.setActiveMonth(props.month);
+        setActiveMonth(month);
       }}
     >
-      <Typography variant="h7">{props.month}</Typography>
+      <Typography variant="h7">{month}</Typography>
     </Button>
   );
+};
+
+MonthButton.propTypes = {
+  month: PropTypes.string,
+  activeMonth: PropTypes.string,
+  setActiveMonth: PropTypes.func,
 };
 
 export default MonthButton;

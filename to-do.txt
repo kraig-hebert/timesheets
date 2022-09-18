@@ -1,0 +1,1 @@
+- update props use with validators and destructuring

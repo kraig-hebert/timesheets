@@ -7,15 +7,16 @@ import * as client from '../api/client';
 
 const initialState = { entities: {} };
 
-// fetch list of timeshee entries from db.json
+// fetch list of timesheet entries from db.json
 export const fetchEntries = createAsyncThunk(
   'entries/fetchEntries',
   async () => {
-    const response = await client.getEntryList();
+    const response = await client.get();
     return response;
   }
 );
 
+// save new entry to db.json and update state.entries.entities
 export const saveNewEntry = createAsyncThunk(
   'entries/saveNewEntry',
   async (entry) => {
