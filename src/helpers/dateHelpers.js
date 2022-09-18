@@ -13,6 +13,8 @@ export const MONTHS = [
   'December',
 ];
 
+export const YEARS = ['2022', '2021', '2020'];
+
 // return month name from dateObject.getMonth()
 export const getMonthName = (monthNum) => {
   return MONTHS[monthNum];

@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import YearButton from './yearButton/YearButton';
 import { stackSX } from './sideBarSX';
 import { Stack } from '@mui/material';
+import { YEARS } from '../../helpers/dateHelpers';
 
 const SideBar = () => {
-  const YEARS = ['2022', '2021', '2020'];
-
   const [activeYear, setActiveYear] = useState('2022');
 
   const renderedYearList = YEARS.map((year) => {
