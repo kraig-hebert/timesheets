@@ -14,6 +14,7 @@ const YearButton = (props) => {
       <MonthButton
         month={month}
         activeMonth={activeMonth}
+        activeYear={activeYear}
         setActiveMonth={setActiveMonth}
         key={month}
       />

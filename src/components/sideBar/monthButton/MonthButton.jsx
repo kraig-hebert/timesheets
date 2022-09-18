@@ -1,10 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Typography } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { buttonMonthSX } from '../sideBarSX';
 
 const MonthButton = (props) => {
+  const dispatch = useDispatch();
   const { month, activeMonth, setActiveMonth } = props;
   const activeButtonMonthSX = () => {
     if (month === activeMonth) {
@@ -29,6 +31,7 @@ const MonthButton = (props) => {
 MonthButton.propTypes = {
   month: PropTypes.string,
   activeMonth: PropTypes.string,
+  activeYear: PropTypes.string,
   setActiveMonth: PropTypes.func,
 };
 

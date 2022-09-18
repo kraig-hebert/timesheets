@@ -63,4 +63,10 @@ export const selectEntries = createSelector(selectEntryEntities, (entities) => {
   return entryListWithDateObjects;
 });
 
+// select entries sorted by month and year selected
+export const sortEntriesByMonth = createSelector(
+  selectEntries,
+  (entries) => {}
+);
+
 export default entriesSlice.reducer;

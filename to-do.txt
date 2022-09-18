@@ -1,1 +1,3 @@
-- update props use with validators and destructuring
+- create redux slice for app settings
+    - activeMonth, activeYear etc.......
+    - implement new store throughout app
