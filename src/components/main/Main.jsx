@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectEntries, saveNewEntry } from '../../reducers/entriesSlice';
 import {
-  selectActiveMonth,
-  selectActiveYear,
-} from '../../reducers/appSettingsSlice';
+  saveNewEntry,
+  selectFilteredEntries,
+} from '../../reducers/entriesSlice';
+
 import {
   Table,
   TableBody,
@@ -19,10 +19,7 @@ import * as dh from '../../helpers/dateHelpers';
 
 const Main = () => {
   const dispatch = useDispatch();
-  const entries = useSelector(selectEntries);
-  const activeMonth = useSelector(selectActiveMonth);
-  const activeYear = useSelector(selectActiveYear);
-  const [filteredEntries, setFilteredEntries] = useState([]);
+  const filteredEntries = useSelector(selectFilteredEntries);
 
   // set table data
   const createData = (
@@ -66,19 +63,6 @@ const Main = () => {
     const monthNum = dateObject.getMonth();
     return `${dh.getMonthName(monthNum)} ${dateObject.getDate()}`;
   };
-
-  useEffect(() => {
-    // filter entries by month
-    setFilteredEntries(
-      entries.filter((entry) => {
-        if (
-          dh.MONTHS[entry.startTime.getMonth()] === activeMonth &&
-          entry.startTime.getFullYear().toString() === activeYear
-        )
-          return entry;
-      })
-    );
-  }, [activeMonth]);
 
   return (
     <>
