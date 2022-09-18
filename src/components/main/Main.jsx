@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectEntries, saveNewEntry } from '../../reducers/entriesSlice';
+import {
+  selectActiveMonth,
+  selectActiveYear,
+} from '../../reducers/appSettingsSlice';
 import {
   Table,
   TableBody,
@@ -8,7 +12,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Button,
 } from '@mui/material';
 import * as SX from './mainSX';
@@ -17,6 +20,9 @@ import * as dh from '../../helpers/dateHelpers';
 const Main = () => {
   const dispatch = useDispatch();
   const entries = useSelector(selectEntries);
+  const activeMonth = useSelector(selectActiveMonth);
+  const activeYear = useSelector(selectActiveYear);
+  const [filteredEntries, setFilteredEntries] = useState([]);
 
   // set table data
   const createData = (
@@ -30,7 +36,7 @@ const Main = () => {
   ) => {
     return { id, date, location, comments, type, startTime, endTime };
   };
-  const rows = entries.map((entry) => {
+  const rows = filteredEntries.map((entry) => {
     return createData(
       entry.id,
       entry.date,
@@ -60,6 +66,19 @@ const Main = () => {
     const monthNum = dateObject.getMonth();
     return `${dh.getMonthName(monthNum)} ${dateObject.getDate()}`;
   };
+
+  useEffect(() => {
+    // filter entries by month
+    setFilteredEntries(
+      entries.filter((entry) => {
+        if (
+          dh.MONTHS[entry.startTime.getMonth()] === activeMonth &&
+          entry.startTime.getFullYear().toString() === activeYear
+        )
+          return entry;
+      })
+    );
+  }, [activeMonth]);
 
   return (
     <>

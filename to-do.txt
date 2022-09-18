@@ -1,3 +1,3 @@
-- create redux slice for app settings
-    - activeMonth, activeYear etc.......
-    - implement new store throughout app
+- add message to table if there are no entries for that selected month
+- update odd/even row styles
+    - now that we filter the entries they can't be colored by odd/even id

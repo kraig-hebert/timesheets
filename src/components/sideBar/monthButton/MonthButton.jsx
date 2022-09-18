@@ -1,13 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Typography } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { buttonMonthSX } from '../sideBarSX';
+import {
+  selectActiveMonth,
+  monthSelected,
+} from '../../../reducers/appSettingsSlice';
 
 const MonthButton = (props) => {
+  const { month } = props;
   const dispatch = useDispatch();
-  const { month, activeMonth, setActiveMonth } = props;
+  const activeMonth = useSelector(selectActiveMonth);
+
   const activeButtonMonthSX = () => {
     if (month === activeMonth) {
       return {
@@ -20,7 +26,7 @@ const MonthButton = (props) => {
       sx={[buttonMonthSX, activeButtonMonthSX]}
       startIcon={month === activeMonth && <KeyboardArrowRight />}
       onClick={() => {
-        setActiveMonth(month);
+        dispatch(monthSelected(month));
       }}
     >
       <Typography variant="h7">{month}</Typography>
@@ -30,9 +36,6 @@ const MonthButton = (props) => {
 
 MonthButton.propTypes = {
   month: PropTypes.string,
-  activeMonth: PropTypes.string,
-  activeYear: PropTypes.string,
-  setActiveMonth: PropTypes.func,
 };
 
 export default MonthButton;

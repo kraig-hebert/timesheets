@@ -15,9 +15,14 @@ const appSettingsSlice = createSlice({
     },
     yearSelected(state, action) {
       const year = action.payload;
-      state.year = action.payload;
+      state.activeYear = year;
     },
   },
 });
+
+export const { monthSelected, yearSelected } = appSettingsSlice.actions;
+
+export const selectActiveMonth = (state) => state.appSettings.activeMonth;
+export const selectActiveYear = (state) => state.appSettings.activeYear;
 
 export default appSettingsSlice.reducer;
