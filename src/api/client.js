@@ -11,7 +11,7 @@ export const getEntryList = async () => {
   return await response.json();
 };
 
-export const saveNewEntry = async (entry) => {
+export const post = async (entry) => {
   const response = fetch(API_URL, {
     headers: {
       Accept: 'application/json',
