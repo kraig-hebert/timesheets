@@ -4,6 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import * as client from '../api/client';
+import { MONTHS } from '../helpers/dateHelpers';
 
 const initialState = { entities: {} };
 
@@ -50,6 +51,11 @@ const entriesSlice = createSlice({
 // select all entry entities
 export const selectEntryEntities = (state) => state.entries.entities;
 
+//select activeMonth from appSettings
+export const selectActiveMonth = (state) => state.appSettings.activeMonth;
+//select activeYear from appSettings
+export const selectActiveYear = (state) => state.appSettings.activeYear;
+
 // select entries with dateObjects instead of JSON strings
 export const selectEntries = createSelector(selectEntryEntities, (entities) => {
   const entryList = Object.values(entities);
@@ -62,5 +68,20 @@ export const selectEntries = createSelector(selectEntryEntities, (entities) => {
   });
   return entryListWithDateObjects;
 });
+
+// select entries filtered by month and year
+export const selectFilteredEntries = createSelector(
+  selectActiveMonth,
+  selectActiveYear,
+  selectEntries,
+  (activeMonth, activeYear, entries) => {
+    const filteredEntries = entries.filter(
+      (entry) =>
+        MONTHS[entry.startTime.getMonth()] === activeMonth &&
+        entry.startTime.getFullYear().toString() === activeYear
+    );
+    return filteredEntries;
+  }
+);
 
 export default entriesSlice.reducer;
