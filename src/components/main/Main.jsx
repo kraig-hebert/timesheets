@@ -48,12 +48,12 @@ const Main = () => {
   // dummy data for testing saveNewEntry()
   const handleAdd = () => {
     const newEntry = {
-      id: 5,
-      location: 'Assumption',
+      id: 6,
+      location: 'Nowhere',
       comments: 'Kennedy Front Door',
       type: 'Service',
-      startTime: '2022-07-28T12:00:00.788Z',
-      endTime: '2022-07-28T18:00:00.788Z',
+      startTime: '2022-07-26T12:00:00.788Z',
+      endTime: '2022-07-26T18:00:00.788Z',
     };
     dispatch(saveNewEntry(newEntry));
   };

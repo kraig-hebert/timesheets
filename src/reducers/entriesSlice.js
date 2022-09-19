@@ -59,14 +59,16 @@ export const selectActiveYear = (state) => state.appSettings.activeYear;
 // select entries with dateObjects instead of JSON strings
 export const selectEntries = createSelector(selectEntryEntities, (entities) => {
   const entryList = Object.values(entities);
-  const entryListWithDateObjects = entryList.map((entry) => {
-    return {
-      ...entry,
-      startTime: new Date(entry.startTime),
-      endTime: new Date(entry.endTime),
-    };
-  });
-  return entryListWithDateObjects;
+  const sortedEntryListWithDateObjects = entryList
+    .map((entry) => {
+      return {
+        ...entry,
+        startTime: new Date(entry.startTime),
+        endTime: new Date(entry.endTime),
+      };
+    })
+    .sort((entryA, entryB) => entryA.startTime - entryB.startTime);
+  return sortedEntryListWithDateObjects;
 });
 
 // select entries filtered by month and year

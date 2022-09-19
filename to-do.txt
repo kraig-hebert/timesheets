@@ -2,3 +2,4 @@
 - update odd/even row styles
     - now that we filter the entries they can't be colored by odd/even id
 
+- sort entries.entities by startTime so table data is in the right order for stylings
