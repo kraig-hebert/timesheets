@@ -18,7 +18,7 @@ import * as SX from './mainSX';
 import * as dh from '../../helpers/dateHelpers';
 
 const Main = () => {
-  let lastStyle = 'type1';
+  let lastStyle = 'type2';
 
   const dispatch = useDispatch();
   const filteredEntries = useSelector(selectFilteredEntries);
@@ -52,8 +52,7 @@ const Main = () => {
     type,
     startTime,
     endTime,
-    rowStyle,
-    displayDate
+    styles
   ) => {
     return {
       id,
@@ -63,8 +62,7 @@ const Main = () => {
       type,
       startTime,
       endTime,
-      rowStyle,
-      displayDate,
+      styles,
     };
   };
   const rows = filteredEntries.map((entry, index) => {
@@ -78,8 +76,7 @@ const Main = () => {
       entry.type,
       entry.startTime,
       entry.endTime,
-      styles.style,
-      styles.displayDate
+      styles
     );
   });
 
@@ -108,27 +105,31 @@ const Main = () => {
         <Table size="small" sx={SX.tableSX}>
           <TableHead>
             <TableRow sx={SX.tableHeadSX}>
-              <TableCell>Date</TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Comments</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Start Time</TableCell>
-              <TableCell>End Time</TableCell>
-              <TableCell>Total Hours</TableCell>
+              <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Location</TableCell>
+              <TableCell align="center">Comments</TableCell>
+              <TableCell align="center">Type</TableCell>
+              <TableCell align="center">Start Time</TableCell>
+              <TableCell align="center">End Time</TableCell>
+              <TableCell align="center">Total Hours</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} sx={SX.tableRowSX(row.rowStyle)}>
-                <TableCell>
-                  {row.displayDate && setTableDate(row.startTime)}
+              <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
+                <TableCell align="center">
+                  {row.styles.displayDate && setTableDate(row.startTime)}
                 </TableCell>
-                <TableCell>{row.location}</TableCell>
-                <TableCell>{row.comments}</TableCell>
-                <TableCell>{row.type}</TableCell>
-                <TableCell>{dh.getTimeString(row.startTime)}</TableCell>
-                <TableCell>{dh.getTimeString(row.endTime)}</TableCell>
-                <TableCell>
+                <TableCell align="center">{row.location}</TableCell>
+                <TableCell align="center">{row.comments}</TableCell>
+                <TableCell align="center">{row.type}</TableCell>
+                <TableCell align="center">
+                  {dh.getTimeString(row.startTime)}
+                </TableCell>
+                <TableCell align="center">
+                  {dh.getTimeString(row.endTime)}
+                </TableCell>
+                <TableCell align="center">
                   {dh.getTotalHours(row.endTime - row.startTime)}
                 </TableCell>
               </TableRow>

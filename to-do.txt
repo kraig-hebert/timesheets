@@ -1,5 +1,1 @@
 - add message to table if there are no entries for that selected month
-- update odd/even row styles
-    - now that we filter the entries they can't be colored by odd/even id
-
-- update the date column on table so only first day in sequence displahys date
