@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectSelectValue,
+  selectValueSelected,
+} from '../../reducers/appSettingsSlice';
 import {
   FormControl,
   InputLabel,
@@ -9,6 +14,8 @@ import {
 import * as SX from './headerSX';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const selectValue = useSelector(selectSelectValue);
   return (
     <>
       <TextField
@@ -22,15 +29,17 @@ const Header = () => {
           Sheet Type
         </InputLabel>
         <Select
-          labelId="sheet-selector-lbael"
+          labelId="sheet-selector-label"
           id="sheet-selector"
-          value=""
+          value={selectValue}
           label="Sheet Type"
-          onChange={() => {}}
+          onChange={(e) => {
+            dispatch(selectValueSelected(e.target.value));
+          }}
           sx={SX.selectSX}
         >
-          <MenuItem value="events">Events</MenuItem>
-          <MenuItem value="expenses">Expenses</MenuItem>
+          <MenuItem value="Entries">Entries</MenuItem>
+          <MenuItem value="Expenses">Expenses</MenuItem>
         </Select>
       </FormControl>
     </>

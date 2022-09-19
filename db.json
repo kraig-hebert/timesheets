@@ -56,5 +56,20 @@
       "startTime": "2022-07-29T12:00:00.788Z",
       "endTime": "2022-07-29T18:00:00.788Z"
     }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "destination": "Assumption College",
+      "miles": 20,
+      "date": "2022-07-28T18:00:00.788Z"
+    },
+    {
+      "id": 2,
+      "destination": "Minnechaug",
+      "miles": 28,
+      "date": "2022-07-29T18:00:00.788Z"
+    }
+
   ]
 }

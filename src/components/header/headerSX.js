@@ -4,7 +4,7 @@ export const textFieldSX = {
     color: 'primary.main',
   },
   '& .MuiInputLabel-root': {
-    color: 'primary.main',
+    color: 'secondary.main',
   },
   '& .MuiFilledInput-input': {
     borderBottom: '2px solid',
@@ -19,6 +19,8 @@ export const labelSX = {
 
 export const selectSX = {
   width: '300px',
+  color: 'secondary.main',
+
   backgroundColor: 'primary.bg',
   '&:hover': {
     '& .MuiOutlinedInput-notchedOutline': {

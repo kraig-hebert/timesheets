@@ -1,1 +1,8 @@
 - add message to table if there are no entries for that selected month
+
+- add expenses to the app
+    - create slice in store for redux
+    - create dummy data
+    - set up table and import dummy data
+    - create button test adding a new expense
+    - work on collapsing expenses into 1 item for the same date

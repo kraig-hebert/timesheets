@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   activeMonth: 'January',
   activeYear: '2022',
+  selectValue: 'Entries',
 };
 
 const appSettingsSlice = createSlice({
@@ -17,12 +18,18 @@ const appSettingsSlice = createSlice({
       const year = action.payload;
       state.activeYear = year;
     },
+    selectValueSelected(state, action) {
+      const newSelectValue = action.payload;
+      state.selectValue = newSelectValue;
+    },
   },
 });
 
-export const { monthSelected, yearSelected } = appSettingsSlice.actions;
+export const { monthSelected, yearSelected, selectValueSelected } =
+  appSettingsSlice.actions;
 
 export const selectActiveMonth = (state) => state.appSettings.activeMonth;
 export const selectActiveYear = (state) => state.appSettings.activeYear;
+export const selectSelectValue = (state) => state.appSettings.selectValue;
 
 export default appSettingsSlice.reducer;
