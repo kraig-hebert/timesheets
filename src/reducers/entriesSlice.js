@@ -12,7 +12,7 @@ const initialState = { entities: {} };
 export const fetchEntries = createAsyncThunk(
   'entries/fetchEntries',
   async () => {
-    const response = await client.get();
+    const response = await client.get('entries');
     return response;
   }
 );
@@ -52,9 +52,9 @@ const entriesSlice = createSlice({
 export const selectEntryEntities = (state) => state.entries.entities;
 
 //select activeMonth from appSettings
-export const selectActiveMonth = (state) => state.appSettings.activeMonth;
+const selectActiveMonth = (state) => state.appSettings.activeMonth;
 //select activeYear from appSettings
-export const selectActiveYear = (state) => state.appSettings.activeYear;
+const selectActiveYear = (state) => state.appSettings.activeYear;
 
 // select entries with dateObjects instead of JSON strings
 export const selectEntries = createSelector(selectEntryEntities, (entities) => {

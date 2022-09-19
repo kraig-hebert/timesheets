@@ -1,9 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  saveNewEntry,
-  selectFilteredEntries,
-} from '../../reducers/entriesSlice';
+import { selectFilteredEntries } from '../../reducers/entriesSlice';
 
 import {
   Table,
@@ -16,12 +13,17 @@ import {
 } from '@mui/material';
 import * as SX from './mainSX';
 import * as dh from '../../helpers/dateHelpers';
+import {
+  fetchExpenses,
+  selectFilteredExpenses,
+} from '../../reducers/expensesSlice';
 
 const Main = () => {
   let lastStyle = 'type2';
 
   const dispatch = useDispatch();
   const filteredEntries = useSelector(selectFilteredEntries);
+  const filteredExpenses = useSelector(selectFilteredExpenses);
 
   const setStyle = (index) => {
     if (index === 0) return { style: lastStyle, displayDate: true };
@@ -80,18 +82,8 @@ const Main = () => {
     );
   });
 
-  // dummy data for testing saveNewEntry()
-  const handleAdd = () => {
-    const newEntry = {
-      id: 7,
-      location: 'Holyoke High School',
-      comments: 'Nothing Fun',
-      type: 'Service',
-      startTime: '2022-07-29T12:00:00.788Z',
-      endTime: '2022-07-29T18:00:00.788Z',
-    };
-    dispatch(saveNewEntry(newEntry));
-  };
+  // dummy data for testing saveNewExpense()
+  const handleAdd = () => {};
 
   // return date in "Month date" format for table
   const setTableDate = (dateObject) => {

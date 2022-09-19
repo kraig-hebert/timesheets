@@ -1,7 +1,7 @@
-const API_URL = 'http://localhost:3001/entries/';
+const API_URL = 'http://localhost:3001/';
 
-export const get = async () => {
-  const response = await fetch(API_URL, {
+export const get = async (dataList) => {
+  const response = await fetch(API_URL + dataList, {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',

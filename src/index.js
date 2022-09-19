@@ -5,10 +5,12 @@ import store from './app/store';
 import App from './App';
 import { fetchEntries } from './reducers/entriesSlice';
 import './index.css';
+import { fetchExpenses } from './reducers/expensesSlice';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 store.dispatch(fetchEntries());
+store.dispatch(fetchExpenses());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
