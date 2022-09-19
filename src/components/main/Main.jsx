@@ -23,6 +23,26 @@ const Main = () => {
   const dispatch = useDispatch();
   const filteredEntries = useSelector(selectFilteredEntries);
 
+  const setStyle = (index) => {
+    if (index === 0) return lastStyle;
+    else {
+      if (
+        filteredEntries[index - 1].startTime.getDate() ===
+        filteredEntries[index].startTime.getDate()
+      )
+        return lastStyle;
+      else {
+        if (lastStyle === 'type1') {
+          lastStyle = 'type2';
+          return 'type2';
+        } else {
+          lastStyle = 'type1';
+          return 'type1';
+        }
+      }
+    }
+  };
+
   // set table data
   const createData = (
     id,
@@ -37,27 +57,8 @@ const Main = () => {
     return { id, date, location, comments, type, startTime, endTime, rowStyle };
   };
   const rows = filteredEntries.map((entry, index) => {
-    let style = '';
+    const style = setStyle(index);
 
-    if (index === 0) {
-      style = lastStyle;
-    } else {
-      console.log(lastStyle);
-      if (
-        filteredEntries[index - 1].startTime.getDate() ===
-        filteredEntries[index].startTime.getDate()
-      ) {
-        style = lastStyle;
-      } else {
-        if (lastStyle === 'type1') {
-          style = 'type2';
-          lastStyle = 'type2';
-        } else {
-          style = 'type1';
-          lastStyle = 'type1';
-        }
-      }
-    }
     return createData(
       entry.id,
       entry.date,
