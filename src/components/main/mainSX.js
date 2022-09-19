@@ -14,20 +14,20 @@ export const tableHeadSX = {
   },
 };
 
-export const tableRowSX = (id) => {
-  // set styling for every other row
-  if (id % 2 === 0) {
-    return {
+export const tableRowSX = (style) => {
+  const styles = {
+    type1: {
       backgroundColor: 'secondary.bg',
       '& .MuiTableCell-root': {
         color: 'white',
       },
-    };
-  }
-  return {
-    backgroundColor: 'tertiary.main',
-    '& .MuiTableCell-root': {
-      color: 'secondary.main',
+    },
+    type2: {
+      backgroundColor: 'tertiary.main',
+      '& .MuiTableCell-root': {
+        color: 'secondary.main',
+      },
     },
   };
+  return styles[style];
 };

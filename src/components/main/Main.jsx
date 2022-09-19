@@ -18,6 +18,8 @@ import * as SX from './mainSX';
 import * as dh from '../../helpers/dateHelpers';
 
 const Main = () => {
+  let lastStyle = 'type1';
+
   const dispatch = useDispatch();
   const filteredEntries = useSelector(selectFilteredEntries);
 
@@ -29,11 +31,33 @@ const Main = () => {
     comments,
     type,
     startTime,
-    endTime
+    endTime,
+    rowStyle
   ) => {
-    return { id, date, location, comments, type, startTime, endTime };
+    return { id, date, location, comments, type, startTime, endTime, rowStyle };
   };
-  const rows = filteredEntries.map((entry) => {
+  const rows = filteredEntries.map((entry, index) => {
+    let style = '';
+
+    if (index === 0) {
+      style = lastStyle;
+    } else {
+      console.log(lastStyle);
+      if (
+        filteredEntries[index - 1].startTime.getDate() ===
+        filteredEntries[index].startTime.getDate()
+      ) {
+        style = lastStyle;
+      } else {
+        if (lastStyle === 'type1') {
+          style = 'type2';
+          lastStyle = 'type2';
+        } else {
+          style = 'type1';
+          lastStyle = 'type1';
+        }
+      }
+    }
     return createData(
       entry.id,
       entry.date,
@@ -41,19 +65,20 @@ const Main = () => {
       entry.comments,
       entry.type,
       entry.startTime,
-      entry.endTime
+      entry.endTime,
+      style
     );
   });
 
   // dummy data for testing saveNewEntry()
   const handleAdd = () => {
     const newEntry = {
-      id: 6,
-      location: 'Nowhere',
-      comments: 'Kennedy Front Door',
+      id: 7,
+      location: 'Holyoke High School',
+      comments: 'Nothing Fun',
       type: 'Service',
-      startTime: '2022-07-26T12:00:00.788Z',
-      endTime: '2022-07-26T18:00:00.788Z',
+      startTime: '2022-07-29T12:00:00.788Z',
+      endTime: '2022-07-29T18:00:00.788Z',
     };
     dispatch(saveNewEntry(newEntry));
   };
@@ -81,7 +106,7 @@ const Main = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} sx={SX.tableRowSX(row.id)}>
+              <TableRow key={row.id} sx={SX.tableRowSX(row.rowStyle)}>
                 <TableCell>{setTableDate(row.startTime)}</TableCell>
                 <TableCell>{row.location}</TableCell>
                 <TableCell>{row.comments}</TableCell>
