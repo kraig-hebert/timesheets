@@ -24,20 +24,20 @@ const Main = () => {
   const filteredEntries = useSelector(selectFilteredEntries);
 
   const setStyle = (index) => {
-    if (index === 0) return lastStyle;
+    if (index === 0) return { style: lastStyle, displayDate: true };
     else {
       if (
         filteredEntries[index - 1].startTime.getDate() ===
         filteredEntries[index].startTime.getDate()
       )
-        return lastStyle;
+        return { style: lastStyle, displayDate: false };
       else {
         if (lastStyle === 'type1') {
           lastStyle = 'type2';
-          return 'type2';
+          return { style: 'type2', displayDate: true };
         } else {
           lastStyle = 'type1';
-          return 'type1';
+          return { style: 'type1', displayDate: true };
         }
       }
     }
@@ -52,12 +52,23 @@ const Main = () => {
     type,
     startTime,
     endTime,
-    rowStyle
+    rowStyle,
+    displayDate
   ) => {
-    return { id, date, location, comments, type, startTime, endTime, rowStyle };
+    return {
+      id,
+      date,
+      location,
+      comments,
+      type,
+      startTime,
+      endTime,
+      rowStyle,
+      displayDate,
+    };
   };
   const rows = filteredEntries.map((entry, index) => {
-    const style = setStyle(index);
+    const styles = setStyle(index);
 
     return createData(
       entry.id,
@@ -67,7 +78,8 @@ const Main = () => {
       entry.type,
       entry.startTime,
       entry.endTime,
-      style
+      styles.style,
+      styles.displayDate
     );
   });
 
@@ -108,7 +120,9 @@ const Main = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} sx={SX.tableRowSX(row.rowStyle)}>
-                <TableCell>{setTableDate(row.startTime)}</TableCell>
+                <TableCell>
+                  {row.displayDate && setTableDate(row.startTime)}
+                </TableCell>
                 <TableCell>{row.location}</TableCell>
                 <TableCell>{row.comments}</TableCell>
                 <TableCell>{row.type}</TableCell>
