@@ -69,6 +69,12 @@
       "destination": "Minnechaug",
       "miles": 28,
       "date": "2022-07-29T18:00:00.788Z"
+    },
+    {
+      "id": 3,
+      "destination": "Holyoke High School",
+      "miles": 56,
+      "date": "2022-08-29T18:00:00.788Z"
     }
 
   ]
