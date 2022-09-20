@@ -4,10 +4,9 @@ QUICK/EASY
 
 MEDIUM
 ---------
-- add message to table if there are no entries for that selected 
-- fix stylings for table so its column widths are static
-    - table should not warp when different months are selected
-    - the table headers will change from expense to entries though(this is ok)
+- SEARCH
+    - add ability to search entries or expenses
+    - allow user to filter by last month/year or # of months
 
 LONGER/HARD
 -------------

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -11,6 +12,7 @@ import {
   TableRow,
 } from '@mui/material';
 import * as SX from '../mainSX';
+import { PaidTwoTone } from '@mui/icons-material';
 
 const ExpensesTable = () => {
   const filteredExpenses = useSelector(selectFilteredExpenses);
@@ -35,33 +37,53 @@ const ExpensesTable = () => {
     );
   });
 
+  const renderedRowList = rows.map((row) => (
+    <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {setTableDate(row.date)}
+      </TableCell>
+
+      <TableCell align="center" sx={{ widthg: '80%' }}>
+        {row.destination}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {row.miles}
+      </TableCell>
+    </TableRow>
+  ));
+
+  const RenderButtonRow = () => {
+    return (
+      <TableRow>
+        <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={3}>
+          <Button variant="contained" startIcon={<PaidTwoTone />}>
+            Add Expense
+          </Button>
+        </TableCell>
+      </TableRow>
+    );
+  };
+
   return (
     <>
       <TableContainer>
         <Table size="small" sx={SX.tableSX}>
           <TableHead>
             <TableRow sx={SX.tableHeadSX}>
-              <TableCell align="center">Date</TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Date
+              </TableCell>
 
-              <TableCell align="center">Destination</TableCell>
-              <TableCell align="center">Miles</TableCell>
+              <TableCell align="center" sx={{ width: '80%' }}>
+                Destination
+              </TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Miles
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
-                <TableCell align="center" sx={{ width: '10%' }}>
-                  {setTableDate(row.date)}
-                </TableCell>
-
-                <TableCell align="center" sx={{ widthg: '80%' }}>
-                  {row.destination}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '10%' }}>
-                  {row.miles}
-                </TableCell>
-              </TableRow>
-            ))}
+            {rows.length ? renderedRowList : <RenderButtonRow />}
           </TableBody>
         </Table>
       </TableContainer>

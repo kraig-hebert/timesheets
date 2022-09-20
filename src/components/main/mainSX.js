@@ -31,3 +31,8 @@ export const tableRowSX = (style) => {
   };
   return styles[style];
 };
+
+export const emptyTableCellSX = {
+  width: '100%',
+  height: '100px',
+};

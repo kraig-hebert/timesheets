@@ -4,6 +4,7 @@ import { selectFilteredEntries } from '../../../reducers/entriesSlice';
 import * as dh from '../../../helpers/dateHelpers';
 
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,6 +13,7 @@ import {
   TableRow,
 } from '@mui/material';
 import * as SX from '../mainSX';
+import { EventAvailableSharp } from '@mui/icons-material';
 
 const EntriesTable = () => {
   let lastStyle = 'type2';
@@ -74,47 +76,75 @@ const EntriesTable = () => {
     );
   });
 
+  const renderedRowList = rows.map((row) => (
+    <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {row.styles.displayDate && dh.setTableDate(row.startTime)}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '20%' }}>
+        {row.location}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '20%' }}>
+        {row.comments}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {row.type}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '15%' }}>
+        {dh.getTimeString(row.startTime)}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '15%' }}>
+        {dh.getTimeString(row.endTime)}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {dh.getTotalHours(row.endTime - row.startTime)}
+      </TableCell>
+    </TableRow>
+  ));
+
+  const RenderRowButton = () => {
+    return (
+      <TableRow>
+        <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={7}>
+          <Button variant="contained" startIcon={<EventAvailableSharp />}>
+            Add Entry
+          </Button>
+        </TableCell>
+      </TableRow>
+    );
+  };
+
   return (
     <>
       <TableContainer>
         <Table size="small" sx={SX.tableSX}>
           <TableHead>
             <TableRow sx={SX.tableHeadSX}>
-              <TableCell align="center">Date</TableCell>
-              <TableCell align="center">Location</TableCell>
-              <TableCell align="center">Comments</TableCell>
-              <TableCell align="center">Type</TableCell>
-              <TableCell align="center">Start Time</TableCell>
-              <TableCell align="center">End Time</TableCell>
-              <TableCell align="center">Total Hours</TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Date
+              </TableCell>
+              <TableCell align="center" sx={{ width: '20%' }}>
+                Location
+              </TableCell>
+              <TableCell align="center" sx={{ width: '20%' }}>
+                Comments
+              </TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Type
+              </TableCell>
+              <TableCell align="center" sx={{ width: '15%' }}>
+                Start Time
+              </TableCell>
+              <TableCell align="center" sx={{ width: '15%' }}>
+                End Time
+              </TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Total Hours
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
-                <TableCell align="center" sx={{ width: '10%' }}>
-                  {row.styles.displayDate && dh.setTableDate(row.startTime)}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '20%' }}>
-                  {row.location}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '20%' }}>
-                  {row.comments}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '10%' }}>
-                  {row.type}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '15%' }}>
-                  {dh.getTimeString(row.startTime)}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '15%' }}>
-                  {dh.getTimeString(row.endTime)}
-                </TableCell>
-                <TableCell align="center" sx={{ width: '10%' }}>
-                  {dh.getTotalHours(row.endTime - row.startTime)}
-                </TableCell>
-              </TableRow>
-            ))}
+            {rows.length ? renderedRowList : <RenderRowButton />}
           </TableBody>
         </Table>
       </TableContainer>
