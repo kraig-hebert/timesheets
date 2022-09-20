@@ -31,3 +31,9 @@ export const getTotalHours = (milliseconds) => {
   const hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
   return [hours.toString(), minutes.toString().padStart(2, '0')].join(':');
 };
+
+// return date in "Month date" format for table
+export const setTableDate = (dateObject) => {
+  const monthNum = dateObject.getMonth();
+  return `${getMonthName(monthNum)} ${dateObject.getDate()}`;
+};

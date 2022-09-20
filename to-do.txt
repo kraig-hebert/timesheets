@@ -9,8 +9,6 @@ MEDIUM
 LONGER/HARD
 -------------
 - add expenses to the app
-    - abstract expense and entry table off of <Main />
-    - create dummy data
-    - set up table and import dummy data
-    - create button test adding a new expense
     - work on collapsing expenses into 1 item for the same date
+    - FINISHED OFF HERE
+    - need to figure out way to map over list and separate by date and than recompile the list

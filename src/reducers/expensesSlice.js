@@ -59,6 +59,7 @@ export const selectExpenses = createSelector(
   selectExpenseEntities,
   (expenses) => {
     const expenseList = Object.values(expenses);
+
     const sortedExpenseListWithDateObjects = expenseList
       .map((expense) => {
         return {
@@ -76,12 +77,31 @@ export const selectFilteredExpenses = createSelector(
   selectActiveYear,
   selectExpenses,
   (activeMonth, activeYear, expenses) => {
+    let tempDict = {};
+
     const filteredExpenses = expenses.filter(
       (expense) =>
         MONTHS[expense.date.getMonth()] === activeMonth &&
         expense.date.getFullYear().toString() === activeYear
     );
-    return filteredExpenses;
+    filteredExpenses.forEach((expense, index) => {
+      if (index === 0) tempDict[expense.date] = expense;
+      else if (Object.keys(tempDict).includes(expense.date.toString())) {
+        tempDict[expense.date.toString()] = {
+          ...tempDict[expense.date],
+          destination: `${tempDict[expense.date.toString()].destination} / ${
+            expense.destination
+          }`,
+          miles: tempDict[expense.date.toString()].miles + expense.miles,
+        };
+      } else tempDict[expense.date] = expense;
+    });
+    console.log(tempDict);
+    const sortedCombinedFilteredExpenses = Object.values(tempDict);
+
+    console.log(sortedCombinedFilteredExpenses);
+
+    return sortedCombinedFilteredExpenses;
   }
 );
 

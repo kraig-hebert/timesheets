@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
+import { setTableDate } from '../../../helpers/dateHelpers';
 import {
   Table,
   TableBody,
@@ -19,39 +20,40 @@ const ExpensesTable = () => {
     else return 'type2';
   };
 
-  const createData = (id, destination, miles, date, style) => {
-    return { id, destination, miles, date, style };
+  const createData = (id, date, destination, miles, style) => {
+    return { id, date, destination, miles, style };
   };
 
   const rows = filteredExpenses.map((expense, index) => {
     const style = setStyle(index);
     return createData(
       expense.id,
+      expense.date,
       expense.destination,
       expense.miles,
-      expense.date,
       style
     );
   });
+
   return (
     <>
       <TableContainer>
         <Table size="small" sx={SX.tableSX}>
           <TableHead>
             <TableRow sx={SX.tableHeadSX}>
-              <TableCell align="center">ID</TableCell>
+              <TableCell align="center">Date</TableCell>
+
               <TableCell align="center">Destination</TableCell>
               <TableCell align="center">Miles</TableCell>
-              <TableCell align="center">Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
-                <TableCell align="center">{row.id}</TableCell>
+                <TableCell align="center">{setTableDate(row.date)}</TableCell>
+
                 <TableCell align="center">{row.destination}</TableCell>
                 <TableCell align="center">{row.miles}</TableCell>
-                <TableCell align="center">{row.date.toString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>

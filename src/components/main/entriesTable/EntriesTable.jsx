@@ -74,12 +74,6 @@ const EntriesTable = () => {
     );
   });
 
-  // return date in "Month date" format for table
-  const setTableDate = (dateObject) => {
-    const monthNum = dateObject.getMonth();
-    return `${dh.getMonthName(monthNum)} ${dateObject.getDate()}`;
-  };
-
   return (
     <>
       <TableContainer>
@@ -99,7 +93,7 @@ const EntriesTable = () => {
             {rows.map((row) => (
               <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
                 <TableCell align="center">
-                  {row.styles.displayDate && setTableDate(row.startTime)}
+                  {row.styles.displayDate && dh.setTableDate(row.startTime)}
                 </TableCell>
                 <TableCell align="center">{row.location}</TableCell>
                 <TableCell align="center">{row.comments}</TableCell>
