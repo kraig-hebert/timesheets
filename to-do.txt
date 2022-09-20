@@ -1,5 +1,8 @@
 QUICK/EASY
 -----------
+ADDBUTTONS
+- abstract renderRowButton in the empty table to a component for reuse
+- change location of addButton when the table gets its first expense or entry
 
 MEDIUM
 ---------
@@ -9,7 +12,15 @@ MEDIUM
 MODALS
 - add modals so the user can add an expense or entry to the db
 - abstract each modal into 1 and just call form components to display inside
+- fix styling
 
 LONGER/HARD
 -------------
 - update selectors in slices to all use createSelectors
+
+
+
+*********************************************************
+FIX ISSUE WITH COMPARING DATES WITH TIME
+    - once they are manually created that add seconds and minutes etc....
+    - maybe force date format with a zeroed out time.

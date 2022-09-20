@@ -25,6 +25,16 @@ export const getTimeString = (dateObject) => {
   return dateObject.toLocaleTimeString();
 };
 
+// changes memory object to Date.JSON or returns Date.JSON
+export const forceDateString = (dateObj) => {
+  if (dateObj.hasOwnProperty('_isAMomentObject')) {
+    const newDateObj = dateObj.toDate();
+    return newDateObj.toJSON();
+  } else {
+    return dateObj.toJSON();
+  }
+};
+
 // return today hours worked formatted HH:MM
 export const getTotalHours = (milliseconds) => {
   const minutes = Math.floor((milliseconds / 1000 / 60) % 60);

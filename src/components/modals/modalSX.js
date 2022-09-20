@@ -7,7 +7,7 @@ export const modalSX = {
   },
   '& .MuiDialogTitle-root, & .MuiDialogActions-root': {
     backgroundColor: 'tertiary.main',
-    color: '#fff',
+    color: 'secondary.main',
   },
   '& .MuiButton-root': {
     color: 'secondary.main',
@@ -15,5 +15,5 @@ export const modalSX = {
 };
 
 export const dividerSX = {
-  backgroundColor: 'white',
+  backgroundColor: '#fff',
 };

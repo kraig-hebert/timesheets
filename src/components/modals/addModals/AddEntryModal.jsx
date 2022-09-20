@@ -27,9 +27,9 @@ const AddEntryModal = () => {
       sx={SX.modalSX}
     >
       <DialogTitle>Add New Entry</DialogTitle>
-      <Divider variant="middle" sx={SX.dividerSX} />
+      <Divider sx={SX.dividerSX} />
       <DialogContent>Replace Form</DialogContent>
-      <Divider variant="middle" sx={SX.dividerSX} />
+      <Divider sx={SX.dividerSX} />
       <DialogActions>
         <Button variant="outlined" onClick={handleModalClose}>
           Cancel

@@ -12,37 +12,42 @@ import SideBar from './components/sideBar/SideBar';
 import Logo from './components/logo/Logo';
 import AddExpenseModal from './components/modals/addModals/AddExpenseModal';
 import AddEntryModal from './components/modals/addModals/AddEntryModal';
+// import date picker dependancies
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        sx={SX.containerSX}
-        fluid="true"
-        disableGutters
-        maxWidth="100%"
-      >
-        <Grid container spacing={0}>
-          <Grid item xs={2} sx={SX.leftColumnSX}>
-            <Box sx={[SX.boxSX, SX.logoSX]}>
-              <Logo />
-            </Box>
-            <Box sx={[SX.boxSX, SX.sideBarSX]}>
-              <SideBar />
-            </Box>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <Container
+          sx={SX.containerSX}
+          fluid="true"
+          disableGutters
+          maxWidth="100%"
+        >
+          <Grid container spacing={0}>
+            <Grid item xs={2} sx={SX.leftColumnSX}>
+              <Box sx={[SX.boxSX, SX.logoSX]}>
+                <Logo />
+              </Box>
+              <Box sx={[SX.boxSX, SX.sideBarSX]}>
+                <SideBar />
+              </Box>
+            </Grid>
+            <Grid item xs={10} sx={SX.rightColumnSX}>
+              <Box sx={[SX.boxSX, SX.headerSX]}>
+                <Header />
+              </Box>
+              <Box sx={[SX.boxSX, SX.mainSX]}>
+                <Main />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={10} sx={SX.rightColumnSX}>
-            <Box sx={[SX.boxSX, SX.headerSX]}>
-              <Header />
-            </Box>
-            <Box sx={[SX.boxSX, SX.mainSX]}>
-              <Main />
-            </Box>
-          </Grid>
-        </Grid>
-        <AddExpenseModal />
-        <AddEntryModal />
-      </Container>
+          <AddExpenseModal />
+          <AddEntryModal />
+        </Container>
+      </LocalizationProvider>
     </ThemeProvider>
   );
 }

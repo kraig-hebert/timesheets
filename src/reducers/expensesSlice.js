@@ -16,12 +16,25 @@ export const fetchExpenses = createAsyncThunk(
   }
 );
 
+const getID = (expenseList) => {
+  const id = expenseList.length
+    ? expenseList[expenseList.length - 1].id + 1
+    : 1;
+
+  return id;
+};
+
 export const saveNewExpense = createAsyncThunk(
   'expenses/saveNewExpense',
-  async (expense) => {
-    const response = await client.post(expense, 'expenses');
+  async (expense, { getState }) => {
+    const state = getState();
+    const newExpense = {
+      ...expense,
+      id: getID(Object.values(state.expenses.entities)),
+    };
+    const response = await client.post(newExpense, 'expenses');
     if (response.status === 201) {
-      return expense;
+      return newExpense;
     }
   }
 );
@@ -41,7 +54,6 @@ const expensesSlice = createSlice({
       })
       .addCase(saveNewExpense.fulfilled, (state, action) => {
         const expense = action.payload;
-        console.log(expense);
         state.entities[expense.id] = expense;
       });
   },
