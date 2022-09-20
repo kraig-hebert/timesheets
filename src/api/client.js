@@ -10,8 +10,8 @@ export const get = async (dataList) => {
   return await response.json();
 };
 
-export const post = async (entry) => {
-  const response = fetch(API_URL, {
+export const post = async (entry, dataList) => {
+  const response = fetch(API_URL + dataList, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

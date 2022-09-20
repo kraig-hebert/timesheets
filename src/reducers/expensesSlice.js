@@ -16,18 +16,34 @@ export const fetchExpenses = createAsyncThunk(
   }
 );
 
+export const saveNewExpense = createAsyncThunk(
+  'expenses/saveNewExpense',
+  async (expense) => {
+    const response = await client.post(expense, 'expenses');
+    if (response.status === 201) {
+      return expense;
+    }
+  }
+);
+
 const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchExpenses.fulfilled, (state, action) => {
-      const newExpenses = {};
-      action.payload.forEach((expense) => {
-        newExpenses[expense.id] = expense;
+    builder
+      .addCase(fetchExpenses.fulfilled, (state, action) => {
+        const newExpenses = {};
+        action.payload.forEach((expense) => {
+          newExpenses[expense.id] = expense;
+        });
+        state.entities = newExpenses;
+      })
+      .addCase(saveNewExpense.fulfilled, (state, action) => {
+        const expense = action.payload;
+        console.log(expense);
+        state.entities[expense.id] = expense;
       });
-      state.entities = newExpenses;
-    });
   },
 });
 

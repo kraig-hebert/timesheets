@@ -21,7 +21,7 @@ export const fetchEntries = createAsyncThunk(
 export const saveNewEntry = createAsyncThunk(
   'entries/saveNewEntry',
   async (entry) => {
-    const response = await client.post(entry);
+    const response = await client.post(entry, 'entries');
     if (response.status === 201) {
       return entry;
     }
