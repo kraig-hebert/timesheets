@@ -1,6 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
+import {
+  selectActiveModal,
+  modalOpened,
+} from '../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
 import {
   Button,
@@ -15,6 +19,7 @@ import * as SX from '../mainSX';
 import { PaidTwoTone } from '@mui/icons-material';
 
 const ExpensesTable = () => {
+  const dispatch = useDispatch();
   const filteredExpenses = useSelector(selectFilteredExpenses);
 
   const setStyle = (index) => {
@@ -56,7 +61,11 @@ const ExpensesTable = () => {
     return (
       <TableRow>
         <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={3}>
-          <Button variant="contained" startIcon={<PaidTwoTone />}>
+          <Button
+            variant="contained"
+            startIcon={<PaidTwoTone />}
+            onClick={() => dispatch(modalOpened('expenses'))}
+          >
             Add Expense
           </Button>
         </TableCell>

@@ -10,3 +10,4 @@ MEDIUM
 
 LONGER/HARD
 -------------
+- update selectors in slices to all use createSelectors

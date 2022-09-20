@@ -1,7 +1,4 @@
 import React from 'react';
-// state imports
-import { useSelector } from 'react-redux';
-import { selectEntries } from './reducers/entriesSlice';
 // style imports
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './themes/mainTheme';
@@ -13,18 +10,10 @@ import Header from './components/header/Header';
 import Main from './components/main/Main';
 import SideBar from './components/sideBar/SideBar';
 import Logo from './components/logo/Logo';
+import AddExpenseModal from './components/modals/addModals/AddExpenseModal';
+import AddEntryModal from './components/modals/addModals/AddEntryModal';
 
 function App() {
-  // const entries = useSelector(selectEntries);
-
-  // const renderedListItems = entries.map((entry) => {
-  //   return (
-  //     <li key={entry.id}>
-  //       {entry.location}-{entry.startTime.toLocaleString('en-US')}
-  //     </li>
-  //   );
-  // });
-
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -51,7 +40,8 @@ function App() {
             </Box>
           </Grid>
         </Grid>
-        {/* <ul>{renderedListItems}</ul> */}
+        <AddExpenseModal />
+        <AddEntryModal />
       </Container>
     </ThemeProvider>
   );
