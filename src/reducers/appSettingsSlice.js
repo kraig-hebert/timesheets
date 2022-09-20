@@ -5,7 +5,7 @@ const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
   selectValue: 'Entries',
-  activeModal: 'expenses',
+  activeModal: 'none',
 };
 
 const appSettingsSlice = createSlice({

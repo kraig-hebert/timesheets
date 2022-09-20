@@ -6,7 +6,9 @@ MEDIUM
 - SEARCH
     - add ability to search entries or expenses
     - allow user to filter by last month/year or # of 
+MODALS
 - add modals so the user can add an expense or entry to the db
+- abstract each modal into 1 and just call form components to display inside
 
 LONGER/HARD
 -------------

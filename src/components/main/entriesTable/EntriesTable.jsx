@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredEntries } from '../../../reducers/entriesSlice';
+import { modalOpened } from '../../../reducers/appSettingsSlice';
 import * as dh from '../../../helpers/dateHelpers';
 
 import {
@@ -16,6 +17,7 @@ import * as SX from '../mainSX';
 import { EventAvailableTwoTone } from '@mui/icons-material';
 
 const EntriesTable = () => {
+  const dispatch = useDispatch();
   let lastStyle = 'type2';
   const filteredEntries = useSelector(selectFilteredEntries);
 
@@ -106,7 +108,11 @@ const EntriesTable = () => {
     return (
       <TableRow>
         <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={7}>
-          <Button variant="contained" startIcon={<EventAvailableTwoTone />}>
+          <Button
+            variant="contained"
+            startIcon={<EventAvailableTwoTone />}
+            onClick={() => dispatch(modalOpened('entries'))}
+          >
             Add Entry
           </Button>
         </TableCell>

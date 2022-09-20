@@ -1,10 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
-import {
-  selectActiveModal,
-  modalOpened,
-} from '../../../reducers/appSettingsSlice';
+import { modalOpened } from '../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
 import {
   Button,
