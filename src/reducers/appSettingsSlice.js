@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getMonthName } from '../helpers/dateHelpers';
 
 const initialState = {
-  activeMonth: 'January',
-  activeYear: '2022',
+  activeMonth: getMonthName(new Date().getMonth()),
+  activeYear: new Date().getFullYear().toString(),
   selectValue: 'Entries',
 };
 

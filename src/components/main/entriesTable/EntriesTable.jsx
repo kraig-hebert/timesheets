@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '@mui/material';
 import * as SX from '../mainSX';
-import { EventAvailableSharp } from '@mui/icons-material';
+import { EventAvailableTwoTone } from '@mui/icons-material';
 
 const EntriesTable = () => {
   let lastStyle = 'type2';
@@ -106,7 +106,7 @@ const EntriesTable = () => {
     return (
       <TableRow>
         <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={7}>
-          <Button variant="contained" startIcon={<EventAvailableSharp />}>
+          <Button variant="contained" startIcon={<EventAvailableTwoTone />}>
             Add Entry
           </Button>
         </TableCell>

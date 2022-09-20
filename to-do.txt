@@ -1,12 +1,12 @@
 QUICK/EASY
 -----------
-- load page to current month/year
 
 MEDIUM
 ---------
 - SEARCH
     - add ability to search entries or expenses
-    - allow user to filter by last month/year or # of months
+    - allow user to filter by last month/year or # of 
+- add modals so the user can add an expense or entry to the db
 
 LONGER/HARD
 -------------
