@@ -50,10 +50,16 @@ const ExpensesTable = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
-                <TableCell align="center">{setTableDate(row.date)}</TableCell>
+                <TableCell align="center" sx={{ width: '10%' }}>
+                  {setTableDate(row.date)}
+                </TableCell>
 
-                <TableCell align="center">{row.destination}</TableCell>
-                <TableCell align="center">{row.miles}</TableCell>
+                <TableCell align="center" sx={{ widthg: '80%' }}>
+                  {row.destination}
+                </TableCell>
+                <TableCell align="center" sx={{ width: '10%' }}>
+                  {row.miles}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

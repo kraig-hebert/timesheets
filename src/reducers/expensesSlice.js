@@ -96,12 +96,7 @@ export const selectFilteredExpenses = createSelector(
         };
       } else tempDict[expense.date] = expense;
     });
-    console.log(tempDict);
-    const sortedCombinedFilteredExpenses = Object.values(tempDict);
-
-    console.log(sortedCombinedFilteredExpenses);
-
-    return sortedCombinedFilteredExpenses;
+    return Object.values(tempDict);
   }
 );
 

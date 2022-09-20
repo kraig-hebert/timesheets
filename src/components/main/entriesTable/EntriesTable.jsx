@@ -92,19 +92,25 @@ const EntriesTable = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
-                <TableCell align="center">
+                <TableCell align="center" sx={{ width: '10%' }}>
                   {row.styles.displayDate && dh.setTableDate(row.startTime)}
                 </TableCell>
-                <TableCell align="center">{row.location}</TableCell>
-                <TableCell align="center">{row.comments}</TableCell>
-                <TableCell align="center">{row.type}</TableCell>
-                <TableCell align="center">
+                <TableCell align="center" sx={{ width: '20%' }}>
+                  {row.location}
+                </TableCell>
+                <TableCell align="center" sx={{ width: '20%' }}>
+                  {row.comments}
+                </TableCell>
+                <TableCell align="center" sx={{ width: '10%' }}>
+                  {row.type}
+                </TableCell>
+                <TableCell align="center" sx={{ width: '15%' }}>
                   {dh.getTimeString(row.startTime)}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" sx={{ width: '15%' }}>
                   {dh.getTimeString(row.endTime)}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" sx={{ width: '10%' }}>
                   {dh.getTotalHours(row.endTime - row.startTime)}
                 </TableCell>
               </TableRow>
