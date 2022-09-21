@@ -101,22 +101,16 @@
       "date": "2022-07-21T18:00:00.788Z"
     },
     {
-      "date": "2022-09-20T21:43:57.246Z",
+      "date": "2022-09-20T04:00:00.000Z",
       "destination": "Test",
-      "miles": 45,
+      "miles": 60,
       "id": 8
     },
     {
-      "date": "2021-09-13T21:44:08.000Z",
-      "destination": "Nvember",
-      "miles": 6,
+      "date": "2022-09-20T04:00:00.000Z",
+      "destination": "Test numba 2",
+      "miles": 20,
       "id": 9
-    },
-    {
-      "date": "2022-09-20T21:44:43.058Z",
-      "destination": "SEcond Place",
-      "miles": 100,
-      "id": 10
     }
   ]
 }

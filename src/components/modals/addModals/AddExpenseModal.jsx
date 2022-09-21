@@ -72,7 +72,6 @@ const AddExpenseModal = () => {
             renderInput={(params) => <TextField {...params} />}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="destination"
             label="Destination"
@@ -84,7 +83,6 @@ const AddExpenseModal = () => {
             value={destinationValue}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="miles"
             label="Miles"

@@ -20,7 +20,3 @@ LONGER/HARD
 
 
 
-*********************************************************
-FIX ISSUE WITH COMPARING DATES WITH TIME
-    - once they are manually created that add seconds and minutes etc....
-    - maybe force date format with a zeroed out time.

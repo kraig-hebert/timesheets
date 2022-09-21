@@ -29,10 +29,17 @@ export const getTimeString = (dateObject) => {
 export const forceDateString = (dateObj) => {
   if (dateObj.hasOwnProperty('_isAMomentObject')) {
     const newDateObj = dateObj.toDate();
-    return newDateObj.toJSON();
-  } else {
-    return dateObj.toJSON();
-  }
+    return new Date(
+      newDateObj.getFullYear(),
+      newDateObj.getMonth(),
+      newDateObj.getDate()
+    ).toJSON();
+  } else
+    return new Date(
+      dateObj.getFullYear(),
+      dateObj.getMonth(),
+      dateObj.getDate()
+    ).toJSON();
 };
 
 // return today hours worked formatted HH:MM
