@@ -17,13 +17,24 @@ export const fetchEntries = createAsyncThunk(
   }
 );
 
+const getID = (entryList) => {
+  const id = entryList.length ? entryList[entryList.length - 1].id + 1 : 1;
+
+  return id;
+};
+
 // save new entry to db.json and update state.entries.entities
 export const saveNewEntry = createAsyncThunk(
   'entries/saveNewEntry',
-  async (entry) => {
+  async (entry, { getState }) => {
+    const state = getState();
+    const newEntry = {
+      ...entry,
+      id: getID(Object.values(state.expenses.entities)),
+    };
     const response = await client.post(entry, 'entries');
     if (response.status === 201) {
-      return entry;
+      return newEntry;
     }
   }
 );

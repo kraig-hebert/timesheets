@@ -49,7 +49,7 @@ const AddExpenseModal = () => {
       miles: parseInt(milesValue),
     };
     clearForm();
-    dispatch(modalClosed());
+    handleModalClose();
     dispatch(saveNewExpense(newExpense));
   };
 

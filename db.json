@@ -39,22 +39,6 @@
       "type": "Service",
       "startTime": "2022-07-28T12:00:00.788Z",
       "endTime": "2022-07-28T18:00:00.788Z"
-    },
-    {
-      "id": 6,
-      "location": "Nowhere",
-      "comments": "Kennedy Front Door",
-      "type": "Service",
-      "startTime": "2022-07-26T12:00:00.788Z",
-      "endTime": "2022-07-26T18:00:00.788Z"
-    },
-    {
-      "id": 7,
-      "location": "Holyoke High School",
-      "comments": "Nothing Fun",
-      "type": "Service",
-      "startTime": "2022-07-29T12:00:00.788Z",
-      "endTime": "2022-07-29T18:00:00.788Z"
     }
   ],
   "expenses": [
@@ -111,6 +95,12 @@
       "destination": "Test numba 2",
       "miles": 20,
       "id": 9
+    },
+    {
+      "date": "2022-09-20T04:00:00.000Z",
+      "destination": "Test 3",
+      "miles": 5,
+      "id": 10
     }
   ]
 }

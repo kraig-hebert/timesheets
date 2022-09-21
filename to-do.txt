@@ -13,6 +13,7 @@ MODALS
 - add modals so the user can add an expense or entry to the db
 - abstract each modal into 1 and just call form components to display inside
 - fix styling
+- update datepickers so that they default to current month/year of the table the user is adding from. You can use the current date for the day of the week.
 
 LONGER/HARD
 -------------

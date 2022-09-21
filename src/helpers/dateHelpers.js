@@ -26,6 +26,8 @@ export const getTimeString = (dateObject) => {
 };
 
 // changes memory object to Date.JSON or returns Date.JSON
+// this will have DATE as part of the Date Object
+// time will be zeroed out
 export const forceDateString = (dateObj) => {
   if (dateObj.hasOwnProperty('_isAMomentObject')) {
     const newDateObj = dateObj.toDate();
@@ -40,6 +42,17 @@ export const forceDateString = (dateObj) => {
       dateObj.getMonth(),
       dateObj.getDate()
     ).toJSON();
+};
+
+// changes memory object to Date.JSON or returns Date.JSON
+// this will have both DATE and TIME as part of the Date Object
+// seconds will be zeroed out
+export const forceDateTimeString = (dateObj) => {
+  if (dateObj.hasOwnProperty('_isAMomentObject')) {
+    const newDateObj = dateObj.toDate();
+    newDateObj.setSeconds(0);
+    return newDateObj.toJSON();
+  } else return dateObj.setSeconds(0).toJSON();
 };
 
 // return today hours worked formatted HH:MM
