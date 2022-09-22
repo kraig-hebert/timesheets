@@ -8,6 +8,11 @@ import { MONTHS } from '../helpers/dateHelpers';
 
 const initialState = { entities: {}, editEntryRowID: '' };
 
+const getID = (entryList) => {
+  const id = entryList.length ? entryList[entryList.length - 1].id + 1 : 1;
+  return id;
+};
+
 // fetch list of timesheet entries from db.json
 export const fetchEntries = createAsyncThunk(
   'entries/fetchEntries',
@@ -16,12 +21,6 @@ export const fetchEntries = createAsyncThunk(
     return response;
   }
 );
-
-const getID = (entryList) => {
-  const id = entryList.length ? entryList[entryList.length - 1].id + 1 : 1;
-
-  return id;
-};
 
 // save new entry to db.json and update state.entries.entities
 export const saveNewEntry = createAsyncThunk(
@@ -33,10 +32,23 @@ export const saveNewEntry = createAsyncThunk(
       id: getID(Object.values(state.expenses.entities)),
     };
     const response = await client.post(entry, 'entries');
-    if (response.status === 201) {
-      return newEntry;
-    }
+    if (response.status === 201) return newEntry;
   }
+);
+
+// edit entry in db and update state.entries.entities
+export const editEntry = createAsyncThunk(
+  'entries/editEntry',
+  async (entry) => {
+    const response = await client.patch(entry, 'entries');
+    if (response.status === 200) return entry;
+  }
+);
+
+// delete entry from db and update state.entries.entities
+export const deleteEntry = createAsyncThunk(
+  'entries/deleteEntry',
+  async (entry) => {}
 );
 
 const entriesSlice = createSlice({
@@ -60,7 +72,12 @@ const entriesSlice = createSlice({
       .addCase(saveNewEntry.fulfilled, (state, action) => {
         const entry = action.payload;
         state.entities[entry.id] = entry;
-      });
+      })
+      .addCase(editEntry.fulfilled, (state, action) => {
+        const entry = action.payload;
+        state.entities[entry.id] = entry;
+      })
+      .addCase(deleteEntry.fulfilled, (state, action) => {});
   },
 });
 

@@ -21,3 +21,14 @@ export const post = async (entry, dataList) => {
   });
   return response;
 };
+
+export const patch = async (entry, dataList) => {
+  const response = await fetch(`${API_URL + dataList}/${entry.id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'PATCH',
+    body: JSON.stringify(entry),
+  });
+  return response;
+};

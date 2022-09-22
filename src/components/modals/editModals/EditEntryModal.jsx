@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import * as SX from '../modalSX';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectEditEntry } from '../../../reducers/entriesSlice';
+import {
+  selectEditEntry,
+  editEntry,
+  deleteEntry,
+} from '../../../reducers/entriesSlice';
 import {
   selectActiveModal,
   modalClosed,
@@ -28,7 +32,7 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 const EditEntryModal = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector(selectActiveModal);
-  const editEntry = useSelector(selectEditEntry);
+  const editableEntry = useSelector(selectEditEntry);
 
   const [locationValue, setLocationValue] = useState('');
   const handleLocationChange = (location) => setLocationValue(location);
@@ -46,25 +50,37 @@ const EditEntryModal = () => {
   const handleEndTimeChange = (date) => setEndTimeValue(date);
 
   const handleModalClose = () => dispatch(modalClosed('none'));
-  const handleEditClick = () => {};
-  const handleDeleteClick = () => {};
+  const handleEditClick = () => {
+    const editedEntry = {
+      id: editableEntry.id,
+      location: locationValue,
+      comments: commentsValue,
+      type: typeValue,
+      startTime: forceDateTimeString(startTimeValue),
+      endTime: forceDateTimeString(endTimeValue),
+    };
+    handleModalClose();
+    dispatch(editEntry(editedEntry));
+  };
+  const handleDeleteClick = () => {
+    dispatch(deleteEntry());
+  };
 
   useEffect(() => {
-    if (editEntry != undefined) {
-      setLocationValue(editEntry.location);
-      setCommentsValue(editEntry.comments);
-      setTypeValue(editEntry.type);
-      setStartTimeValue(editEntry.startTime);
-      setEndTimeValue(editEntry.endTime);
+    if (editableEntry != undefined) {
+      setLocationValue(editableEntry.location);
+      setCommentsValue(editableEntry.comments);
+      setTypeValue(editableEntry.type);
+      setStartTimeValue(editableEntry.startTime);
+      setEndTimeValue(editableEntry.endTime);
     }
-  }, [editEntry]);
+  }, [editableEntry]);
   return (
     <Dialog
       open={activeModal === 'edit-entries' ? true : false}
       onClose={handleModalClose}
       sx={SX.modalSX}
     >
-      {' '}
       <DialogTitle>Edit/Delete Entry</DialogTitle>
       <Divider sx={SX.dividerSX} />
       <DialogContent sx={SX.dialogContentSX}>
@@ -99,7 +115,6 @@ const EditEntryModal = () => {
             <InputLabel id="typeID" sx={SX.labelSX}>
               Sheet Type
             </InputLabel>
-
             <Select
               labelId="typeID"
               id="type"
@@ -150,7 +165,7 @@ const EditEntryModal = () => {
           Delete
         </Button>
         <Button variant="outlined" onClick={handleEditClick}>
-          Add
+          Edit
         </Button>
       </DialogActions>
     </Dialog>
