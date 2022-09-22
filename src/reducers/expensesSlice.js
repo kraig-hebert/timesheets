@@ -6,15 +6,7 @@ import {
 import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
 
-const initialState = { entities: {} };
-
-export const fetchExpenses = createAsyncThunk(
-  'expenses/fetchExpenses',
-  async () => {
-    const response = await client.get('expenses');
-    return response;
-  }
-);
+const initialState = { entities: {}, editExpenseRowDate: [] };
 
 const getID = (expenseList) => {
   const id = expenseList.length
@@ -23,6 +15,14 @@ const getID = (expenseList) => {
 
   return id;
 };
+
+export const fetchExpenses = createAsyncThunk(
+  'expenses/fetchExpenses',
+  async () => {
+    const response = await client.get('expenses');
+    return response;
+  }
+);
 
 export const saveNewExpense = createAsyncThunk(
   'expenses/saveNewExpense',
@@ -39,10 +39,28 @@ export const saveNewExpense = createAsyncThunk(
   }
 );
 
+export const editExpense = createAsyncThunk(
+  'expenses/editExpense',
+  async (expense) => {
+    const response = await client.patch(expense, 'expenses');
+    if (response.status === 200) return expense;
+  }
+);
+
+export const deleteExpense = createAsyncThunk(
+  'expenses/deleteExpense',
+  async (expense) => {}
+);
+
 const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
-  reducers: {},
+  reducers: {
+    expenseRowClicked(state, action) {
+      const date = action.payload;
+      state.editExpenseRowDate = date;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchExpenses.fulfilled, (state, action) => {
@@ -55,12 +73,23 @@ const expensesSlice = createSlice({
       .addCase(saveNewExpense.fulfilled, (state, action) => {
         const expense = action.payload;
         state.entities[expense.id] = expense;
-      });
+      })
+      .addCase(editExpense.fulfilled, (state, action) => {
+        const expense = action.payload;
+        state.entities[expense.id] = expense;
+      })
+      .addCase(deleteExpense.fulfilled, (state, action) => {});
   },
 });
 
+export const { expenseRowClicked } = expensesSlice.actions;
+
 // select all expense entities
 export const selectExpenseEntities = (state) => state.expenses.entities;
+
+// select editExpenseRowDate
+export const selectEditExpenseRowDate = (state) =>
+  state.expenses.editExpenseRowDate;
 
 // select activeMonth from appSettings
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
@@ -81,6 +110,17 @@ export const selectExpenses = createSelector(
       })
       .sort((expenseA, expenseB) => expenseA.date - expenseB.date);
     return sortedExpenseListWithDateObjects;
+  }
+);
+
+export const selectEditExpenses = createSelector(
+  selectEditExpenseRowDate,
+  selectExpenses,
+  (date, expenses) => {
+    const editExpenseList = expenses.filter(
+      (expense) => expense.date.toJSON() === date
+    );
+    return editExpenseList;
   }
 );
 

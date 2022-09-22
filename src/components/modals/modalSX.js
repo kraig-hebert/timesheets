@@ -65,3 +65,18 @@ export const selectSX = {
 export const labelSX = {
   color: '#fff',
 };
+
+export const buttonSX = {
+  borderColor: 'secondary.main',
+  backgroundColor: 'tertiary.main',
+  margin: '5px',
+  '&:hover': {
+    borderColor: '#fff',
+    backgroundColor: 'primary.main',
+    color: '#fff',
+  },
+};
+
+export const boxSX = {
+  margin: '0 10px',
+};

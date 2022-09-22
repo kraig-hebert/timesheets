@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
+import {
+  selectFilteredExpenses,
+  expenseRowClicked,
+} from '../../../reducers/expensesSlice';
 import { modalOpened } from '../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
 import RowButton from '../rowButton/RowButton';
@@ -40,6 +43,11 @@ const ExpensesTable = () => {
     );
   });
 
+  const handleRowClick = (date) => {
+    dispatch(modalOpened('edit-expenses'));
+    dispatch(expenseRowClicked(date.toJSON()));
+  };
+
   const renderedRowList = rows.map((row) => (
     <TableRow
       key={row.id}
@@ -58,10 +66,6 @@ const ExpensesTable = () => {
       </TableCell>
     </TableRow>
   ));
-
-  const handleRowClick = (date) => {
-    dispatch(modalOpened('edit-expenses'));
-  };
 
   return (
     <>
