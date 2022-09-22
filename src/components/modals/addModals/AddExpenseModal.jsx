@@ -28,7 +28,7 @@ const AddExpenseModal = () => {
   const [datePickerValue, setDatePickerValue] = useState(new Date());
   const handleDateChange = (newDate) => setDatePickerValue(newDate);
 
-  const [destinationValue, setDestinationValue] = useState('');
+  const [destinationValue, setDestinationValue] = useState(' ');
   const handleDestinationChange = (destination) =>
     setDestinationValue(destination);
 
@@ -37,7 +37,7 @@ const AddExpenseModal = () => {
 
   const clearForm = () => {
     setDatePickerValue(new Date());
-    setDestinationValue('');
+    setDestinationValue(' ');
     setMilesValue(0);
   };
 
@@ -69,29 +69,34 @@ const AddExpenseModal = () => {
             onChange={(newDate) => {
               handleDateChange(newDate);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField variant="filled" sx={SX.inputSX} {...params} />
+            )}
+            sx={SX.inputSX}
           />
           <TextField
             margin="dense"
             id="destination"
             label="Destination"
             type="text"
-            fullWidth
+            variant="filled"
             onChange={(e) => {
               handleDestinationChange(e.target.value);
             }}
             value={destinationValue}
+            sx={SX.inputSX}
           />
           <TextField
             margin="dense"
             id="miles"
             label="Miles"
             type="number"
-            fullWidth
+            variant="filled"
             onChange={(e) => {
               handleMilesChange(e.target.value);
             }}
             value={milesValue}
+            sx={SX.inputSX}
           />
         </Stack>
       </DialogContent>

@@ -25,7 +25,7 @@ const Header = () => {
         sx={SX.textFieldSX}
       />
       <FormControl>
-        <InputLabel id="sheet-selector-lbael" sx={SX.labelSX}>
+        <InputLabel id="sheet-selector-label" sx={SX.labelSX}>
           Sheet Type
         </InputLabel>
         <Select

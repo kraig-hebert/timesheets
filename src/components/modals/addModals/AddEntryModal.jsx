@@ -14,6 +14,8 @@ import {
   DialogActions,
   Button,
   Divider,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -26,10 +28,10 @@ const AddEntryModal = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector(selectActiveModal);
 
-  const [locationValue, setLocationValue] = useState('');
+  const [locationValue, setLocationValue] = useState(' ');
   const handleLocationChange = (location) => setLocationValue(location);
 
-  const [commentsValue, setCommentsValue] = useState('');
+  const [commentsValue, setCommentsValue] = useState(' ');
   const handleCommentsChange = (comments) => setCommentsValue(comments);
 
   const [typeValue, setTypeValue] = useState('Service');
@@ -42,8 +44,8 @@ const AddEntryModal = () => {
   const handleEndTimeChange = (date) => setEndTimeValue(date);
 
   const clearForm = () => {
-    setLocationValue('');
-    setCommentsValue('');
+    setLocationValue(' ');
+    setCommentsValue(' ');
     setTypeValue('Service');
     setStartTimeValue(new Date());
     setEndTimeValue(new Date());
@@ -77,44 +79,59 @@ const AddEntryModal = () => {
             id="location"
             label="Location"
             type="text"
+            variant="filled"
             fullWidth
             onChange={(e) => {
               handleLocationChange(e.target.value);
             }}
             value={locationValue}
+            sx={SX.inputSX}
           />
           <TextField
             margin="dense"
             id="comments"
             label="Comments"
             type="text"
+            variant="filled"
             fullWidth
             onChange={(e) => {
               handleCommentsChange(e.target.value);
             }}
             value={commentsValue}
+            sx={SX.inputSX}
           />
-          <Select
-            labelId="sheet-selector-label"
-            id="sheet-selector"
-            value={typeValue}
-            label="Sheet Type"
-            onChange={(e) => {
-              handleTypeChange(e.target.value);
-            }}
-          >
-            <MenuItem value="Service">Service</MenuItem>
-            <MenuItem value="Startup">Startup</MenuItem>
-            <MenuItem value="Meeting">Meeting</MenuItem>
-            <MenuItem value="Testing">Testing</MenuItem>
-          </Select>
+          <FormControl>
+            <InputLabel id="typeID" sx={SX.labelSX}>
+              Sheet Type
+            </InputLabel>
+
+            <Select
+              labelId="typeID"
+              id="type"
+              variant="outlined"
+              value={typeValue}
+              label="Sheet Type"
+              onChange={(e) => {
+                handleTypeChange(e.target.value);
+              }}
+              sx={SX.selectSX}
+            >
+              <MenuItem value="Service">Service</MenuItem>
+              <MenuItem value="Startup">Startup</MenuItem>
+              <MenuItem value="Meeting">Meeting</MenuItem>
+              <MenuItem value="Testing">Testing</MenuItem>
+            </Select>
+          </FormControl>
           <DateTimePicker
             label="Start Date"
             value={startTimeValue}
             onChange={(newDate) => {
               handleStartTimeChange(newDate);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            sx={SX.inputSX}
+            renderInput={(params) => (
+              <TextField variant="filled" sx={SX.inputSX} {...params} />
+            )}
           />
           <DateTimePicker
             label="End Date"
@@ -122,7 +139,10 @@ const AddEntryModal = () => {
             onChange={(newDate) => {
               handleEndTimeChange(newDate);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            sx={SX.inputSX}
+            renderInput={(params) => (
+              <TextField variant="filled" sx={SX.inputSX} {...params} />
+            )}
           />
         </Stack>
       </DialogContent>

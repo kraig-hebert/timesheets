@@ -52,7 +52,10 @@ export const forceDateTimeString = (dateObj) => {
     const newDateObj = dateObj.toDate();
     newDateObj.setSeconds(0);
     return newDateObj.toJSON();
-  } else return dateObj.setSeconds(0).toJSON();
+  } else {
+    dateObj.setSeconds(0);
+    return dateObj.toJSON();
+  }
 };
 
 // return today hours worked formatted HH:MM
