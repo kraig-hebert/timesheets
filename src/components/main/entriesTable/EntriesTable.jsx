@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectFilteredEntries } from '../../../reducers/entriesSlice';
-import { modalOpened } from '../../../reducers/appSettingsSlice';
 import * as dh from '../../../helpers/dateHelpers';
+import RowButton from '../rowButton/RowButton';
 
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -17,7 +16,6 @@ import * as SX from '../mainSX';
 import { EventAvailableTwoTone } from '@mui/icons-material';
 
 const EntriesTable = () => {
-  const dispatch = useDispatch();
   let lastStyle = 'type2';
   const filteredEntries = useSelector(selectFilteredEntries);
 
@@ -104,24 +102,6 @@ const EntriesTable = () => {
     </TableRow>
   ));
 
-  const RenderRowButton = () => {
-    return (
-      <TableRow>
-        <TableCell align="center" colSpan={7}>
-          <Button
-            variant="contained"
-            size="small"
-            startIcon={<EventAvailableTwoTone />}
-            onClick={() => dispatch(modalOpened('entries'))}
-            sx={SX.rowButtonSX}
-          >
-            Add Entry
-          </Button>
-        </TableCell>
-      </TableRow>
-    );
-  };
-
   return (
     <>
       <TableContainer>
@@ -153,7 +133,12 @@ const EntriesTable = () => {
           </TableHead>
           <TableBody>
             {renderedRowList}
-            <RenderRowButton />
+            <RowButton
+              colSpan={7}
+              icon={<EventAvailableTwoTone />}
+              buttonType="entries"
+              buttonText="Add Entry"
+            />
           </TableBody>
         </Table>
       </TableContainer>

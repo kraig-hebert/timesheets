@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredExpenses } from '../../../reducers/expensesSlice';
 import { modalOpened } from '../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
+import RowButton from '../rowButton/RowButton';
+
 import {
   Button,
   Table,
@@ -54,24 +56,6 @@ const ExpensesTable = () => {
     </TableRow>
   ));
 
-  const RenderButtonRow = () => {
-    return (
-      <TableRow>
-        <TableCell align="center" colSpan={3}>
-          <Button
-            variant="contained"
-            size="small"
-            startIcon={<PaidTwoTone />}
-            onClick={() => dispatch(modalOpened('expenses'))}
-            sx={SX.rowButtonSX}
-          >
-            Add Expense
-          </Button>
-        </TableCell>
-      </TableRow>
-    );
-  };
-
   return (
     <>
       <TableContainer>
@@ -92,7 +76,12 @@ const ExpensesTable = () => {
           </TableHead>
           <TableBody>
             {renderedRowList}
-            <RenderButtonRow />
+            <RowButton
+              colSpan={3}
+              icon={<PaidTwoTone />}
+              buttonType="expenses"
+              buttonText="Add Expense"
+            />
           </TableBody>
         </Table>
       </TableContainer>

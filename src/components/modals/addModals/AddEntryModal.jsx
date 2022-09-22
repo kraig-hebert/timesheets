@@ -115,7 +115,6 @@ const AddEntryModal = () => {
             placeholder="Enter a Location"
             type="text"
             variant="filled"
-            fullWidth
             onChange={(e) => {
               handleLocationChange(e.target.value);
             }}
@@ -129,7 +128,6 @@ const AddEntryModal = () => {
             placeholder="Enter Quick Comments"
             type="text"
             variant="filled"
-            fullWidth
             onChange={(e) => {
               handleCommentsChange(e.target.value);
             }}

@@ -1,15 +1,8 @@
 QUICK/EASY
 *****************************************************************************************
-ADDBUTTONS
-- abstract renderRowButton in the empty table to a component for reuse
-
-- fix TextField placeholders
-    - right now it is a space so that it always looks active. 
-    - this will add a space to the value when saved to the db.json
-
 - update header styling to use secondary.main for focus and active
 
-- figure out how the label color changes on foces for an input
+- figure out how the label color changes on focus for an input
     - we want to control that and make it white instead of primary.main
 
 
