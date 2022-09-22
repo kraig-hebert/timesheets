@@ -15,11 +15,18 @@ export const modalSX = {
   },
 };
 
+export const dialogContentSX = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
 export const dividerSX = {
   backgroundColor: '#fff',
 };
 
 export const inputSX = {
+  width: '400px',
   backgroundColor: 'tertiary.main',
   input: {
     color: 'secondary.main',
@@ -42,6 +49,7 @@ export const inputSX = {
 };
 
 export const selectSX = {
+  width: '400px',
   color: 'secondary.main',
   backgroundColor: 'tertiary.main',
   '&:hover': {

@@ -32,7 +32,10 @@ export const tableRowSX = (style) => {
   return styles[style];
 };
 
-export const emptyTableCellSX = {
+export const tableRowWithButtonSX = {
+  margin: '0',
+};
+
+export const rowButtonSX = {
   width: '100%',
-  height: '100px',
 };

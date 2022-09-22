@@ -107,11 +107,13 @@ const EntriesTable = () => {
   const RenderRowButton = () => {
     return (
       <TableRow>
-        <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={7}>
+        <TableCell align="center" colSpan={7}>
           <Button
             variant="contained"
+            size="small"
             startIcon={<EventAvailableTwoTone />}
             onClick={() => dispatch(modalOpened('entries'))}
+            sx={SX.rowButtonSX}
           >
             Add Entry
           </Button>
@@ -150,7 +152,8 @@ const EntriesTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.length ? renderedRowList : <RenderRowButton />}
+            {renderedRowList}
+            <RenderRowButton />
           </TableBody>
         </Table>
       </TableContainer>

@@ -72,7 +72,7 @@ const AddEntryModal = () => {
     >
       <DialogTitle>Add New Entry</DialogTitle>
       <Divider sx={SX.dividerSX} />
-      <DialogContent>
+      <DialogContent sx={SX.dialogContentSX}>
         <Stack spacing={1}>
           <TextField
             margin="dense"

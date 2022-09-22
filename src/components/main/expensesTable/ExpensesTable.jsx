@@ -57,11 +57,13 @@ const ExpensesTable = () => {
   const RenderButtonRow = () => {
     return (
       <TableRow>
-        <TableCell sx={SX.emptyTableCellSX} align="center" colSpan={3}>
+        <TableCell align="center" colSpan={3}>
           <Button
             variant="contained"
+            size="small"
             startIcon={<PaidTwoTone />}
             onClick={() => dispatch(modalOpened('expenses'))}
+            sx={SX.rowButtonSX}
           >
             Add Expense
           </Button>
@@ -89,7 +91,8 @@ const ExpensesTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.length ? renderedRowList : <RenderButtonRow />}
+            {renderedRowList}
+            <RenderButtonRow />
           </TableBody>
         </Table>
       </TableContainer>

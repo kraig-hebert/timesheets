@@ -61,7 +61,7 @@ const AddExpenseModal = () => {
     >
       <DialogTitle>Add New Expense</DialogTitle>
       <Divider sx={SX.dividerSX} />
-      <DialogContent>
+      <DialogContent sx={SX.dialogContentSX}>
         <Stack spacing={1}>
           <DatePicker
             label="Date"
