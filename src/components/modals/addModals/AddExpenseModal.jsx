@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as SX from '../modalSX';
 import { saveNewExpense } from '../../../reducers/expensesSlice';
 import {
+  selectActiveMonth,
+  selectActiveYear,
   selectActiveModal,
   modalClosed,
 } from '../../../reducers/appSettingsSlice';
-import { forceDateString } from '../../../helpers/dateHelpers';
+import {
+  forceDateString,
+  getMonthIndex,
+  MONTHS,
+} from '../../../helpers/dateHelpers';
 
 import {
   Dialog,
@@ -23,22 +29,38 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const AddExpenseModal = () => {
   const dispatch = useDispatch();
+  const activeMonth = useSelector(selectActiveMonth);
+  const activeYear = useSelector(selectActiveYear);
   const activeModal = useSelector(selectActiveModal);
 
   const [datePickerValue, setDatePickerValue] = useState(new Date());
   const handleDateChange = (newDate) => setDatePickerValue(newDate);
 
-  const [destinationValue, setDestinationValue] = useState(' ');
+  const [destinationValue, setDestinationValue] = useState('');
   const handleDestinationChange = (destination) =>
     setDestinationValue(destination);
 
-  const [milesValue, setMilesValue] = useState(0);
+  const [milesValue, setMilesValue] = useState('');
   const handleMilesChange = (miles) => setMilesValue(miles);
 
+  const updateDateValue = () => {
+    const testDate = new Date();
+    if (
+      MONTHS[testDate.getMonth()] === activeMonth &&
+      testDate.getFullYear().toString() === activeYear
+    ) {
+      testDate.setSeconds(0);
+      setDatePickerValue(testDate);
+    } else
+      setDatePickerValue(
+        new Date(parseInt(activeYear), getMonthIndex(activeMonth), 15)
+      );
+  };
+
   const clearForm = () => {
-    setDatePickerValue(new Date());
-    setDestinationValue(' ');
-    setMilesValue(0);
+    updateDateValue();
+    setDestinationValue('');
+    setMilesValue('');
   };
 
   const handleModalClose = () => dispatch(modalClosed('none'));
@@ -52,6 +74,10 @@ const AddExpenseModal = () => {
     handleModalClose();
     dispatch(saveNewExpense(newExpense));
   };
+
+  useEffect(() => {
+    updateDateValue();
+  }, [activeMonth, activeYear]);
 
   return (
     <Dialog
@@ -78,6 +104,7 @@ const AddExpenseModal = () => {
             margin="dense"
             id="destination"
             label="Destination"
+            placeholder="Enter Destination Name"
             type="text"
             variant="filled"
             onChange={(e) => {
@@ -90,6 +117,7 @@ const AddExpenseModal = () => {
             margin="dense"
             id="miles"
             label="Miles"
+            placeholder="0"
             type="number"
             variant="filled"
             onChange={(e) => {

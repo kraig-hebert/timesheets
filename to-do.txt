@@ -1,22 +1,41 @@
 QUICK/EASY
------------
+*****************************************************************************************
 ADDBUTTONS
 - abstract renderRowButton in the empty table to a component for reuse
-- change location of addButton when the table gets its first expense or entry
+
+- fix TextField placeholders
+    - right now it is a space so that it always looks active. 
+    - this will add a space to the value when saved to the db.json
+
+- update header styling to use secondary.main for focus and active
+
+- figure out how the label color changes on foces for an input
+    - we want to control that and make it white instead of primary.main
+
+
+
 
 MEDIUM
----------
+*****************************************************************************************
 - SEARCH
     - add ability to search entries or expenses
     - allow user to filter by last month/year or # of 
 MODALS
-- add modals so the user can add an expense or entry to the db
 - abstract each modal into 1 and just call form components to display inside
-- fix styling
-- update datepickers so that they default to current month/year of the table the user is adding from. You can use the current date for the day of the week.
+EDIT/DELETE MODALS
+- create modal for entries and expenses
+- 1 modal can handle delete and edit
+- have extra step to confirm edit or delete before commiting action
+- separate a single day expenses and put each on an ediiable textield
+    - allow edit or delete of each expense item
+
+
+
+
+
 
 LONGER/HARD
--------------
+*****************************************************************************************
 - update selectors in slices to all use createSelectors
 
 

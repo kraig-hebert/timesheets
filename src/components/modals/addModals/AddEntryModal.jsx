@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as SX from '../modalSX';
 import { saveNewEntry } from '../../../reducers/entriesSlice';
 import {
+  selectActiveMonth,
+  selectActiveYear,
   selectActiveModal,
   modalClosed,
 } from '../../../reducers/appSettingsSlice';
-import { forceDateTimeString } from '../../../helpers/dateHelpers';
+import {
+  forceDateTimeString,
+  getMonthIndex,
+  MONTHS,
+} from '../../../helpers/dateHelpers';
 
 import {
   Dialog,
@@ -26,12 +32,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const AddEntryModal = () => {
   const dispatch = useDispatch();
+  const activeMonth = useSelector(selectActiveMonth);
+  const activeYear = useSelector(selectActiveYear);
+
   const activeModal = useSelector(selectActiveModal);
 
-  const [locationValue, setLocationValue] = useState(' ');
+  const [locationValue, setLocationValue] = useState('');
   const handleLocationChange = (location) => setLocationValue(location);
 
-  const [commentsValue, setCommentsValue] = useState(' ');
+  const [commentsValue, setCommentsValue] = useState('');
   const handleCommentsChange = (comments) => setCommentsValue(comments);
 
   const [typeValue, setTypeValue] = useState('Service');
@@ -43,12 +52,32 @@ const AddEntryModal = () => {
   const [endTimeValue, setEndTimeValue] = useState(new Date());
   const handleEndTimeChange = (date) => setEndTimeValue(date);
 
+  const updateDateValues = () => {
+    const testDate = new Date();
+    if (
+      MONTHS[testDate.getMonth()] === activeMonth &&
+      testDate.getFullYear().toString() === activeYear
+    ) {
+      testDate.setSeconds(0);
+      testDate.setMinutes(0);
+      testDate.setHours(12);
+      setStartTimeValue(testDate);
+      setEndTimeValue(testDate);
+    } else {
+      setStartTimeValue(
+        new Date(parseInt(activeYear), getMonthIndex(activeMonth), 15, 12, 0, 0)
+      );
+      setEndTimeValue(
+        new Date(parseInt(activeYear), getMonthIndex(activeMonth), 15, 12, 0, 0)
+      );
+    }
+  };
+
   const clearForm = () => {
-    setLocationValue(' ');
-    setCommentsValue(' ');
+    setLocationValue('');
+    setCommentsValue('');
     setTypeValue('Service');
-    setStartTimeValue(new Date());
-    setEndTimeValue(new Date());
+    updateDateValues();
   };
 
   const handleModalClose = () => dispatch(modalClosed('none'));
@@ -64,6 +93,11 @@ const AddEntryModal = () => {
     handleModalClose();
     dispatch(saveNewEntry(newEntry));
   };
+
+  useEffect(() => {
+    updateDateValues();
+  }, [activeMonth, activeYear]);
+
   return (
     <Dialog
       open={activeModal === 'entries' ? true : false}
@@ -78,6 +112,7 @@ const AddEntryModal = () => {
             margin="dense"
             id="location"
             label="Location"
+            placeholder="Enter a Location"
             type="text"
             variant="filled"
             fullWidth
@@ -91,6 +126,7 @@ const AddEntryModal = () => {
             margin="dense"
             id="comments"
             label="Comments"
+            placeholder="Enter Quick Comments"
             type="text"
             variant="filled"
             fullWidth

@@ -16,8 +16,13 @@ export const MONTHS = [
 export const YEARS = ['2022', '2021', '2020'];
 
 // return month name from dateObject.getMonth()
-export const getMonthName = (monthNum) => {
-  return MONTHS[monthNum];
+export const getMonthName = (monthIndex) => {
+  return MONTHS[monthIndex];
+};
+
+// return month index from name
+export const getMonthIndex = (monthName) => {
+  return MONTHS.indexOf(monthName);
 };
 
 // return formatted time string for table
