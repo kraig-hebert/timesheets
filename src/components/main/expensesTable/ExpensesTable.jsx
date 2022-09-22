@@ -6,7 +6,6 @@ import { setTableDate } from '../../../helpers/dateHelpers';
 import RowButton from '../rowButton/RowButton';
 
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -42,7 +41,11 @@ const ExpensesTable = () => {
   });
 
   const renderedRowList = rows.map((row) => (
-    <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
+    <TableRow
+      key={row.id}
+      sx={SX.tableRowSX(row.style)}
+      onClick={() => handleRowClick(row.date)}
+    >
       <TableCell align="center" sx={{ width: '10%' }}>
         {setTableDate(row.date)}
       </TableCell>
@@ -55,6 +58,10 @@ const ExpensesTable = () => {
       </TableCell>
     </TableRow>
   ));
+
+  const handleRowClick = (date) => {
+    dispatch(modalOpened('edit-expenses'));
+  };
 
   return (
     <>

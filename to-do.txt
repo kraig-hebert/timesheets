@@ -5,6 +5,10 @@ QUICK/EASY
 - figure out how the label color changes on focus for an input
     - we want to control that and make it white instead of primary.main
 
+- update selectors in slices to all use createSelectors
+
+
+
 
 
 
@@ -13,8 +17,6 @@ MEDIUM
 - SEARCH
     - add ability to search entries or expenses
     - allow user to filter by last month/year or # of 
-MODALS
-- abstract each modal into 1 and just call form components to display inside
 EDIT/DELETE MODALS
 - create modal for entries and expenses
 - 1 modal can handle delete and edit
@@ -29,7 +31,8 @@ EDIT/DELETE MODALS
 
 LONGER/HARD
 *****************************************************************************************
-- update selectors in slices to all use createSelectors
+MODALS
+- abstract each modal into 1 and just call form components to display inside
 
 
 

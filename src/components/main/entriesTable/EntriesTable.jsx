@@ -1,6 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectFilteredEntries } from '../../../reducers/entriesSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectFilteredEntries,
+  entryRowClicked,
+} from '../../../reducers/entriesSlice';
+import { modalOpened } from '../../../reducers/appSettingsSlice';
 import * as dh from '../../../helpers/dateHelpers';
 import RowButton from '../rowButton/RowButton';
 
@@ -16,6 +20,7 @@ import * as SX from '../mainSX';
 import { EventAvailableTwoTone } from '@mui/icons-material';
 
 const EntriesTable = () => {
+  const dispatch = useDispatch();
   let lastStyle = 'type2';
   const filteredEntries = useSelector(selectFilteredEntries);
 
@@ -76,8 +81,17 @@ const EntriesTable = () => {
     );
   });
 
+  const handleRowClick = (id) => {
+    dispatch(modalOpened('edit-entries'));
+    dispatch(entryRowClicked(id));
+  };
+
   const renderedRowList = rows.map((row) => (
-    <TableRow key={row.id} sx={SX.tableRowSX(row.styles.style)}>
+    <TableRow
+      key={row.id}
+      sx={SX.tableRowSX(row.styles.style)}
+      onClick={() => handleRowClick(row.id)}
+    >
       <TableCell align="center" sx={{ width: '10%' }}>
         {row.styles.displayDate && dh.setTableDate(row.startTime)}
       </TableCell>

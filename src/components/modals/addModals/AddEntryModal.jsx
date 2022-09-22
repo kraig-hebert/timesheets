@@ -34,7 +34,6 @@ const AddEntryModal = () => {
   const dispatch = useDispatch();
   const activeMonth = useSelector(selectActiveMonth);
   const activeYear = useSelector(selectActiveYear);
-
   const activeModal = useSelector(selectActiveModal);
 
   const [locationValue, setLocationValue] = useState('');

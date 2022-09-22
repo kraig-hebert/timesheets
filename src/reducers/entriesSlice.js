@@ -6,7 +6,7 @@ import {
 import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
 
-const initialState = { entities: {} };
+const initialState = { entities: {}, editEntryRowID: '' };
 
 // fetch list of timesheet entries from db.json
 export const fetchEntries = createAsyncThunk(
@@ -42,7 +42,12 @@ export const saveNewEntry = createAsyncThunk(
 const entriesSlice = createSlice({
   name: 'entries',
   initialState,
-  reducers: {},
+  reducers: {
+    entryRowClicked(state, action) {
+      const id = action.payload;
+      state.editEntryRowID = id;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEntries.fulfilled, (state, action) => {
@@ -59,8 +64,13 @@ const entriesSlice = createSlice({
   },
 });
 
+export const { entryRowClicked } = entriesSlice.actions;
+
 // select all entry entities
 export const selectEntryEntities = (state) => state.entries.entities;
+
+// select editRowEntryValue
+export const selectEditEntryRowID = (state) => state.entries.editEntryRowID;
 
 //select activeMonth from appSettings
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
@@ -81,6 +91,16 @@ export const selectEntries = createSelector(selectEntryEntities, (entities) => {
     .sort((entryA, entryB) => entryA.startTime - entryB.startTime);
   return sortedEntryListWithDateObjects;
 });
+
+// select entry for edit
+export const selectEditEntry = createSelector(
+  selectEditEntryRowID,
+  selectEntries,
+  (id, entries) => {
+    const editEntryList = entries.filter((entry) => entry.id === id);
+    return editEntryList[0];
+  }
+);
 
 // select entries filtered by month and year
 export const selectFilteredEntries = createSelector(

@@ -18,12 +18,31 @@ export const tableRowSX = (style) => {
   const styles = {
     type1: {
       backgroundColor: 'secondary.bg',
+      '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: '#fff',
+        '& .MuiTableCell-root': {
+          color: '#000',
+        },
+      },
+
+      '& .MuiTableCell-root': {
+        color: 'secondary.main',
+      },
       '& .MuiTableCell-root': {
         color: 'white',
       },
     },
     type2: {
       backgroundColor: 'tertiary.main',
+      '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: '#fff',
+        '& .MuiTableCell-root': {
+          color: '#000',
+        },
+      },
+
       '& .MuiTableCell-root': {
         color: 'secondary.main',
       },

@@ -12,6 +12,8 @@ import SideBar from './components/sideBar/SideBar';
 import Logo from './components/logo/Logo';
 import AddExpenseModal from './components/modals/addModals/AddExpenseModal';
 import AddEntryModal from './components/modals/addModals/AddEntryModal';
+import EditExpenseModal from './components/modals/editModals/EditExpenseModal';
+import EditEntryModal from './components/modals/editModals/EditEntryModal';
 // import date picker dependancies
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -45,7 +47,9 @@ function App() {
             </Grid>
           </Grid>
           <AddExpenseModal />
+          <EditExpenseModal />
           <AddEntryModal />
+          <EditEntryModal />
         </Container>
       </LocalizationProvider>
     </ThemeProvider>
