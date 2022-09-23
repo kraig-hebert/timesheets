@@ -37,18 +37,18 @@ const EditExpenseModal = () => {
     setActivePage('page2');
   };
 
-  const handleModalClose = () => {
-    if (activePage === 'page1') dispatch(modalClosed('none'));
+  const handleModalClose = (forceClose = false) => {
+    if ((activePage === 'page1') | forceClose) dispatch(modalClosed('none'));
     setActivePage('page1');
     setTitle('Choose Expense to Edit');
   };
   const handleEditClick = () => {
     console.log('edit');
-    handleModalClose();
+    handleModalClose(true);
   };
   const handleDeleteClick = () => {
     console.log('delete');
-    handleModalClose();
+    handleModalClose(true);
   };
 
   return (
