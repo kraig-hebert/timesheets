@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as SX from '../../modalSX';
 import { useDispatch, useSelector } from 'react-redux';
 import EditableExpenses from './EditableExpenses';
 import EditableExpense from './EditableExpense';
-import {
-  selectEditExpenses,
-  editExpense,
-  deleteExpense,
-} from '../../../../reducers/expensesSlice';
+import { editExpense, deleteExpense } from '../../../../reducers/expensesSlice';
 import {
   selectActiveModal,
   modalClosed,
 } from '../../../../reducers/appSettingsSlice';
+import { forceDateString } from '../../../../helpers/dateHelpers';
 
 import {
   Dialog,
@@ -31,6 +28,12 @@ const EditExpenseModal = () => {
   const [activePage, setActivePage] = useState('page1');
   const [editableExpense, setEditableExpense] = useState();
 
+  const [datePickerValue, setDatePickerValue] = useState(new Date());
+
+  const [destinationValue, setDestinationValue] = useState('');
+
+  const [milesValue, setMilesValue] = useState('');
+
   const handleExpenseClick = (expense) => {
     setEditableExpense(expense);
     setTitle('Edit Expense');
@@ -43,8 +46,14 @@ const EditExpenseModal = () => {
     setTitle('Choose Expense to Edit');
   };
   const handleEditClick = () => {
-    console.log('edit');
+    const editedExpense = {
+      id: editableExpense.id,
+      date: forceDateString(datePickerValue),
+      destination: destinationValue,
+      miles: parseFloat(milesValue),
+    };
     handleModalClose(true);
+    dispatch(editExpense(editedExpense));
   };
   const handleDeleteClick = () => {
     console.log('delete');
@@ -64,7 +73,15 @@ const EditExpenseModal = () => {
           {activePage === 'page1' ? (
             <EditableExpenses handleExpenseClick={handleExpenseClick} />
           ) : (
-            <EditableExpense editableExpense={editableExpense} />
+            <EditableExpense
+              editableExpense={editableExpense}
+              datePickerValue={datePickerValue}
+              setDatePickerValue={setDatePickerValue}
+              destinationValue={destinationValue}
+              setDestinationValue={setDestinationValue}
+              milesValue={milesValue}
+              setMilesValue={setMilesValue}
+            />
           )}
         </Stack>
       </DialogContent>

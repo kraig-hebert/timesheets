@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { inputSX } from '../../modalSX';
 import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 
 const EditableExpense = (props) => {
-  const { editableExpense } = props;
-  const [datePickerValue, setDatePickerValue] = useState(new Date());
-  const handleDateChange = (newDate) => setDatePickerValue(newDate);
+  const {
+    editableExpense,
+    datePickerValue,
+    setDatePickerValue,
+    destinationValue,
+    setDestinationValue,
+    milesValue,
+    setMilesValue,
+  } = props;
 
-  const [destinationValue, setDestinationValue] = useState('');
+  const handleDateChange = (newDate) => setDatePickerValue(newDate);
   const handleDestinationChange = (destination) =>
     setDestinationValue(destination);
-
-  const [milesValue, setMilesValue] = useState('');
   const handleMilesChange = (miles) => setMilesValue(miles);
 
   useEffect(() => {

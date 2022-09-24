@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { buttonSX, boxSX } from '../../modalSX';
 import { Button, Box } from '@mui/material';
