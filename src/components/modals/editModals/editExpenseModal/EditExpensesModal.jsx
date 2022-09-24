@@ -46,7 +46,6 @@ const EditExpenseModal = () => {
   };
 
   const handleModalClose = (forceClose = false) => {
-    console.log(editExpenseList);
     if ((activePage === 'page1') | forceClose) dispatch(modalClosed('none'));
     setActivePage('page1');
     setTitle('Choose Expense to Edit');

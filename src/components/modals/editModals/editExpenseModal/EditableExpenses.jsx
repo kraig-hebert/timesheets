@@ -2,12 +2,9 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { buttonSX, boxSX } from '../../modalSX';
 import { Button, Box } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { selectEditExpenses } from '../../../../reducers/expensesSlice';
 
 const EditableExpenses = (props) => {
-  const { handleExpenseClick } = props;
-  const editExpenseList = useSelector(selectEditExpenses);
+  const { handleExpenseClick, editExpenseList } = props;
 
   const renderedExpenseButtons = editExpenseList.map((expense) => {
     return (
