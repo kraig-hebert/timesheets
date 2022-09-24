@@ -32,3 +32,10 @@ export const patch = async (entry, dataList) => {
   });
   return response;
 };
+
+export const remove = async (id, dataList) => {
+  const response = await fetch(`${API_URL + dataList}/${id}`, {
+    method: 'DELETE',
+  });
+  return response;
+};

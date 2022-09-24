@@ -4,7 +4,6 @@ import { buttonSX, boxSX } from '../../modalSX';
 import { Button, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectEditExpenses } from '../../../../reducers/expensesSlice';
-import EditableExpense from './EditableExpense';
 
 const EditableExpenses = (props) => {
   const { handleExpenseClick } = props;
@@ -27,7 +26,7 @@ const EditableExpenses = (props) => {
   return <>{renderedExpenseButtons}</>;
 };
 
-EditableExpense.propTypes = {
+EditableExpenses.propTypes = {
   handleExpenseClick: PropTypes.func,
 };
 export default EditableExpenses;

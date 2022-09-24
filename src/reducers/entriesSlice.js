@@ -48,7 +48,10 @@ export const editEntry = createAsyncThunk(
 // delete entry from db and update state.entries.entities
 export const deleteEntry = createAsyncThunk(
   'entries/deleteEntry',
-  async (entry) => {}
+  async (id) => {
+    const response = await client.remove(id, 'entries');
+    if (response.status === 200) return id;
+  }
 );
 
 const entriesSlice = createSlice({
@@ -77,7 +80,12 @@ const entriesSlice = createSlice({
         const entry = action.payload;
         state.entities[entry.id] = entry;
       })
-      .addCase(deleteEntry.fulfilled, (state, action) => {});
+      .addCase(deleteEntry.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.entities = Object.values(state.entities).filter(
+          (entry) => entry.id != id
+        );
+      });
   },
 });
 

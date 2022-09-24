@@ -49,7 +49,10 @@ export const editExpense = createAsyncThunk(
 
 export const deleteExpense = createAsyncThunk(
   'expenses/deleteExpense',
-  async (expense) => {}
+  async (id) => {
+    const response = await client.remove(id, 'expenses');
+    if (response.status === 200) return id;
+  }
 );
 
 const expensesSlice = createSlice({
@@ -78,7 +81,12 @@ const expensesSlice = createSlice({
         const expense = action.payload;
         state.entities[expense.id] = expense;
       })
-      .addCase(deleteExpense.fulfilled, (state, action) => {});
+      .addCase(deleteExpense.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.entities = Object.values(state.entities).filter(
+          (expense) => expense.id != id
+        );
+      });
   },
 });
 

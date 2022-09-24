@@ -3,7 +3,11 @@ import * as SX from '../../modalSX';
 import { useDispatch, useSelector } from 'react-redux';
 import EditableExpenses from './EditableExpenses';
 import EditableExpense from './EditableExpense';
-import { editExpense, deleteExpense } from '../../../../reducers/expensesSlice';
+import {
+  editExpense,
+  deleteExpense,
+  selectEditExpenses,
+} from '../../../../reducers/expensesSlice';
 import {
   selectActiveModal,
   modalClosed,
@@ -23,6 +27,7 @@ import {
 const EditExpenseModal = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector(selectActiveModal);
+  const editExpenseList = useSelector(selectEditExpenses);
 
   const [title, setTitle] = useState('Choose Expense to Edit');
   const [activePage, setActivePage] = useState('page1');
@@ -41,6 +46,7 @@ const EditExpenseModal = () => {
   };
 
   const handleModalClose = (forceClose = false) => {
+    console.log(editExpenseList);
     if ((activePage === 'page1') | forceClose) dispatch(modalClosed('none'));
     setActivePage('page1');
     setTitle('Choose Expense to Edit');
@@ -55,9 +61,10 @@ const EditExpenseModal = () => {
     handleModalClose(true);
     dispatch(editExpense(editedExpense));
   };
+
   const handleDeleteClick = () => {
-    console.log('delete');
     handleModalClose(true);
+    dispatch(deleteExpense(editableExpense.id));
   };
 
   return (
@@ -71,7 +78,10 @@ const EditExpenseModal = () => {
       <DialogContent sx={SX.dialogContentSX}>
         <Stack spacing={1}>
           {activePage === 'page1' ? (
-            <EditableExpenses handleExpenseClick={handleExpenseClick} />
+            <EditableExpenses
+              handleExpenseClick={handleExpenseClick}
+              editExpenseList={editExpenseList}
+            />
           ) : (
             <EditableExpense
               editableExpense={editableExpense}

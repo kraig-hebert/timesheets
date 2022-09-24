@@ -63,7 +63,8 @@ const EditEntryModal = () => {
     dispatch(editEntry(editedEntry));
   };
   const handleDeleteClick = () => {
-    dispatch(deleteEntry());
+    handleModalClose();
+    dispatch(deleteEntry(editableEntry.id));
   };
 
   useEffect(() => {
