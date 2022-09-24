@@ -28,24 +28,24 @@ const appSettingsSlice = createSlice({
       const activeModal = action.payload;
       state.activeModal = activeModal;
     },
-    modalClosed(state, action) {
-      const activeModal = action.payload;
-      state.activeModal = activeModal;
+    modalClosed(state) {
+      state.activeModal = 'none';
     },
   },
 });
 
-export const {
-  monthSelected,
-  yearSelected,
-  selectValueSelected,
-  modalOpened,
-  modalClosed,
-} = appSettingsSlice.actions;
-
+// selectors
 export const selectActiveMonth = (state) => state.appSettings.activeMonth;
 export const selectActiveYear = (state) => state.appSettings.activeYear;
 export const selectSelectValue = (state) => state.appSettings.selectValue;
 export const selectActiveModal = (state) => state.appSettings.activeModal;
+
+export const {
+  monthSelected,
+  modalOpened,
+  modalClosed,
+  selectValueSelected,
+  yearSelected,
+} = appSettingsSlice.actions;
 
 export default appSettingsSlice.reducer;

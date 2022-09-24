@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import * as SX from '../modalSX';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveNewEntry } from '../../../reducers/entriesSlice';
 import {
+  modalClosed,
   selectActiveMonth,
   selectActiveYear,
   selectActiveModal,
-  modalClosed,
 } from '../../../reducers/appSettingsSlice';
 import {
   forceDateTimeString,
   getMonthIndex,
   MONTHS,
 } from '../../../helpers/dateHelpers';
-
 import {
   Dialog,
   DialogTitle,
@@ -27,8 +26,8 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import * as SX from '../modalSX';
 import { DateTimePicker } from '@mui/x-date-pickers';
-import { useDispatch, useSelector } from 'react-redux';
 
 const AddEntryModal = () => {
   const dispatch = useDispatch();
@@ -37,20 +36,12 @@ const AddEntryModal = () => {
   const activeModal = useSelector(selectActiveModal);
 
   const [locationValue, setLocationValue] = useState('');
-  const handleLocationChange = (location) => setLocationValue(location);
-
   const [commentsValue, setCommentsValue] = useState('');
-  const handleCommentsChange = (comments) => setCommentsValue(comments);
-
   const [typeValue, setTypeValue] = useState('Service');
-  const handleTypeChange = (type) => setTypeValue(type);
-
   const [startTimeValue, setStartTimeValue] = useState(new Date());
-  const handleStartTimeChange = (date) => setStartTimeValue(date);
-
   const [endTimeValue, setEndTimeValue] = useState(new Date());
-  const handleEndTimeChange = (date) => setEndTimeValue(date);
 
+  // set date input values once the modal is cleared
   const updateDateValues = () => {
     const testDate = new Date();
     if (
@@ -79,7 +70,7 @@ const AddEntryModal = () => {
     updateDateValues();
   };
 
-  const handleModalClose = () => dispatch(modalClosed('none'));
+  const handleModalClose = () => dispatch(modalClosed());
   const handleAddClick = () => {
     const newEntry = {
       location: locationValue,
@@ -115,7 +106,7 @@ const AddEntryModal = () => {
             type="text"
             variant="filled"
             onChange={(e) => {
-              handleLocationChange(e.target.value);
+              setLocationValue(e.target.value);
             }}
             value={locationValue}
             sx={SX.inputSX}
@@ -128,7 +119,7 @@ const AddEntryModal = () => {
             type="text"
             variant="filled"
             onChange={(e) => {
-              handleCommentsChange(e.target.value);
+              setCommentsValue(e.target.value);
             }}
             value={commentsValue}
             sx={SX.inputSX}
@@ -145,7 +136,7 @@ const AddEntryModal = () => {
               value={typeValue}
               label="Sheet Type"
               onChange={(e) => {
-                handleTypeChange(e.target.value);
+                setTypeValue(e.target.value);
               }}
               sx={SX.selectSX}
             >
@@ -159,7 +150,7 @@ const AddEntryModal = () => {
             label="Start Date"
             value={startTimeValue}
             onChange={(newDate) => {
-              handleStartTimeChange(newDate);
+              setStartTimeValue(newDate);
             }}
             sx={SX.inputSX}
             renderInput={(params) => (
@@ -170,7 +161,7 @@ const AddEntryModal = () => {
             label="End Date"
             value={endTimeValue}
             onChange={(newDate) => {
-              handleEndTimeChange(newDate);
+              setEndTimeValue(newDate);
             }}
             sx={SX.inputSX}
             renderInput={(params) => (

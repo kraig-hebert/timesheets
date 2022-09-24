@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import * as SX from '../modalSX';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
-  selectEditEntry,
-  editEntry,
   deleteEntry,
+  editEntry,
+  selectEditEntry,
 } from '../../../reducers/entriesSlice';
 import {
-  selectActiveModal,
   modalClosed,
+  selectActiveModal,
 } from '../../../reducers/appSettingsSlice';
-
 import { forceDateTimeString } from '../../../helpers/dateHelpers';
 import {
   Dialog,
@@ -27,6 +24,8 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import * as SX from '../modalSX';
+
 import { DateTimePicker } from '@mui/x-date-pickers';
 
 const EditEntryModal = () => {
@@ -49,7 +48,7 @@ const EditEntryModal = () => {
   const [endTimeValue, setEndTimeValue] = useState(new Date());
   const handleEndTimeChange = (date) => setEndTimeValue(date);
 
-  const handleModalClose = () => dispatch(modalClosed('none'));
+  const handleModalClose = () => dispatch(modalClosed());
   const handleEditClick = () => {
     const editedEntry = {
       id: editableEntry.id,

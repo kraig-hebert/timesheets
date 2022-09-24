@@ -15,11 +15,6 @@ const EditableExpense = (props) => {
     setMilesValue,
   } = props;
 
-  const handleDateChange = (newDate) => setDatePickerValue(newDate);
-  const handleDestinationChange = (destination) =>
-    setDestinationValue(destination);
-  const handleMilesChange = (miles) => setMilesValue(miles);
-
   useEffect(() => {
     setDatePickerValue(editableExpense.date);
     setDestinationValue(editableExpense.destination);
@@ -32,7 +27,7 @@ const EditableExpense = (props) => {
         label="Date"
         value={datePickerValue}
         onChange={(newDate) => {
-          handleDateChange(newDate);
+          setDatePickerValue(newDate);
         }}
         renderInput={(params) => (
           <TextField variant="filled" sx={inputSX} {...params} />
@@ -47,7 +42,7 @@ const EditableExpense = (props) => {
         type="text"
         variant="filled"
         onChange={(e) => {
-          handleDestinationChange(e.target.value);
+          setDestinationValue(e.target.value);
         }}
         value={destinationValue}
         sx={inputSX}
@@ -60,7 +55,7 @@ const EditableExpense = (props) => {
         type="number"
         variant="filled"
         onChange={(e) => {
-          handleMilesChange(e.target.value);
+          setMilesValue(e.target.value);
         }}
         value={milesValue}
         sx={inputSX}

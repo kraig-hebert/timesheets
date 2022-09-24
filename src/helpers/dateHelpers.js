@@ -16,22 +16,16 @@ export const MONTHS = [
 export const YEARS = ['2022', '2021', '2020'];
 
 // return month name from dateObject.getMonth()
-export const getMonthName = (monthIndex) => {
-  return MONTHS[monthIndex];
-};
+export const getMonthName = (monthIndex) => MONTHS[monthIndex];
 
 // return month index from name
-export const getMonthIndex = (monthName) => {
-  return MONTHS.indexOf(monthName);
-};
+export const getMonthIndex = (monthName) => MONTHS.indexOf(monthName);
 
 // return formatted time string for table
-export const getTimeString = (dateObject) => {
-  return dateObject.toLocaleTimeString();
-};
+export const getTimeString = (dateObject) => dateObject.toLocaleTimeString();
 
 // changes memory object to Date.JSON or returns Date.JSON
-// this will have DATE as part of the Date Object
+// this will have onlt the DATE as part of the Date Object
 // time will be zeroed out
 export const forceDateString = (dateObj) => {
   if (dateObj.hasOwnProperty('_isAMomentObject')) {
@@ -71,7 +65,5 @@ export const getTotalHours = (milliseconds) => {
 };
 
 // return date in "Month date" format for table
-export const setTableDate = (dateObject) => {
-  const monthNum = dateObject.getMonth();
-  return `${getMonthName(monthNum)} ${dateObject.getDate()}`;
-};
+export const setTableDate = (dateObject) =>
+  `${getMonthName(dateObject.getMonth())} ${dateObject.getDate()}`;

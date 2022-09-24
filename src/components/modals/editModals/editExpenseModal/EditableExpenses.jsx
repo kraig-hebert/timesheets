@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { buttonSX, boxSX } from '../../modalSX';
-import { Button, Box } from '@mui/material';
+import { boxSX, buttonSX } from '../../modalSX';
+import { Box, Button } from '@mui/material';
 
 const EditableExpenses = (props) => {
   const { handleExpenseClick, editExpenseList } = props;
@@ -25,5 +25,6 @@ const EditableExpenses = (props) => {
 
 EditableExpenses.propTypes = {
   handleExpenseClick: PropTypes.func,
+  editExpenseList: PropTypes.array,
 };
 export default EditableExpenses;

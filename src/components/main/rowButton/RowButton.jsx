@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { PropTypes } from 'prop-types';
-import { Button, TableRow, TableCell } from '@mui/material';
-import { rowButtonSX } from '../mainSX';
 import { modalOpened } from '../../../reducers/appSettingsSlice';
+import { PropTypes } from 'prop-types';
+import { Button, TableCell, TableRow } from '@mui/material';
+import { rowButtonSX } from '../mainSX';
 
 const RowButton = (props) => {
   const { colSpan, icon, buttonType, buttonText } = props;

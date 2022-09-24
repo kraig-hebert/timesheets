@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import * as SX from '../modalSX';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveNewExpense } from '../../../reducers/expensesSlice';
 import {
+  modalClosed,
   selectActiveMonth,
   selectActiveYear,
   selectActiveModal,
-  modalClosed,
 } from '../../../reducers/appSettingsSlice';
 import {
   forceDateString,
   getMonthIndex,
   MONTHS,
 } from '../../../helpers/dateHelpers';
-
 import {
   Dialog,
   DialogTitle,
@@ -23,9 +22,8 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import * as SX from '../modalSX';
 import { DatePicker } from '@mui/x-date-pickers';
-
-import { useDispatch, useSelector } from 'react-redux';
 
 const AddExpenseModal = () => {
   const dispatch = useDispatch();
@@ -34,15 +32,10 @@ const AddExpenseModal = () => {
   const activeModal = useSelector(selectActiveModal);
 
   const [datePickerValue, setDatePickerValue] = useState(new Date());
-  const handleDateChange = (newDate) => setDatePickerValue(newDate);
-
   const [destinationValue, setDestinationValue] = useState('');
-  const handleDestinationChange = (destination) =>
-    setDestinationValue(destination);
-
   const [milesValue, setMilesValue] = useState('');
-  const handleMilesChange = (miles) => setMilesValue(miles);
 
+  // set date input values once the modal is cleared
   const updateDateValue = () => {
     const testDate = new Date();
     if (
@@ -63,7 +56,7 @@ const AddExpenseModal = () => {
     setMilesValue('');
   };
 
-  const handleModalClose = () => dispatch(modalClosed('none'));
+  const handleModalClose = () => dispatch(modalClosed());
   const handleAddClick = () => {
     const newExpense = {
       date: forceDateString(datePickerValue),
@@ -93,7 +86,7 @@ const AddExpenseModal = () => {
             label="Date"
             value={datePickerValue}
             onChange={(newDate) => {
-              handleDateChange(newDate);
+              setDatePickerValue(newDate);
             }}
             renderInput={(params) => (
               <TextField variant="filled" sx={SX.inputSX} {...params} />
@@ -108,7 +101,7 @@ const AddExpenseModal = () => {
             type="text"
             variant="filled"
             onChange={(e) => {
-              handleDestinationChange(e.target.value);
+              setDestinationValue(e.target.value);
             }}
             value={destinationValue}
             sx={SX.inputSX}
@@ -121,7 +114,7 @@ const AddExpenseModal = () => {
             type="number"
             variant="filled"
             onChange={(e) => {
-              handleMilesChange(e.target.value);
+              setMilesValue(e.target.value);
             }}
             value={milesValue}
             sx={SX.inputSX}

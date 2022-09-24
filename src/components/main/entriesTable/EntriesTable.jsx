@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectFilteredEntries,
   entryRowClicked,
+  selectFilteredEntries,
 } from '../../../reducers/entriesSlice';
 import { modalOpened } from '../../../reducers/appSettingsSlice';
 import * as dh from '../../../helpers/dateHelpers';
@@ -24,27 +24,7 @@ const EntriesTable = () => {
   let lastStyle = 'type2';
   const filteredEntries = useSelector(selectFilteredEntries);
 
-  const setStyle = (index) => {
-    if (index === 0) return { style: lastStyle, displayDate: true };
-    else {
-      if (
-        filteredEntries[index - 1].startTime.getDate() ===
-        filteredEntries[index].startTime.getDate()
-      )
-        return { style: lastStyle, displayDate: false };
-      else {
-        if (lastStyle === 'type1') {
-          lastStyle = 'type2';
-          return { style: 'type2', displayDate: true };
-        } else {
-          lastStyle = 'type1';
-          return { style: 'type1', displayDate: true };
-        }
-      }
-    }
-  };
-
-  // set table data
+  // table row data constructor
   const createData = (
     id,
     date,
@@ -66,10 +46,29 @@ const EntriesTable = () => {
       styles,
     };
   };
-  const rows = filteredEntries.map((entry, index) => {
-    const styles = setStyle(index);
 
-    return createData(
+  //returns style type only changing if the date changes
+  const setStyle = (index) => {
+    if (index === 0) return { style: lastStyle, displayDate: true };
+    else {
+      if (
+        filteredEntries[index - 1].startTime.getDate() ===
+        filteredEntries[index].startTime.getDate()
+      )
+        return { style: lastStyle, displayDate: false };
+      else {
+        if (lastStyle === 'type1') {
+          lastStyle = 'type2';
+          return { style: 'type2', displayDate: true };
+        } else {
+          lastStyle = 'type1';
+          return { style: 'type1', displayDate: true };
+        }
+      }
+    }
+  };
+  const rows = filteredEntries.map((entry, index) =>
+    createData(
       entry.id,
       entry.date,
       entry.location,
@@ -77,9 +76,9 @@ const EntriesTable = () => {
       entry.type,
       entry.startTime,
       entry.endTime,
-      styles
-    );
-  });
+      setStyle(index)
+    )
+  );
 
   const handleRowClick = (id) => {
     dispatch(modalOpened('edit-entries'));

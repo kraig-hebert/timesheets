@@ -2,7 +2,7 @@ import React from 'react';
 // style imports
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './themes/mainTheme';
-import * as SX from './appSettings';
+import * as SX from './appSX';
 // MUI component imports
 import { Box, Container, Grid } from '@mui/material';
 // component imports

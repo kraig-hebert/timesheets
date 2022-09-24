@@ -36,3 +36,6 @@ MODALS
 
 
 
+***********************************************
+figure out why ONLY AFTER delete........
+- if you edit an item it will duplicate it in state and if you select the new item it will reflect the original value not what is showing

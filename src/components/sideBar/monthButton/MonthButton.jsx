@@ -5,8 +5,8 @@ import { Button, Typography } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { buttonMonthSX } from '../sideBarSX';
 import {
-  selectActiveMonth,
   monthSelected,
+  selectActiveMonth,
 } from '../../../reducers/appSettingsSlice';
 
 const MonthButton = (props) => {
@@ -15,11 +15,10 @@ const MonthButton = (props) => {
   const activeMonth = useSelector(selectActiveMonth);
 
   const activeButtonMonthSX = () => {
-    if (month === activeMonth) {
+    if (month === activeMonth)
       return {
         color: 'secondary.main',
       };
-    }
   };
   return (
     <Button

@@ -8,22 +8,17 @@ import { MONTHS } from '../helpers/dateHelpers';
 
 const initialState = { entities: {}, editExpenseRowDate: [] };
 
-const getID = (expenseList) => {
-  const id = expenseList.length
-    ? expenseList[expenseList.length - 1].id + 1
-    : 1;
+// return next available id
+const getID = (expenseList) =>
+  expenseList.length ? expenseList[expenseList.length - 1].id + 1 : 1;
 
-  return id;
-};
-
+// fetch list of timesheet expenses from db.json
 export const fetchExpenses = createAsyncThunk(
   'expenses/fetchExpenses',
-  async () => {
-    const response = await client.get('expenses');
-    return response;
-  }
+  async () => await client.get('expenses')
 );
 
+// save new expense to db.json and update state.entries.entities
 export const saveNewExpense = createAsyncThunk(
   'expenses/saveNewExpense',
   async (expense, { getState }) => {
@@ -33,12 +28,11 @@ export const saveNewExpense = createAsyncThunk(
       id: getID(Object.values(state.expenses.entities)),
     };
     const response = await client.post(newExpense, 'expenses');
-    if (response.status === 201) {
-      return newExpense;
-    }
+    if (response.status === 201) return newExpense;
   }
 );
 
+// edit expense in db and update state.entries.entities
 export const editExpense = createAsyncThunk(
   'expenses/editExpense',
   async (expense) => {
@@ -47,6 +41,7 @@ export const editExpense = createAsyncThunk(
   }
 );
 
+// delete expense from db and update state.entries.entities
 export const deleteExpense = createAsyncThunk(
   'expenses/deleteExpense',
   async (id) => {
@@ -92,18 +87,16 @@ const expensesSlice = createSlice({
 
 export const { expenseRowClicked } = expensesSlice.actions;
 
-// select all expense entities
+// selectors
 export const selectExpenseEntities = (state) => state.expenses.entities;
-
-// select editExpenseRowDate
 export const selectEditExpenseRowDate = (state) =>
   state.expenses.editExpenseRowDate;
 
-// select activeMonth from appSettings
+// selectrors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
-// select activeYear from appSettings
 const selectActiveYear = (state) => state.appSettings.activeYear;
 
+// select expenses with the dateObjects instead of JSON strings
 export const selectExpenses = createSelector(
   selectExpenseEntities,
   (expenses) => {
@@ -121,6 +114,7 @@ export const selectExpenses = createSelector(
   }
 );
 
+// select lkist of expenses for edit
 export const selectEditExpenses = createSelector(
   selectEditExpenseRowDate,
   selectExpenses,
@@ -132,6 +126,9 @@ export const selectEditExpenses = createSelector(
   }
 );
 
+// select expenses filtered by month and year
+// expeneses with the same date will be combined into 1 expense
+// disdplay as: "destination / destination" and miles are added together
 export const selectFilteredExpenses = createSelector(
   selectActiveMonth,
   selectActiveYear,
@@ -144,6 +141,8 @@ export const selectFilteredExpenses = createSelector(
         MONTHS[expense.date.getMonth()] === activeMonth &&
         expense.date.getFullYear().toString() === activeYear
     );
+
+    // combine expenses by date
     filteredExpenses.forEach((expense, index) => {
       if (index === 0) tempDict[expense.date] = expense;
       else if (Object.keys(tempDict).includes(expense.date.toString())) {

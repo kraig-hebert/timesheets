@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectFilteredExpenses,
   expenseRowClicked,
+  selectFilteredExpenses,
 } from '../../../reducers/expensesSlice';
 import { modalOpened } from '../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../helpers/dateHelpers';
@@ -23,25 +23,31 @@ const ExpensesTable = () => {
   const dispatch = useDispatch();
   const filteredExpenses = useSelector(selectFilteredExpenses);
 
+  // table row data constructor
+  const createData = (id, date, destination, miles, style) => {
+    return {
+      id,
+      date,
+      destination,
+      miles,
+      style,
+    };
+  };
+
+  // returns style type changing each turn
   const setStyle = (index) => {
     if (index % 2 != 0) return 'type1';
     else return 'type2';
   };
-
-  const createData = (id, date, destination, miles, style) => {
-    return { id, date, destination, miles, style };
-  };
-
-  const rows = filteredExpenses.map((expense, index) => {
-    const style = setStyle(index);
-    return createData(
+  const rows = filteredExpenses.map((expense, index) =>
+    createData(
       expense.id,
       expense.date,
       expense.destination,
       expense.miles,
-      style
-    );
-  });
+      setStyle(index)
+    )
+  );
 
   const handleRowClick = (date) => {
     dispatch(modalOpened('edit-expenses'));

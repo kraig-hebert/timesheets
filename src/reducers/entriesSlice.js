@@ -8,18 +8,14 @@ import { MONTHS } from '../helpers/dateHelpers';
 
 const initialState = { entities: {}, editEntryRowID: '' };
 
-const getID = (entryList) => {
-  const id = entryList.length ? entryList[entryList.length - 1].id + 1 : 1;
-  return id;
-};
+// return next available id
+const getID = (entryList) =>
+  entryList.length ? entryList[entryList.length - 1].id + 1 : 1;
 
 // fetch list of timesheet entries from db.json
 export const fetchEntries = createAsyncThunk(
   'entries/fetchEntries',
-  async () => {
-    const response = await client.get('entries');
-    return response;
-  }
+  async () => await client.get('entries')
 );
 
 // save new entry to db.json and update state.entries.entities
@@ -91,21 +87,17 @@ const entriesSlice = createSlice({
 
 export const { entryRowClicked } = entriesSlice.actions;
 
-// select all entry entities
+// selectors
 export const selectEntryEntities = (state) => state.entries.entities;
-
-// select editRowEntryValue
 export const selectEditEntryRowID = (state) => state.entries.editEntryRowID;
 
-//select activeMonth from appSettings
+// selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
-//select activeYear from appSettings
 const selectActiveYear = (state) => state.appSettings.activeYear;
 
 // select entries with dateObjects instead of JSON strings
 export const selectEntries = createSelector(selectEntryEntities, (entities) => {
-  const entryList = Object.values(entities);
-  const sortedEntryListWithDateObjects = entryList
+  const sortedEntryListWithDateObjects = Object.values(entities)
     .map((entry) => {
       return {
         ...entry,
