@@ -63,7 +63,8 @@ const entriesSlice = createSlice({
     builder
       .addCase(fetchEntries.fulfilled, (state, action) => {
         const newEntries = {};
-        action.payload.forEach((entry) => {
+        const entryList = action.payload;
+        entryList.forEach((entry) => {
           newEntries[entry.id] = entry;
         });
         state.entities = newEntries;
@@ -78,9 +79,11 @@ const entriesSlice = createSlice({
       })
       .addCase(deleteEntry.fulfilled, (state, action) => {
         const id = action.payload;
-        state.entities = Object.values(state.entities).filter(
-          (entry) => entry.id != id
-        );
+        const newEntries = {};
+        Object.values(state.entities).forEach((entry) => {
+          if (id != entry.id) newEntries[entry.id] = entry;
+        });
+        state.entities = newEntries;
       });
   },
 });

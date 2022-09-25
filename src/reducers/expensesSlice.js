@@ -78,9 +78,11 @@ const expensesSlice = createSlice({
       })
       .addCase(deleteExpense.fulfilled, (state, action) => {
         const id = action.payload;
-        state.entities = Object.values(state.entities).filter(
-          (expense) => expense.id != id
-        );
+        const newExpenses = {};
+        Object.values(state.entities).forEach((expense) => {
+          if (id != expense.id) newExpenses[expense.id] = expense;
+        });
+        state.entities = newExpenses;
       });
   },
 });
