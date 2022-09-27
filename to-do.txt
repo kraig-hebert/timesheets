@@ -5,7 +5,7 @@ QUICK/EASY
 - figure out how the label color changes on focus for an input
     - we want to control that and make it white instead of primary.main
 
-- update selectors in slices to all use createSelectors
+- update entries/expenses SELECT icon to match the add button icon
 
 
 

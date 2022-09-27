@@ -4,7 +4,8 @@ import { getMonthName } from '../helpers/dateHelpers';
 const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
-  selectValue: 'Entries',
+  sheetTypeSelectValue: 'Entries',
+  employeeSelectValue: 'Kraig Hebert',
   activeModal: 'none',
 };
 
@@ -20,9 +21,13 @@ const appSettingsSlice = createSlice({
       const year = action.payload;
       state.activeYear = year;
     },
-    selectValueSelected(state, action) {
-      const newSelectValue = action.payload;
-      state.selectValue = newSelectValue;
+    sheetTypeSelectValueSelected(state, action) {
+      const newSheetTypeSelectValue = action.payload;
+      state.sheetTypeSelectValue = newSheetTypeSelectValue;
+    },
+    employeeSelectValueSelected(state, action) {
+      const newEmployeeSelectValue = action.payload;
+      state.employeeSelectValue = newEmployeeSelectValue;
     },
     modalOpened(state, action) {
       const activeModal = action.payload;
@@ -37,14 +42,18 @@ const appSettingsSlice = createSlice({
 // selectors
 export const selectActiveMonth = (state) => state.appSettings.activeMonth;
 export const selectActiveYear = (state) => state.appSettings.activeYear;
-export const selectSelectValue = (state) => state.appSettings.selectValue;
+export const selectSheetTypeSelectValue = (state) =>
+  state.appSettings.sheetTypeSelectValue;
+export const selectEmployeeSelectValue = (state) =>
+  state.appSettings.employeeSelectValue;
 export const selectActiveModal = (state) => state.appSettings.activeModal;
 
 export const {
   monthSelected,
   modalOpened,
   modalClosed,
-  selectValueSelected,
+  sheetTypeSelectValueSelected,
+  employeeSelectValueSelected,
   yearSelected,
 } = appSettingsSlice.actions;
 

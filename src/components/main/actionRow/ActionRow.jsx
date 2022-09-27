@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectSelectValue,
-  selectValueSelected,
+  selectSheetTypeSelectValue,
+  sheetTypeSelectValueSelected,
+  selectEmployeeSelectValue,
+  employeeSelectValueSelected,
 } from '../../../reducers/appSettingsSlice';
 import * as SX from '../actionRow/actionRowSX';
 
@@ -16,7 +18,8 @@ import {
 
 const ActionRow = () => {
   const dispatch = useDispatch();
-  const selectValue = useSelector(selectSelectValue);
+  const sheetTypeSelectValue = useSelector(selectSheetTypeSelectValue);
+  const employeeSelectValue = useSelector(selectEmployeeSelectValue);
 
   return (
     <>
@@ -29,10 +32,10 @@ const ActionRow = () => {
           labelId="sheet-selector-label"
           id="sheet-selector"
           size="small"
-          value={selectValue}
+          value={sheetTypeSelectValue}
           label="Sheet Type"
           onChange={(e) => {
-            dispatch(selectValueSelected(e.target.value));
+            dispatch(sheetTypeSelectValueSelected(e.target.value));
           }}
           sx={SX.selectSX}
         >
@@ -48,9 +51,11 @@ const ActionRow = () => {
           labelId="employee-selector-label"
           id="employee-selector"
           size="small"
-          value="Kraig Hebert"
+          value={employeeSelectValue}
           label="Sheet Type"
-          onChange={(e) => {}}
+          onChange={(e) => {
+            dispatch(employeeSelectValueSelected(e.target.value));
+          }}
           sx={SX.selectSX}
         >
           <MenuItem value="Kraig Hebert">Kraig Hebert</MenuItem>
