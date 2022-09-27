@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   entryRowClicked,
   selectFilteredEntries,
-} from '../../../reducers/entriesSlice';
-import { modalOpened } from '../../../reducers/appSettingsSlice';
-import * as dh from '../../../helpers/dateHelpers';
+} from '../../../../reducers/entriesSlice';
+import { modalOpened } from '../../../../reducers/appSettingsSlice';
+import * as dh from '../../../../helpers/dateHelpers';
 import RowButton from '../rowButton/RowButton';
 
 import {
@@ -16,7 +16,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import * as SX from '../mainSX';
+import * as SX from '../../mainSX';
 import { EventAvailableTwoTone } from '@mui/icons-material';
 
 const EntriesTable = () => {
