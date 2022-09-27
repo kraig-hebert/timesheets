@@ -34,6 +34,8 @@ LONGER/HARD
 MODALS
 - abstract each modal into 1 and just call form components to display inside
 
+- update SX for all inputs across app so they look the same
+
 
 
 ***********************************************

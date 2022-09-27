@@ -1,3 +1,10 @@
+export const containerSX = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  paddingBottom: '10px',
+  width: '90%',
+};
+
 export const tableSX = {
   width: '90%',
   margin: 'auto',
