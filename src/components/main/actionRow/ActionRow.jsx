@@ -7,9 +7,12 @@ import {
   employeeSelectValueSelected,
 } from '../../../reducers/appSettingsSlice';
 import * as SX from '../actionRow/actionRowSX';
+import { Search } from '@mui/icons-material';
 
 import {
   FormControl,
+  IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -23,7 +26,20 @@ const ActionRow = () => {
 
   return (
     <>
-      <TextField label="Search Events" size="small" sx={SX.textFieldSX} />
+      <TextField
+        label="Search Events"
+        size="small"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton color="secondary">
+                <Search />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        sx={SX.textFieldSX}
+      />
       <FormControl>
         <InputLabel id="sheet-selector-label" sx={SX.labelSX}>
           Sheet Type

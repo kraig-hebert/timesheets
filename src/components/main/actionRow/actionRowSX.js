@@ -1,5 +1,6 @@
 export const textFieldSX = {
   width: '500px',
+  color: 'secondary.main',
   input: {
     color: 'secondary.main',
   },
@@ -18,13 +19,12 @@ export const textFieldSX = {
 };
 
 export const labelSX = {
-  color: 'primary.main',
+  color: 'secondary.main',
 };
 
 export const selectSX = {
   width: '300px',
   color: 'secondary.main',
-
   backgroundColor: 'primary.bg',
   '&:hover': {
     '& .MuiOutlinedInput-notchedOutline': {
@@ -35,6 +35,6 @@ export const selectSX = {
     borderColor: 'primary.main',
   },
   '& .MuiSvgIcon-root': {
-    color: 'primary.main',
+    color: 'secondary.main',
   },
 };
