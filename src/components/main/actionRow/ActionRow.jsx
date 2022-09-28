@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSheetTypeSelectValue,
@@ -18,11 +18,29 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { selectUsers } from '../../../reducers/usersSlice';
 
 const ActionRow = () => {
   const dispatch = useDispatch();
   const sheetTypeSelectValue = useSelector(selectSheetTypeSelectValue);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
+  const users = useSelector(selectUsers);
+
+  const renderedUserMenuItems = users.map((user) => (
+    <MenuItem
+      key={user.id}
+      value={`${user.firstName} ${user.lastName}`}
+    >{`${user.firstName} ${user.lastName}`}</MenuItem>
+  ));
+
+  useEffect(() => {
+    if (users.length > 0) {
+      const user = users[0];
+      dispatch(
+        employeeSelectValueSelected(`${user.firstName} ${user.lastName}`)
+      );
+    }
+  }, [users]);
 
   return (
     <>
@@ -48,6 +66,7 @@ const ActionRow = () => {
           labelId="sheet-selector-label"
           id="sheet-selector"
           size="small"
+          placeholder="SelectUser"
           value={sheetTypeSelectValue}
           label="Sheet Type"
           onChange={(e) => {
@@ -68,14 +87,13 @@ const ActionRow = () => {
           id="employee-selector"
           size="small"
           value={employeeSelectValue}
-          label="Sheet Type"
+          label="Employee"
           onChange={(e) => {
             dispatch(employeeSelectValueSelected(e.target.value));
           }}
           sx={SX.selectSX}
         >
-          <MenuItem value="Kraig Hebert">Kraig Hebert</MenuItem>
-          <MenuItem value="Kara Canata">Kara Canata</MenuItem>
+          {renderedUserMenuItems}
         </Select>
       </FormControl>
     </>

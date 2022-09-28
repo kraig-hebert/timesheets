@@ -5,7 +5,7 @@ const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
   sheetTypeSelectValue: 'Entries',
-  employeeSelectValue: 'Kraig Hebert',
+  employeeSelectValue: '',
   activeModal: 'none',
 };
 
