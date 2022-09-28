@@ -1,13 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './app/store';
 import App from './App';
 import { fetchEntries } from './reducers/entriesSlice';
 import './index.css';
 import { fetchExpenses } from './reducers/expensesSlice';
-import { fetchUsers, selectUsers } from './reducers/usersSlice';
-import { employeeSelectValueSelected } from './reducers/appSettingsSlice';
+import { fetchUsers, selectUserEntities } from './reducers/usersSlice';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

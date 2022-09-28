@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
+import { selectEmployee } from './appSettingsSlice';
 
 const initialState = { entities: {}, editEntryRowID: '' };
 
@@ -126,12 +127,17 @@ export const selectEditEntry = createSelector(
 export const selectFilteredEntries = createSelector(
   selectActiveMonth,
   selectActiveYear,
+  selectEmployee,
   selectEntries,
-  (activeMonth, activeYear, entries) => {
+  (activeMonth, activeYear, employee, entries) => {
+    // skips error if no employee on initial page load
+    if (!employee) return [];
+
     const filteredEntries = entries.filter(
       (entry) =>
         MONTHS[entry.startTime.getMonth()] === activeMonth &&
-        entry.startTime.getFullYear().toString() === activeYear
+        entry.startTime.getFullYear().toString() === activeYear &&
+        entry.userId === employee.id
     );
     return filteredEntries;
   }

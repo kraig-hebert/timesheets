@@ -35,7 +35,7 @@ const ActionRow = () => {
 
   useEffect(() => {
     if (users.length > 0) {
-      const user = users[0];
+      const user = users[1];
       dispatch(
         employeeSelectValueSelected(`${user.firstName} ${user.lastName}`)
       );

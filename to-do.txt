@@ -1,11 +1,11 @@
 QUICK/EASY
 *****************************************************************************************
-- update header styling to use secondary.main for focus and active
-
 - figure out how the label color changes on focus for an input
     - we want to control that and make it white instead of primary.main
 
 - update entries/expenses SELECT icon to match the add button icon
+
+- change the search box label to match entry or expense
 
 
 

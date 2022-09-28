@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
+import { selectEmployee } from './appSettingsSlice';
 
 const initialState = { entities: {}, editExpenseRowDate: [] };
 
@@ -94,7 +95,7 @@ export const selectExpenseEntities = (state) => state.expenses.entities;
 export const selectEditExpenseRowDate = (state) =>
   state.expenses.editExpenseRowDate;
 
-// selectrors from appSettingsSlice
+// selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
 const selectActiveYear = (state) => state.appSettings.activeYear;
 
@@ -134,14 +135,18 @@ export const selectEditExpenses = createSelector(
 export const selectFilteredExpenses = createSelector(
   selectActiveMonth,
   selectActiveYear,
+  selectEmployee,
   selectExpenses,
-  (activeMonth, activeYear, expenses) => {
-    let tempDict = {};
+  (activeMonth, activeYear, employee, expenses) => {
+    // skips error if no employee on initial page load
+    if (!employee) return [];
 
+    let tempDict = {};
     const filteredExpenses = expenses.filter(
       (expense) =>
         MONTHS[expense.date.getMonth()] === activeMonth &&
-        expense.date.getFullYear().toString() === activeYear
+        expense.date.getFullYear().toString() === activeYear &&
+        expense.userId === employee.id
     );
 
     // combine expenses by date

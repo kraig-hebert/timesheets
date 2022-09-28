@@ -1,11 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { getMonthName } from '../helpers/dateHelpers';
+import { selectUsers } from './usersSlice';
 
 const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
-  sheetTypeSelectValue: 'Entries',
+  sheetTypeSelectValue: 'Expenses',
   employeeSelectValue: '',
+  activeEmployeeId: 0,
   activeModal: 'none',
 };
 
@@ -47,6 +49,17 @@ export const selectSheetTypeSelectValue = (state) =>
 export const selectEmployeeSelectValue = (state) =>
   state.appSettings.employeeSelectValue;
 export const selectActiveModal = (state) => state.appSettings.activeModal;
+
+export const selectEmployee = createSelector(
+  selectEmployeeSelectValue,
+  selectUsers,
+  (employeeName, users) => {
+    const idList = users.filter(
+      (user) => `${user.firstName} ${user.lastName}` === employeeName
+    );
+    return idList[0];
+  }
+);
 
 export const {
   monthSelected,
