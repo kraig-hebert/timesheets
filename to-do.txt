@@ -17,12 +17,13 @@ MEDIUM
 - SEARCH
     - add ability to search entries or expenses
     - allow user to filter by last month/year or # of 
-EDIT/DELETE MODALS
-- create modal for entries and expenses
-- 1 modal can handle delete and edit
-- have extra step to confirm edit or delete before commiting action
-- separate a single day expenses and put each on an ediiable textield
-    - allow edit or delete of each expense item
+
+UPDATE EXPENSES
+- create ability to add an expense that is a purchase instead of miles
+- add column for dollar amount
+    - this will reflect the $50 for cell phone as well
+    - add total dollar at the bottom as well
+
 
 
 
@@ -38,6 +39,15 @@ MODALS
 
 
 
-***********************************************
-figure out why ONLY AFTER delete........
-- if you edit an item it will duplicate it in state and if you select the new item it will reflect the original value not what is showing
+
+
+*************************************************
+FIX EXPENSE EDIT
+- the modal will show all expenses for that day, and doesn't filter by activeEmployee
+- FIX: filter edit expenses list by activeEmployee
+- BUG: entry edit modal doesn't clear on exit so old values show up
+    - check to see if expense does the same thing
+    - make sure input values clear on exit
+    - this was on ESC key being clicked. could be a different event that is called on ESC close
+    - there may be a way to not allow the modal to close on ESC for an easy fix
+***************************************************

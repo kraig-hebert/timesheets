@@ -6,6 +6,7 @@ import {
   selectActiveMonth,
   selectActiveYear,
   selectActiveModal,
+  selectEmployee,
 } from '../../../reducers/appSettingsSlice';
 import {
   forceDateTimeString,
@@ -34,6 +35,7 @@ const AddEntryModal = () => {
   const activeMonth = useSelector(selectActiveMonth);
   const activeYear = useSelector(selectActiveYear);
   const activeModal = useSelector(selectActiveModal);
+  const employee = useSelector(selectEmployee);
 
   const [locationValue, setLocationValue] = useState('');
   const [commentsValue, setCommentsValue] = useState('');
@@ -78,6 +80,7 @@ const AddEntryModal = () => {
       type: typeValue,
       startTime: forceDateTimeString(startTimeValue),
       endTime: forceDateTimeString(endTimeValue),
+      userId: employee.id,
     };
     clearForm();
     handleModalClose();

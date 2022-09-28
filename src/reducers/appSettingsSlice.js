@@ -5,10 +5,19 @@ import { selectUsers } from './usersSlice';
 const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
-  sheetTypeSelectValue: 'Expenses',
+  sheetTypeSelectValue: 'Entries',
   employeeSelectValue: '',
   activeEmployeeId: 0,
   activeModal: 'none',
+  activeUser: {
+    id: 1,
+    username: 'kraighebert@gmail.com',
+    password: 'password',
+    firstName: 'Kraig',
+    lastName: 'Hebert',
+    isAdmin: true,
+    hasCellPhone: true,
+  },
 };
 
 const appSettingsSlice = createSlice({
@@ -38,6 +47,10 @@ const appSettingsSlice = createSlice({
     modalClosed(state) {
       state.activeModal = 'none';
     },
+    userLoggedIn(state, action) {
+      const user = action.payload;
+      state.activeUser = user;
+    },
   },
 });
 
@@ -49,6 +62,7 @@ export const selectSheetTypeSelectValue = (state) =>
 export const selectEmployeeSelectValue = (state) =>
   state.appSettings.employeeSelectValue;
 export const selectActiveModal = (state) => state.appSettings.activeModal;
+export const selectActiveUser = (state) => state.appSettings.activeUser;
 
 export const selectEmployee = createSelector(
   selectEmployeeSelectValue,
@@ -68,6 +82,7 @@ export const {
   sheetTypeSelectValueSelected,
   employeeSelectValueSelected,
   yearSelected,
+  userLoggedIn,
 } = appSettingsSlice.actions;
 
 export default appSettingsSlice.reducer;

@@ -6,6 +6,7 @@ import {
   selectActiveMonth,
   selectActiveYear,
   selectActiveModal,
+  selectEmployee,
 } from '../../../reducers/appSettingsSlice';
 import {
   forceDateString,
@@ -30,6 +31,7 @@ const AddExpenseModal = () => {
   const activeMonth = useSelector(selectActiveMonth);
   const activeYear = useSelector(selectActiveYear);
   const activeModal = useSelector(selectActiveModal);
+  const employee = useSelector(selectEmployee);
 
   const [datePickerValue, setDatePickerValue] = useState(new Date());
   const [destinationValue, setDestinationValue] = useState('');
@@ -62,6 +64,7 @@ const AddExpenseModal = () => {
       date: forceDateString(datePickerValue),
       destination: destinationValue,
       miles: parseInt(milesValue),
+      userId: employee.id,
     };
     clearForm();
     handleModalClose();

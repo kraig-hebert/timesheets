@@ -35,6 +35,24 @@
       "endTime": "2022-09-27T19:00:00.000Z",
       "id": 5,
       "userId": 2
+    },
+    {
+      "location": "Kara Tester",
+      "comments": "gggggg",
+      "type": "Service",
+      "startTime": "2022-09-28T16:00:00.564Z",
+      "endTime": "2022-09-28T16:00:00.564Z",
+      "userId": 2,
+      "id": 6
+    },
+    {
+      "location": "Kraig Test",
+      "comments": "gfffffffff",
+      "type": "Service",
+      "startTime": "2022-06-15T16:00:00.000Z",
+      "endTime": "2022-06-15T16:00:00.000Z",
+      "userId": 1,
+      "id": 7
     }
   ],
   "expenses": [
@@ -44,6 +62,27 @@
       "miles": 78,
       "id": 15,
       "userId": 1
+    },
+    {
+      "date": "2022-09-28T04:00:00.000Z",
+      "destination": "Test Expense",
+      "miles": 12,
+      "userId": 1,
+      "id": 16
+    },
+    {
+      "date": "2022-09-28T04:00:00.000Z",
+      "destination": "Karas First",
+      "miles": 123,
+      "userId": 3,
+      "id": 17
+    },
+    {
+      "date": "2022-08-15T04:00:00.000Z",
+      "destination": "Kara Tester",
+      "miles": 12,
+      "userId": 2,
+      "id": 18
     }
   ],
   "users": [

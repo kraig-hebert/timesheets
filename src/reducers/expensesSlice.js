@@ -138,7 +138,7 @@ export const selectFilteredExpenses = createSelector(
   selectEmployee,
   selectExpenses,
   (activeMonth, activeYear, employee, expenses) => {
-    // skips error if no employee on initial page load
+    // skips error when no employee exists on initial page load
     if (!employee) return [];
 
     let tempDict = {};
