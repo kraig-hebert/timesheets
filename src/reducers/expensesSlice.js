@@ -121,9 +121,14 @@ export const selectExpenses = createSelector(
 export const selectEditExpenses = createSelector(
   selectEditExpenseRowDate,
   selectExpenses,
-  (date, expenses) => {
+  selectEmployee,
+  (date, expenses, employee) => {
+    // skips error when no employee exists on initial page load
+    if (!employee) return [];
+
     const editExpenseList = expenses.filter(
-      (expense) => expense.date.toJSON() === date
+      (expense) =>
+        expense.date.toJSON() === date && expense.userId === employee.id
     );
     return editExpenseList;
   }

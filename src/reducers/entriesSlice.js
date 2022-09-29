@@ -26,7 +26,7 @@ export const saveNewEntry = createAsyncThunk(
     const state = getState();
     const newEntry = {
       ...entry,
-      id: getID(Object.values(state.expenses.entities)),
+      id: getID(Object.values(state.entries.entities)),
     };
     const response = await client.post(entry, 'entries');
     if (response.status === 201) return newEntry;
@@ -93,6 +93,7 @@ export const { entryRowClicked } = entriesSlice.actions;
 
 // selectors
 export const selectEntryEntities = (state) => state.entries.entities;
+
 export const selectEditEntryRowID = (state) => state.entries.editEntryRowID;
 
 // selectors from appSettingsSlice

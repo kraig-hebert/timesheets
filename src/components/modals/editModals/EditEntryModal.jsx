@@ -57,6 +57,7 @@ const EditEntryModal = () => {
       type: typeValue,
       startTime: forceDateTimeString(startTimeValue),
       endTime: forceDateTimeString(endTimeValue),
+      userId: editableEntry.userId,
     };
     handleModalClose();
     dispatch(editEntry(editedEntry));

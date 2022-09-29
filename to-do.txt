@@ -31,7 +31,7 @@ UPDATE EXPENSES
 
 
 LONGER/HARD
-*****************************************************************************************
+*******************************************************************************
 MODALS
 - abstract each modal into 1 and just call form components to display inside
 
@@ -42,9 +42,6 @@ MODALS
 
 
 *************************************************
-FIX EXPENSE EDIT
-- the modal will show all expenses for that day, and doesn't filter by activeEmployee
-- FIX: filter edit expenses list by activeEmployee
 - BUG: entry edit modal doesn't clear on exit so old values show up
     - check to see if expense does the same thing
     - make sure input values clear on exit
