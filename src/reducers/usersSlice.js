@@ -5,7 +5,18 @@ import {
 } from '@reduxjs/toolkit';
 import * as client from '../api/client';
 
-const initialState = { entities: {} };
+const initialState = {
+  entities: {},
+  activeUser: {
+    id: 1,
+    username: 'kraighebert@gmail.com',
+    password: 'password',
+    firstName: 'Kraig',
+    lastName: 'Hebert',
+    isAdmin: true,
+    hasCellPhone: true,
+  },
+};
 
 // return next Available id
 const getID = (usersList) =>
@@ -20,7 +31,12 @@ export const fetchUsers = createAsyncThunk(
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    userLoggedIn(state, action) {
+      const user = action.payload;
+      state.activeUser = user;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       const newUsers = {};
@@ -36,10 +52,17 @@ export const {} = usersSlice.actions;
 
 // selectors
 export const selectUserEntities = (state) => state.users.entities;
+export const selectActiveUser = (state) => state.users.activeUser;
 
-export const selectUsers = createSelector(selectUserEntities, (users) => {
-  const userList = Object.values(users);
-  return userList;
-});
+export const selectUsers = createSelector(
+  selectUserEntities,
+  selectActiveUser,
+  (users, user) => {
+    if (user.isAdmin) {
+      const userList = Object.values(users);
+      return userList;
+    } else return [user];
+  }
+);
 
 export default usersSlice.reducer;

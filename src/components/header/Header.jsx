@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@mui/material';
-import { selectActiveUser } from '../../reducers/appSettingsSlice';
+import { selectActiveUser } from '../../reducers/usersSlice';
 import * as SX from './headerSX';
 import { useSelector } from 'react-redux';
 

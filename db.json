@@ -111,6 +111,27 @@
       "miles": 78,
       "userId": 2,
       "id": 8
+    },
+    {
+      "date": "2020-07-15T04:00:00.000Z",
+      "destination": "Test",
+      "miles": 50,
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "date": "2020-07-15T04:00:00.000Z",
+      "destination": "Fffrr",
+      "miles": 2,
+      "userId": 2,
+      "id": 10
+    },
+    {
+      "date": "2020-07-15T04:00:00.000Z",
+      "destination": "FFDES",
+      "miles": 78,
+      "userId": 2,
+      "id": 11
     }
   ],
   "users": [
