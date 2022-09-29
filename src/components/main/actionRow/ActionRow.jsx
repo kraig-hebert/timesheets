@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSheetTypeSelectValue,
@@ -25,6 +25,7 @@ const ActionRow = () => {
   const sheetTypeSelectValue = useSelector(selectSheetTypeSelectValue);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
   const users = useSelector(selectUsers);
+  const [searchValue, setSearchValue] = useState('');
 
   const renderedUserMenuItems = users.map((user) => (
     <MenuItem
@@ -45,8 +46,10 @@ const ActionRow = () => {
   return (
     <>
       <TextField
-        label="Search Events"
+        label={`Search ${sheetTypeSelectValue}`}
         size="small"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

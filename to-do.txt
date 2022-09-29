@@ -3,11 +3,6 @@ QUICK/EASY
 - figure out how the label color changes on focus for an input
     - we want to control that and make it white instead of primary.main
 
-- update entries/expenses SELECT icon to match the add button icon
-
-- change the search box label to match entry or expense
-
-
 
 
 
@@ -36,15 +31,3 @@ MODALS
 - abstract each modal into 1 and just call form components to display inside
 
 - update SX for all inputs across app so they look the same
-
-
-
-
-
-*************************************************
-- BUG: entry edit modal doesn't clear on exit so old values show up
-    - check to see if expense does the same thing
-    - make sure input values clear on exit
-    - this was on ESC key being clicked. could be a different event that is called on ESC close
-    - there may be a way to not allow the modal to close on ESC for an easy fix
-***************************************************
