@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveNewExpense } from '../../../reducers/expensesSlice';
+import { saveNewExpense } from '../../../../reducers/expensesSlice';
 import {
   modalClosed,
   selectActiveMonth,
   selectActiveYear,
   selectActiveModal,
   selectEmployee,
-} from '../../../reducers/appSettingsSlice';
+} from '../../../../reducers/appSettingsSlice';
 import {
   forceDateString,
   getMonthIndex,
   MONTHS,
-} from '../../../helpers/dateHelpers';
+} from '../../../../helpers/dateHelpers';
 import {
   Dialog,
   DialogTitle,
@@ -21,10 +21,14 @@ import {
   Button,
   Divider,
   Stack,
+  Switch,
   TextField,
+  Typography,
 } from '@mui/material';
-import * as SX from '../modalSX';
+import * as SX from '../../modalSX';
 import { DatePicker } from '@mui/x-date-pickers';
+import AddMilesExpense from './AddMilesExpense';
+import AddItemExpense from './AddItemExpense';
 
 const AddExpenseModal = () => {
   const dispatch = useDispatch();
@@ -33,9 +37,14 @@ const AddExpenseModal = () => {
   const activeModal = useSelector(selectActiveModal);
   const employee = useSelector(selectEmployee);
 
+  const [switchChecked, setSwitchChecked] = useState(false);
+  const handleSwitchChange = (e) => setSwitchChecked(e.target.checked);
+
   const [datePickerValue, setDatePickerValue] = useState(new Date());
   const [destinationValue, setDestinationValue] = useState('');
   const [milesValue, setMilesValue] = useState('');
+  const [itemValue, setItemValue] = useState('');
+  const [costValue, setCostValue] = useState('');
 
   // set date input values once the modal is cleared
   const updateDateValue = () => {
@@ -56,16 +65,28 @@ const AddExpenseModal = () => {
     updateDateValue();
     setDestinationValue('');
     setMilesValue('');
+    setItemValue('');
+    setCostValue('');
   };
 
   const handleModalClose = () => dispatch(modalClosed());
   const handleAddClick = () => {
-    const newExpense = {
-      date: forceDateString(datePickerValue),
-      destination: destinationValue,
-      miles: parseInt(milesValue),
-      userId: employee.id,
-    };
+    let newExpense = {};
+    if (!switchChecked)
+      newExpense = {
+        date: forceDateString(datePickerValue),
+        expense: destinationValue,
+        miles: parseInt(milesValue),
+        userId: employee.id,
+      };
+    else
+      newExpense = {
+        date: forceDateString(datePickerValue),
+        expense: itemValue,
+        cost: parseFloat(costValue).toFixed(2),
+        userId: employee.id,
+      };
+
     clearForm();
     handleModalClose();
     dispatch(saveNewExpense(newExpense));
@@ -81,47 +102,41 @@ const AddExpenseModal = () => {
       onClose={handleModalClose}
       sx={SX.modalSX}
     >
-      <DialogTitle>Add New Expense</DialogTitle>
+      <DialogTitle sx={SX.dialogTitleSX}>
+        Add New Expense
+        <Stack direction="row">
+          <Typography variant="h7">Miles</Typography>
+          <Switch
+            checked={switchChecked}
+            onChange={(e) => {
+              handleSwitchChange(e);
+            }}
+          />
+          <Typography variant="h7">Item</Typography>
+        </Stack>
+      </DialogTitle>
       <Divider sx={SX.dividerSX} />
       <DialogContent sx={SX.dialogContentSX}>
         <Stack spacing={1}>
-          <DatePicker
-            label="Date"
-            value={datePickerValue}
-            onChange={(newDate) => {
-              setDatePickerValue(newDate);
-            }}
-            renderInput={(params) => (
-              <TextField variant="filled" sx={SX.inputSX} {...params} />
-            )}
-            sx={SX.inputSX}
-          />
-          <TextField
-            margin="dense"
-            id="destination"
-            label="Destination"
-            placeholder="Enter Destination Name"
-            type="text"
-            variant="filled"
-            onChange={(e) => {
-              setDestinationValue(e.target.value);
-            }}
-            value={destinationValue}
-            sx={SX.inputSX}
-          />
-          <TextField
-            margin="dense"
-            id="miles"
-            label="Miles"
-            placeholder="0"
-            type="number"
-            variant="filled"
-            onChange={(e) => {
-              setMilesValue(e.target.value);
-            }}
-            value={milesValue}
-            sx={SX.inputSX}
-          />
+          {!switchChecked ? (
+            <AddMilesExpense
+              datePickerValue={datePickerValue}
+              setDatePickerValue={setDatePickerValue}
+              destinationValue={destinationValue}
+              setDestinationValue={setDestinationValue}
+              milesValue={milesValue}
+              setMilesValue={setMilesValue}
+            />
+          ) : (
+            <AddItemExpense
+              datePickerValue={datePickerValue}
+              setDatePickerValue={setDatePickerValue}
+              itemValue={itemValue}
+              setItemValue={setItemValue}
+              costValue={costValue}
+              setCostValue={setCostValue}
+            />
+          )}
         </Stack>
       </DialogContent>
       <Divider sx={SX.dividerSX} />

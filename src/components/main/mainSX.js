@@ -14,7 +14,7 @@ export const tableSX = {
 };
 
 export const tableHeadSX = {
-  backgroundColor: 'primary.bg',
+  backgroundColor: 'secondary.bg',
   height: '50px',
   '& .MuiTableCell-root': {
     color: 'white',
@@ -24,7 +24,7 @@ export const tableHeadSX = {
 export const tableRowSX = (style) => {
   const styles = {
     type1: {
-      backgroundColor: 'secondary.bg',
+      backgroundColor: '',
       '&:hover': {
         cursor: 'pointer',
         backgroundColor: '#fff',
@@ -34,10 +34,10 @@ export const tableRowSX = (style) => {
       },
 
       '& .MuiTableCell-root': {
-        color: 'secondary.main',
+        color: '#fff',
       },
       '& .MuiTableCell-root': {
-        color: 'white',
+        color: '#fff',
       },
     },
     type2: {
@@ -51,7 +51,7 @@ export const tableRowSX = (style) => {
       },
 
       '& .MuiTableCell-root': {
-        color: 'secondary.main',
+        color: '#fff',
       },
     },
   };

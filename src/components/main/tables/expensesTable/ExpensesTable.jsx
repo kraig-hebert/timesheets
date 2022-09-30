@@ -47,8 +47,8 @@ const ExpensesTable = () => {
         expense.id,
         expense.date,
         expense.expense,
-        0,
-        parseFloat(expense.price).toFixed(2),
+        '',
+        parseFloat(expense.cost).toFixed(2),
         setStyle(index)
       );
     } else {

@@ -154,14 +154,14 @@ export const selectFilteredExpenses = createSelector(
         expense.userId === employee.id
     );
 
-    // combine expenses by date
+    // combine expenses by date and separate item expenses from miles expenses
     filteredExpenses.forEach((expense, index) => {
       if (index === 0) tempDict[expense.date] = expense;
       else if (Object.keys(tempDict).includes(expense.date.toString())) {
         tempDict[expense.date.toString()] = {
           ...tempDict[expense.date],
-          destination: `${tempDict[expense.date.toString()].destination} / ${
-            expense.destination
+          expense: `${tempDict[expense.date.toString()].expense} / ${
+            expense.expense
           }`,
           miles: tempDict[expense.date.toString()].miles + expense.miles,
         };

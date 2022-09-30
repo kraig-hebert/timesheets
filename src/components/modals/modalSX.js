@@ -15,6 +15,11 @@ export const modalSX = {
   },
 };
 
+export const dialogTitleSX = {
+  display: 'flex',
+  justifyContent: 'space-between',
+};
+
 export const dialogContentSX = {
   display: 'flex',
   flexDirection: 'column',

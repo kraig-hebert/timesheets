@@ -10,7 +10,7 @@ import Header from './components/header/Header';
 import Main from './components/main/Main';
 import SideBar from './components/sideBar/SideBar';
 import Logo from './components/logo/Logo';
-import AddExpenseModal from './components/modals/addModals/AddExpenseModal';
+import AddExpenseModal from './components/modals/addModals/addExpenseModal/AddExpenseModal';
 import AddEntryModal from './components/modals/addModals/AddEntryModal';
 import EditExpensesModal from './components/modals/editModals/editExpenseModal/EditExpensesModal';
 import EditEntryModal from './components/modals/editModals/EditEntryModal';
