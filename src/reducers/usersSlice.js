@@ -36,6 +36,9 @@ const usersSlice = createSlice({
       const user = action.payload;
       state.activeUser = user;
     },
+    userLoggedOut(state) {
+      state.activeUser = '';
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
@@ -54,6 +57,11 @@ export const {} = usersSlice.actions;
 export const selectUserEntities = (state) => state.users.entities;
 export const selectActiveUser = (state) => state.users.activeUser;
 
+export const selectUnfilteredUsers = createSelector(
+  selectUserEntities,
+  (users) => Object.values(users)
+);
+
 export const selectUsers = createSelector(
   selectUserEntities,
   selectActiveUser,
@@ -65,6 +73,6 @@ export const selectUsers = createSelector(
   }
 );
 
-export const { userLoggedIn } = usersSlice.actions;
+export const { userLoggedIn, userLoggedOut } = usersSlice.actions;
 
 export default usersSlice.reducer;

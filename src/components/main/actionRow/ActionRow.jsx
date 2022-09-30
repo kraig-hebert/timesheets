@@ -27,15 +27,18 @@ const ActionRow = () => {
   const users = useSelector(selectUsers);
   const [searchValue, setSearchValue] = useState('');
 
-  const renderedUserMenuItems = users.map((user) => (
-    <MenuItem
-      key={user.id}
-      value={`${user.firstName} ${user.lastName}`}
-    >{`${user.firstName} ${user.lastName}`}</MenuItem>
-  ));
+  let renderedUserMenuItems = [];
+  if (users[0] != '') {
+    renderedUserMenuItems = users.map((user) => (
+      <MenuItem
+        key={user.id}
+        value={`${user.firstName} ${user.lastName}`}
+      >{`${user.firstName} ${user.lastName}`}</MenuItem>
+    ));
+  }
 
   useEffect(() => {
-    if (users.length > 0) {
+    if (users.length > 0 && users[0] != '') {
       const user = users[0];
       dispatch(
         employeeSelectValueSelected(`${user.firstName} ${user.lastName}`)
@@ -89,14 +92,18 @@ const ActionRow = () => {
           labelId="employee-selector-label"
           id="employee-selector"
           size="small"
-          value={employeeSelectValue}
-          label="Employee"
+          value={users[0] != [''] ? employeeSelectValue : 'None'}
+          label="Select Employee"
           onChange={(e) => {
             dispatch(employeeSelectValueSelected(e.target.value));
           }}
           sx={SX.selectSX}
         >
-          {renderedUserMenuItems}
+          {users[0] != [''] ? (
+            renderedUserMenuItems
+          ) : (
+            <MenuItem value="None">None</MenuItem>
+          )}
         </Select>
       </FormControl>
     </>
