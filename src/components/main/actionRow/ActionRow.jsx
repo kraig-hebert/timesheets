@@ -93,7 +93,7 @@ const ActionRow = () => {
           id="employee-selector"
           size="small"
           value={users[0] != [''] ? employeeSelectValue : 'None'}
-          label="Select Employee"
+          label="Employee"
           onChange={(e) => {
             dispatch(employeeSelectValueSelected(e.target.value));
           }}

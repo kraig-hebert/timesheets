@@ -24,12 +24,13 @@ const ExpensesTable = () => {
   const filteredExpenses = useSelector(selectFilteredExpenses);
 
   // table row data constructor
-  const createData = (id, date, destination, miles, style) => {
+  const createData = (id, date, expense, miles, cost, style) => {
     return {
       id,
       date,
-      destination,
+      expense,
       miles,
+      cost,
       style,
     };
   };
@@ -39,15 +40,28 @@ const ExpensesTable = () => {
     if (index % 2 != 0) return 'type1';
     else return 'type2';
   };
-  const rows = filteredExpenses.map((expense, index) =>
-    createData(
-      expense.id,
-      expense.date,
-      expense.destination,
-      expense.miles,
-      setStyle(index)
-    )
-  );
+  const setCost = (miles) => parseFloat(miles * 0.7).toFixed(2);
+  const rows = filteredExpenses.map((expense, index) => {
+    if (!expense.miles) {
+      return createData(
+        expense.id,
+        expense.date,
+        expense.expense,
+        0,
+        parseFloat(expense.price).toFixed(2),
+        setStyle(index)
+      );
+    } else {
+      return createData(
+        expense.id,
+        expense.date,
+        expense.expense,
+        expense.miles,
+        setCost(expense.miles),
+        setStyle(index)
+      );
+    }
+  });
 
   const handleRowClick = (date) => {
     dispatch(modalOpened('edit-expenses'));
@@ -63,12 +77,14 @@ const ExpensesTable = () => {
       <TableCell align="center" sx={{ width: '10%' }}>
         {setTableDate(row.date)}
       </TableCell>
-
-      <TableCell align="center" sx={{ widthg: '80%' }}>
-        {row.destination}
+      <TableCell align="center" sx={{ widthg: '70%' }}>
+        {row.expense}
       </TableCell>
       <TableCell align="center" sx={{ width: '10%' }}>
         {row.miles}
+      </TableCell>
+      <TableCell align="center" sx={{ width: '10%' }}>
+        {`$ ${row.cost}`}
       </TableCell>
     </TableRow>
   ));
@@ -83,18 +99,21 @@ const ExpensesTable = () => {
                 Date
               </TableCell>
 
-              <TableCell align="center" sx={{ width: '80%' }}>
-                Destination
+              <TableCell align="center" sx={{ width: '70%' }}>
+                Expense
               </TableCell>
               <TableCell align="center" sx={{ width: '10%' }}>
                 Miles
+              </TableCell>
+              <TableCell align="center" sx={{ width: '10%' }}>
+                Cost
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {renderedRowList}
             <RowButton
-              colSpan={3}
+              colSpan={4}
               icon={<PaidTwoTone />}
               buttonType="expenses"
               buttonText="Add Expense"
