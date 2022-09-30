@@ -65,4 +65,6 @@ export const selectUsers = createSelector(
   }
 );
 
+export const { userLoggedIn } = usersSlice.actions;
+
 export default usersSlice.reducer;

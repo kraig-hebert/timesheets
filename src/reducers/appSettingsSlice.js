@@ -9,15 +9,6 @@ const initialState = {
   employeeSelectValue: '',
   activeEmployeeId: 0,
   activeModal: 'none',
-  activeUser: {
-    id: 1,
-    username: 'kraighebert@gmail.com',
-    password: 'password',
-    firstName: 'Kraig',
-    lastName: 'Hebert',
-    isAdmin: true,
-    hasCellPhone: true,
-  },
 };
 
 const appSettingsSlice = createSlice({
@@ -46,10 +37,6 @@ const appSettingsSlice = createSlice({
     },
     modalClosed(state) {
       state.activeModal = 'none';
-    },
-    userLoggedIn(state, action) {
-      const user = action.payload;
-      state.activeUser = user;
     },
   },
 });
@@ -82,7 +69,6 @@ export const {
   sheetTypeSelectValueSelected,
   employeeSelectValueSelected,
   yearSelected,
-  userLoggedIn,
 } = appSettingsSlice.actions;
 
 export default appSettingsSlice.reducer;
