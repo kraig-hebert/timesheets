@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Divider,
+  FormControl,
   Menu,
   MenuItem,
   TextField,
@@ -70,6 +71,10 @@ const Header = () => {
               handleMenuClose(e);
             }}
           >
+            {user.isAdmin && (
+              <MenuItem onClick={(e) => {}}>Admin Panel</MenuItem>
+            )}
+            {user.isAdmin && <Divider />}
             <MenuItem
               onClick={(e) => {
                 handleMenuClose(e);
@@ -103,6 +108,7 @@ const Header = () => {
           />
           <TextField
             label="Password"
+            type="password"
             size="small"
             value={passwordInputValue}
             onChange={(e) => {
