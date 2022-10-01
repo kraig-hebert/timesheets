@@ -59,51 +59,23 @@
     {
       "date": "2022-10-01T04:00:00.000Z",
       "expense": "Test",
-      "miles": 12,
+      "cost": 12.23,
       "userId": 1,
       "id": 1
     },
     {
       "date": "2022-10-01T04:00:00.000Z",
-      "expense": "Another triup",
-      "miles": 10,
+      "expense": "Another",
+      "cost": 12.23,
       "userId": 1,
       "id": 2
     },
     {
-      "date": "2022-10-02T04:00:00.000Z",
-      "expense": "ANother one",
-      "cost": 45,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "Third",
+      "cost": 45.22,
       "userId": 1,
       "id": 3
-    },
-    {
-      "date": "2022-10-18T04:00:00.000Z",
-      "expense": "Flashlight",
-      "cost": 30,
-      "userId": 1,
-      "id": 4
-    },
-    {
-      "date": "2022-10-01T04:00:00.000Z",
-      "expense": "item 3",
-      "miles": 25,
-      "userId": 1,
-      "id": 5
-    },
-    {
-      "date": "2022-10-01T04:00:00.000Z",
-      "expense": "item 5",
-      "cost": 25,
-      "userId": 1,
-      "id": 6
-    },
-    {
-      "date": "2022-10-01T04:00:00.000Z",
-      "expense": "Velcro",
-      "cost": 50,
-      "userId": 2,
-      "id": 7
     }
   ],
   "users": [

@@ -79,13 +79,16 @@ const AddExpenseModal = () => {
         miles: parseInt(milesValue),
         userId: employee.id,
       };
-    else
+    else {
+      const cost = parseFloat(costValue).toFixed(2);
+      const num = parseFloat(cost);
       newExpense = {
         date: forceDateString(datePickerValue),
         expense: itemValue,
-        cost: parseInt(costValue),
+        cost: num,
         userId: employee.id,
       };
+    }
 
     clearForm();
     handleModalClose();
