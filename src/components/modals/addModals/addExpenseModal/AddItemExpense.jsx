@@ -30,7 +30,7 @@ const AddItemExpense = (props) => {
         margin="dense"
         id="item"
         label="Item"
-        placeholder="Enter Destination Name"
+        placeholder="Enter Item"
         type="text"
         variant="filled"
         onChange={(e) => {

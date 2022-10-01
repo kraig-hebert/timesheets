@@ -164,9 +164,17 @@ export const selectFilteredExpenses = createSelector(
     );
 
     // combine expenses by date and separate item expenses from miles expenses
+    // set item expenses to tempDict[1] so they show up before all of the miles expenses
     filteredExpenses.forEach((expense, index) => {
-      if (Object.keys(tempDict).length === 0) tempDict[expense.date] = expense;
-      else if (Object.keys(tempDict).includes(expense.date.toString())) {
+      if (expense.hasOwnProperty('cost')) {
+        if (Object.keys(tempDict).includes('1')) {
+          tempDict[1] = {
+            ...tempDict[1],
+            expense: `${tempDict[1].expense} / ${expense.expense}`,
+            cost: tempDict[1].cost + expense.cost,
+          };
+        } else tempDict[1] = expense;
+      } else if (Object.keys(tempDict).includes(expense.date.toString())) {
         tempDict[expense.date.toString()] = {
           ...tempDict[expense.date],
           expense: `${tempDict[expense.date.toString()].expense} / ${

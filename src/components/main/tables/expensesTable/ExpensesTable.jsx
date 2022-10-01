@@ -75,7 +75,7 @@ const ExpensesTable = () => {
       onClick={() => handleRowClick(row.date)}
     >
       <TableCell align="center" sx={{ width: '10%' }}>
-        {row.date && setTableDate(row.date)}
+        {row.date && row.miles !== '' && setTableDate(row.date)}
       </TableCell>
       <TableCell align="center" sx={{ widthg: '70%' }}>
         {row.expense}

@@ -57,67 +57,53 @@
   ],
   "expenses": [
     {
-      "date": "2022-09-29T04:00:00.000Z",
-      "expense": "numba 5",
-      "miles": 10,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "Test",
+      "miles": 12,
       "userId": 1,
       "id": 1
     },
     {
-      "date": "2022-09-28T04:00:00.000Z",
-      "expense": "Zip Ties",
-      "cost": 20.5,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "Another triup",
+      "miles": 10,
       "userId": 1,
       "id": 2
     },
     {
-      "date": "2022-09-30T04:00:00.000Z",
-      "expense": "Test Miles",
-      "miles": 78,
+      "date": "2022-10-02T04:00:00.000Z",
+      "expense": "ANother one",
+      "cost": 45,
       "userId": 1,
       "id": 3
     },
     {
-      "date": "2022-09-14T04:00:00.000Z",
-      "expense": "Another Test Mile",
-      "miles": 45,
+      "date": "2022-10-18T04:00:00.000Z",
+      "expense": "Flashlight",
+      "cost": 30,
       "userId": 1,
       "id": 4
     },
     {
-      "date": "2022-09-14T04:00:00.000Z",
-      "expense": "Come on Georgia",
-      "miles": 10,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "item 3",
+      "miles": 25,
       "userId": 1,
       "id": 5
     },
     {
-      "date": "2022-09-30T04:00:00.000Z",
-      "expense": "Test",
-      "miles": 10,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "item 5",
+      "cost": 25,
       "userId": 1,
       "id": 6
     },
     {
-      "date": "2022-09-21T04:00:00.000Z",
-      "expense": "Screwdriver",
-      "cost": 78,
-      "userId": 1,
+      "date": "2022-10-01T04:00:00.000Z",
+      "expense": "Velcro",
+      "cost": 50,
+      "userId": 2,
       "id": 7
-    },
-    {
-      "date": "2022-09-20T04:00:00.000Z",
-      "expense": "Home Depot",
-      "cost": "50.00",
-      "userId": 1,
-      "id": 8
-    },
-    {
-      "date": "2022-09-28T04:00:00.000Z",
-      "expense": "Test Mies",
-      "miles": 12,
-      "userId": 1,
-      "id": 9
     }
   ],
   "users": [

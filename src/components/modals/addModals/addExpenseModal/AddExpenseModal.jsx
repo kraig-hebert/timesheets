@@ -83,7 +83,7 @@ const AddExpenseModal = () => {
       newExpense = {
         date: forceDateString(datePickerValue),
         expense: itemValue,
-        cost: parseFloat(costValue).toFixed(2),
+        cost: parseInt(costValue),
         userId: employee.id,
       };
 
