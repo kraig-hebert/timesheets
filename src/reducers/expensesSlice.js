@@ -147,6 +147,15 @@ export const selectFilteredExpenses = createSelector(
     if (!employee) return [];
 
     let tempDict = {};
+    if (employee.hasCellPhone) {
+      const newExpense = {
+        id: 0,
+        expense: 'Cell Phone',
+        cost: 50.0,
+      };
+      tempDict['0'] = newExpense;
+    }
+
     const filteredExpenses = expenses.filter(
       (expense) =>
         MONTHS[expense.date.getMonth()] === activeMonth &&
@@ -156,7 +165,7 @@ export const selectFilteredExpenses = createSelector(
 
     // combine expenses by date and separate item expenses from miles expenses
     filteredExpenses.forEach((expense, index) => {
-      if (index === 0) tempDict[expense.date] = expense;
+      if (Object.keys(tempDict).length === 0) tempDict[expense.date] = expense;
       else if (Object.keys(tempDict).includes(expense.date.toString())) {
         tempDict[expense.date.toString()] = {
           ...tempDict[expense.date],

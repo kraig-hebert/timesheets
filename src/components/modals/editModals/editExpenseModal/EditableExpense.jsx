@@ -17,7 +17,7 @@ const EditableExpense = (props) => {
 
   useEffect(() => {
     setDatePickerValue(editableExpense.date);
-    setDestinationValue(editableExpense.destination);
+    setDestinationValue(editableExpense.expense);
     setMilesValue(editableExpense.miles);
   }, [editableExpense]);
 

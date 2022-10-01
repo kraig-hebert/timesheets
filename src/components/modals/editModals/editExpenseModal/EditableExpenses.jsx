@@ -14,7 +14,7 @@ const EditableExpenses = (props) => {
         sx={buttonSX}
         onClick={() => handleExpenseClick(expense)}
       >
-        <Box sx={boxSX}>{expense.destination}</Box>
+        <Box sx={boxSX}>{expense.expense}</Box>
         <Box sx={boxSX}>{expense.miles} miles</Box>
       </Button>
     );
