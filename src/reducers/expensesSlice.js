@@ -7,7 +7,11 @@ import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
 import { selectEmployee } from './appSettingsSlice';
 
-const initialState = { entities: {}, editExpenseRowDate: [] };
+const initialState = {
+  entities: {},
+  editMilesExpenseRowDate: [],
+  sortEditableBy: 'miles',
+};
 
 // return next available id
 const getID = (expenseList) =>
@@ -56,8 +60,12 @@ const expensesSlice = createSlice({
   initialState,
   reducers: {
     expenseRowClicked(state, action) {
+      const sortBy = action.payload;
+      state.sortEditableBy = sortBy;
+    },
+    expenseMilesRowClicked(state, action) {
       const date = action.payload;
-      state.editExpenseRowDate = date;
+      state.editMilesExpenseRowDate = date;
     },
   },
   extraReducers: (builder) => {
@@ -88,12 +96,14 @@ const expensesSlice = createSlice({
   },
 });
 
-export const { expenseRowClicked } = expensesSlice.actions;
+export const { expenseRowClicked, expenseMilesRowClicked } =
+  expensesSlice.actions;
 
 // selectors
 export const selectExpenseEntities = (state) => state.expenses.entities;
-export const selectEditExpenseRowDate = (state) =>
-  state.expenses.editExpenseRowDate;
+export const selectSortEditableBy = (state) => state.expenses.sortEditableBy;
+export const selectMilesEditExpenseRowDate = (state) =>
+  state.expenses.editMilesExpenseRowDate;
 
 // selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
@@ -119,17 +129,27 @@ export const selectExpenses = createSelector(
 
 // select lkist of expenses for edit
 export const selectEditExpenses = createSelector(
-  selectEditExpenseRowDate,
+  selectSortEditableBy,
+  selectMilesEditExpenseRowDate,
   selectExpenses,
   selectEmployee,
-  (date, expenses, employee) => {
+  (sortBy, date, expenses, employee) => {
     // skips error when no employee exists on initial page load
     if (!employee) return [];
+    let editExpenseList;
+    if (sortBy === 'cost') {
+      editExpenseList = expenses.filter((expense) =>
+        expense.hasOwnProperty('cost')
+      );
+    } else {
+      editExpenseList = expenses.filter(
+        (expense) =>
+          expense.date.toJSON() === date &&
+          expense.userId === employee.id &&
+          !expense.hasOwnProperty('cost')
+      );
+    }
 
-    const editExpenseList = expenses.filter(
-      (expense) =>
-        expense.date.toJSON() === date && expense.userId === employee.id
-    );
     return editExpenseList;
   }
 );

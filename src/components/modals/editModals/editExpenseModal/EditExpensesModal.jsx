@@ -33,11 +33,13 @@ const EditExpenseModal = () => {
   const [activePage, setActivePage] = useState('page1');
   const [editableExpense, setEditableExpense] = useState();
 
-  const [datePickerValue, setDatePickerValue] = useState(new Date());
+  const [datePickerValue, setDatePickerValue] = useState(new Date(''));
 
   const [destinationValue, setDestinationValue] = useState('');
+  const [itemValue, setItemValue] = useState('');
 
   const [milesValue, setMilesValue] = useState('');
+  const [costValue, setCostValue] = useState('');
 
   const handleExpenseClick = (expense) => {
     setEditableExpense(expense);
@@ -89,8 +91,12 @@ const EditExpenseModal = () => {
               setDatePickerValue={setDatePickerValue}
               destinationValue={destinationValue}
               setDestinationValue={setDestinationValue}
+              itemValue={itemValue}
+              setItemValue={setItemValue}
               milesValue={milesValue}
               setMilesValue={setMilesValue}
+              costValue={costValue}
+              setCostValue={setCostValue}
             />
           )}
         </Stack>

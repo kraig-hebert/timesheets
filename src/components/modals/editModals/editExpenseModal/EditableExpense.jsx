@@ -1,71 +1,76 @@
 import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-import { inputSX } from '../../modalSX';
-import { TextField } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+
+import { useSelector } from 'react-redux';
+import { selectSortEditableBy } from '../../../../reducers/expensesSlice';
+import EditDestination from './EditDestination';
+import EditItem from './EditItem';
 
 const EditableExpense = (props) => {
+  const sortBy = useSelector(selectSortEditableBy);
   const {
     editableExpense,
     datePickerValue,
     setDatePickerValue,
     destinationValue,
     setDestinationValue,
+    itemValue,
+    setItemValue,
     milesValue,
     setMilesValue,
+    costValue,
+    setCostValue,
   } = props;
 
   useEffect(() => {
-    setDatePickerValue(editableExpense.date);
-    setDestinationValue(editableExpense.expense);
-    setMilesValue(editableExpense.miles);
+    if (sortBy === 'miles') {
+      setDatePickerValue(editableExpense.date);
+      setDestinationValue(editableExpense.expense);
+      setMilesValue(editableExpense.miles);
+    } else {
+      setDatePickerValue(editableExpense.date);
+      setItemValue(editableExpense.expense);
+      setCostValue(editableExpense.cost);
+    }
   }, [editableExpense]);
 
   return (
     <>
-      <DatePicker
-        label="Date"
-        value={datePickerValue}
-        onChange={(newDate) => {
-          setDatePickerValue(newDate);
-        }}
-        renderInput={(params) => (
-          <TextField variant="filled" sx={inputSX} {...params} />
-        )}
-        sx={inputSX}
-      />
-      <TextField
-        margin="dense"
-        id="destination"
-        label="Destination"
-        placeholder="Enter Destination Name"
-        type="text"
-        variant="filled"
-        onChange={(e) => {
-          setDestinationValue(e.target.value);
-        }}
-        value={destinationValue}
-        sx={inputSX}
-      />
-      <TextField
-        margin="dense"
-        id="miles"
-        label="Miles"
-        placeholder="0"
-        type="number"
-        variant="filled"
-        onChange={(e) => {
-          setMilesValue(e.target.value);
-        }}
-        value={milesValue}
-        sx={inputSX}
-      />
+      {sortBy === 'miles' ? (
+        <EditDestination
+          datePickerValue={datePickerValue}
+          setDatePickerValue={setDatePickerValue}
+          destinationValue={destinationValue}
+          setDestinationValue={setDestinationValue}
+          milesValue={milesValue}
+          setMilesValue={setMilesValue}
+        />
+      ) : (
+        <EditItem
+          datePickerValue={datePickerValue}
+          setDatePickerValue={setDatePickerValue}
+          itemValue={itemValue}
+          setItemValue={setItemValue}
+          costValue={costValue}
+          setCostValue={setCostValue}
+        />
+      )}
     </>
   );
 };
 
 EditableExpense.propTypes = {
-  expense: PropTypes.object,
+  editableExpense: PropTypes.object,
+  datePickerValue: PropTypes.object,
+  setDatePickerValue: PropTypes.func,
+  destinationValue: PropTypes.string,
+  setDestinationValue: PropTypes.func,
+  itemValue: PropTypes.string,
+  setItemValue: PropTypes.func,
+  milesValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setMilesValue: PropTypes.func,
+  costValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setCostValue: PropTypes.func,
 };
 
 export default EditableExpense;

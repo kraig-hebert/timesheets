@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  expenseMilesRowClicked,
   expenseRowClicked,
   selectFilteredExpenses,
 } from '../../../../reducers/expensesSlice';
@@ -23,8 +24,14 @@ const ExpensesTable = () => {
   const dispatch = useDispatch();
   const filteredExpenses = useSelector(selectFilteredExpenses);
 
+  const handleRowClick = (date, sortBy) => {
+    dispatch(modalOpened('edit-expenses'));
+    dispatch(expenseMilesRowClicked(date.toJSON()));
+    dispatch(expenseRowClicked(sortBy));
+  };
+
   // table row data constructor
-  const createData = (id, date, expense, miles, cost, style) => {
+  const createData = (id, date, expense, miles, cost, style, sortBy) => {
     return {
       id,
       date,
@@ -32,6 +39,7 @@ const ExpensesTable = () => {
       miles,
       cost,
       style,
+      sortBy,
     };
   };
 
@@ -49,7 +57,8 @@ const ExpensesTable = () => {
         expense.expense,
         '',
         parseFloat(expense.cost).toFixed(2),
-        setStyle(index)
+        setStyle(index),
+        'cost'
       );
     } else {
       return createData(
@@ -58,21 +67,17 @@ const ExpensesTable = () => {
         expense.expense,
         expense.miles,
         setCost(expense.miles),
-        setStyle(index)
+        setStyle(index),
+        'miles'
       );
     }
   });
-
-  const handleRowClick = (date) => {
-    dispatch(modalOpened('edit-expenses'));
-    dispatch(expenseRowClicked(date.toJSON()));
-  };
 
   const renderedRowList = rows.map((row) => (
     <TableRow
       key={row.id}
       sx={SX.tableRowSX(row.style)}
-      onClick={() => handleRowClick(row.date, row.miles)}
+      onClick={() => handleRowClick(row.date, row.sortBy)}
     >
       <TableCell align="center" sx={{ width: '10%' }}>
         {row.date && row.miles !== '' && setTableDate(row.date)}

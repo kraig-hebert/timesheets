@@ -15,7 +15,11 @@ const EditableExpenses = (props) => {
         onClick={() => handleExpenseClick(expense)}
       >
         <Box sx={boxSX}>{expense.expense}</Box>
-        <Box sx={boxSX}>{expense.miles} miles</Box>
+        {expense.hasOwnProperty('cost') ? (
+          <Box sx={boxSX}>$ {expense.cost}</Box>
+        ) : (
+          <Box sx={boxSX}>{expense.miles}</Box>
+        )}
       </Button>
     );
   });
