@@ -25,7 +25,7 @@ const EditableExpenses = (props) => {
         >
           <Box sx={boxSX}>{expense.expense}</Box>
           {expense.hasOwnProperty('cost') ? (
-            <Box sx={boxSX}>$ {expense.cost}</Box>
+            <Box sx={boxSX}>$ {parseFloat(expense.cost).toFixed(2)}</Box>
           ) : (
             <Box sx={boxSX}>{expense.miles}</Box>
           )}{' '}
