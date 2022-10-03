@@ -131,7 +131,7 @@ const EditExpenseModal = () => {
           onClick={handleEditClick}
           disabled={activePage === 'page1'}
         >
-          Edit
+          Save
         </Button>
       </DialogActions>
     </Dialog>

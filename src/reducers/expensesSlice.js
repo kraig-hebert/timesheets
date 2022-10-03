@@ -138,8 +138,10 @@ export const selectEditExpenses = createSelector(
     if (!employee) return [];
     let editExpenseList;
     if (sortBy === 'cost') {
-      editExpenseList = expenses.filter((expense) =>
-        expense.hasOwnProperty('cost')
+      editExpenseList = expenses.filter(
+        (expense) =>
+          expense.hasOwnProperty('cost') &&
+          expense.date.getMonth() === new Date(date).getMonth()
       );
     } else {
       editExpenseList = expenses.filter(

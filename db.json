@@ -1,16 +1,7 @@
 {
   "entries": [
     {
-      "location": "Test  1",
-      "comments": "fffff",
-      "type": "Service",
-      "startTime": "2022-09-29T16:00:00.149Z",
-      "endTime": "2022-09-29T16:00:00.149Z",
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "location": "Tetrsrt",
+      "location": "Update",
       "comments": "rwerwer",
       "type": "Service",
       "startTime": "2022-09-29T16:00:00.945Z",
@@ -53,20 +44,38 @@
       "endTime": "2022-09-29T16:00:00.446Z",
       "userId": 3,
       "id": 6
+    },
+    {
+      "location": "Home",
+      "comments": "Slept",
+      "type": "Meeting",
+      "startTime": "2022-10-03T16:00:00.832Z",
+      "endTime": "2022-10-03T19:00:00.000Z",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "location": "Testt",
+      "comments": "asddsfasdf",
+      "type": "Service",
+      "startTime": "2022-10-03T16:00:00.494Z",
+      "endTime": "2022-10-03T16:00:00.494Z",
+      "userId": 1,
+      "id": 8
     }
   ],
   "expenses": [
     {
       "date": "2022-10-01T04:00:00.000Z",
       "expense": "Home Depot",
-      "cost": 12,
+      "cost": 10,
       "userId": 1,
       "id": 1
     },
     {
       "date": "2022-10-01T04:00:00.000Z",
       "expense": "Another",
-      "cost": 20,
+      "cost": 20.5,
       "userId": 1,
       "id": 2,
       "miles": null
@@ -80,10 +89,38 @@
     },
     {
       "date": "2022-10-03T04:00:00.000Z",
-      "expense": "Third 1",
-      "miles": 10,
+      "expense": "SEcond",
+      "miles": 50,
       "userId": 1,
       "id": 6
+    },
+    {
+      "date": "2022-09-15T04:00:00.000Z",
+      "expense": "Assum;tion",
+      "miles": 12,
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2022-09-14T04:00:00.000Z",
+      "expense": "Home Depo",
+      "cost": 50,
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "date": "2022-09-14T04:00:00.000Z",
+      "expense": "Screwdriver",
+      "cost": 78,
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "date": "2022-09-15T04:00:00.000Z",
+      "expense": "Nowhere",
+      "miles": 78,
+      "userId": 1,
+      "id": 10
     }
   ],
   "users": [

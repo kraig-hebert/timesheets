@@ -85,3 +85,11 @@ export const buttonSX = {
 export const boxSX = {
   margin: '0 10px',
 };
+
+export const popoverSX = {
+  pointerEvents: 'none',
+
+  '& .MuiPopover-paper': {
+    backgroundColor: 'primary.main',
+  },
+};
