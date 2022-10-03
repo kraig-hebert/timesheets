@@ -58,15 +58,15 @@
   "expenses": [
     {
       "date": "2022-10-01T04:00:00.000Z",
-      "expense": "Test",
-      "cost": 12.23,
+      "expense": "Home Depot",
+      "cost": 12,
       "userId": 1,
       "id": 1
     },
     {
       "date": "2022-10-01T04:00:00.000Z",
       "expense": "Another",
-      "cost": 12.23,
+      "cost": 20,
       "userId": 1,
       "id": 2,
       "miles": null

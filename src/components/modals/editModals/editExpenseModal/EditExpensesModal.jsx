@@ -7,6 +7,7 @@ import {
   editExpense,
   deleteExpense,
   selectEditExpenses,
+  selectSortEditableBy,
 } from '../../../../reducers/expensesSlice';
 import {
   selectActiveModal,
@@ -28,6 +29,7 @@ const EditExpenseModal = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector(selectActiveModal);
   const editExpenseList = useSelector(selectEditExpenses);
+  const sortBy = useSelector(selectSortEditableBy);
 
   const [title, setTitle] = useState('Choose Expense to Edit');
   const [activePage, setActivePage] = useState('page1');
@@ -53,13 +55,24 @@ const EditExpenseModal = () => {
     setTitle('Choose Expense to Edit');
   };
   const handleEditClick = () => {
-    const editedExpense = {
-      id: editableExpense.id,
-      date: forceDateString(datePickerValue),
-      expense: destinationValue,
-      miles: parseFloat(milesValue),
-      userId: editableExpense.userId,
-    };
+    let editedExpense = {};
+    if (sortBy === 'miles') {
+      editedExpense = {
+        id: editableExpense.id,
+        date: forceDateString(datePickerValue),
+        expense: destinationValue,
+        miles: parseFloat(milesValue),
+        userId: editableExpense.userId,
+      };
+    } else {
+      editedExpense = {
+        id: editableExpense.id,
+        date: forceDateString(datePickerValue),
+        expense: itemValue,
+        cost: parseFloat(costValue),
+        userId: editableExpense.userId,
+      };
+    }
     handleModalClose(true);
     dispatch(editExpense(editedExpense));
   };
