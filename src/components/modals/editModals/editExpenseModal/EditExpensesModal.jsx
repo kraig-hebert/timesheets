@@ -54,7 +54,7 @@ const EditExpenseModal = () => {
     const editedExpense = {
       id: editableExpense.id,
       date: forceDateString(datePickerValue),
-      destination: destinationValue,
+      expense: destinationValue,
       miles: parseFloat(milesValue),
       userId: editableExpense.userId,
     };

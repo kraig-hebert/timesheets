@@ -76,6 +76,34 @@
       "cost": 45.22,
       "userId": 1,
       "id": 3
+    },
+    {
+      "date": "2022-10-12T04:00:00.000Z",
+      "expense": "check",
+      "miles": 12,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "date": "2022-10-03T04:00:00.000Z",
+      "expense": "ANother",
+      "miles": 100,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "date": "2022-10-03T04:00:00.000Z",
+      "expense": "Third 1",
+      "miles": 40,
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "date": "2022-10-03T04:00:00.000Z",
+      "expense": "Box Cutter",
+      "cost": 10,
+      "userId": 1,
+      "id": 7
     }
   ],
   "users": [
