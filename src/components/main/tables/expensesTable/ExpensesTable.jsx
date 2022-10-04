@@ -7,7 +7,7 @@ import {
 } from '../../../../reducers/expensesSlice';
 import { modalOpened } from '../../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../../helpers/dateHelpers';
-import RowButton from '../rowButton/RowButton';
+import RowButton from '../../rowButton/RowButton';
 
 import {
   Table,

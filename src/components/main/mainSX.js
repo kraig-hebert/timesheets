@@ -8,7 +8,7 @@ export const containerSX = {
 export const adminRowContainerSX = {
   display: 'flex',
   justifyContent: 'center',
-  paddingBottom: '10px',
+  paddingBottom: '20px',
   width: '90%',
 };
 

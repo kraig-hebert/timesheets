@@ -6,7 +6,7 @@ import {
 } from '../../../../reducers/entriesSlice';
 import { modalOpened } from '../../../../reducers/appSettingsSlice';
 import * as dh from '../../../../helpers/dateHelpers';
-import RowButton from '../rowButton/RowButton';
+import RowButton from '../../rowButton/RowButton';
 
 import {
   Table,
