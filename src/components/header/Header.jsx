@@ -57,7 +57,7 @@ const Header = () => {
             <Avatar
               variant="square"
               sx={SX.avatarSX}
-              onClick={(e) => {
+              onMouseEnter={(e) => {
                 handleAvatarClick(e);
               }}
             >
