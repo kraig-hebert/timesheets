@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectSheetTypeSelectValue,
-  sheetTypeSelectValueSelected,
+  openPageSelected,
+  selectSheetType,
   selectEmployeeSelectValue,
   employeeSelectValueSelected,
 } from '../../../reducers/appSettingsSlice';
-import * as SX from '../actionRow/actionRowSX';
+import * as SX from './actionRowSX';
 import { Search } from '@mui/icons-material';
 
 import {
@@ -20,9 +20,9 @@ import {
 } from '@mui/material';
 import { selectUsers } from '../../../reducers/usersSlice';
 
-const ActionRow = () => {
+const TableActionRow = () => {
   const dispatch = useDispatch();
-  const sheetTypeSelectValue = useSelector(selectSheetTypeSelectValue);
+  const sheetType = useSelector(selectSheetType);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
   const users = useSelector(selectUsers);
   const [searchValue, setSearchValue] = useState('');
@@ -49,7 +49,7 @@ const ActionRow = () => {
   return (
     <>
       <TextField
-        label={`Search ${sheetTypeSelectValue}`}
+        label={`Search ${sheetType}`}
         size="small"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
@@ -72,11 +72,11 @@ const ActionRow = () => {
           labelId="sheet-selector-label"
           id="sheet-selector"
           size="small"
-          placeholder="SelectUser"
-          value={sheetTypeSelectValue}
+          placeholder="Select Sheet Type"
+          value={sheetType}
           label="Sheet Type"
           onChange={(e) => {
-            dispatch(sheetTypeSelectValueSelected(e.target.value));
+            dispatch(openPageSelected(e.target.value));
           }}
           sx={SX.selectSX}
         >
@@ -110,4 +110,4 @@ const ActionRow = () => {
   );
 };
 
-export default ActionRow;
+export default TableActionRow;

@@ -1,25 +1,42 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectSheetTypeSelectValue } from '../../reducers/appSettingsSlice';
-import ActionRow from './actionRow/ActionRow';
+import { selectOpenPage } from '../../reducers/appSettingsSlice';
+import TableActionRow from './actionRow/TableActionRow';
+import AdminActionRow from './actionRow/AdminActionRow';
 import EntriesTable from './tables/entriesTable/EntriesTable';
 import ExpensesTable from './tables/expensesTable/ExpensesTable';
-import { containerSX } from './mainSX';
+import { adminRowContainerSX, containerSX } from './mainSX';
 import { Container, Stack } from '@mui/material';
+import AdminPanel from './adminPanel/AdminPanel';
 
 const Main = () => {
-  const sheetTypeSelectValue = useSelector(selectSheetTypeSelectValue);
+  const openPage = useSelector(selectOpenPage);
 
   return (
     <>
       <Stack>
-        <Container sx={containerSX} disableGutters maxWidth={false}>
-          <ActionRow />
-        </Container>
-        {sheetTypeSelectValue === 'Entries' ? (
-          <EntriesTable />
+        {openPage === 'Entries' ? (
+          <>
+            <Container sx={containerSX} disableGutters maxWidth={false}>
+              <TableActionRow />
+            </Container>
+            <EntriesTable />
+          </>
+        ) : openPage === 'Expenses' ? (
+          <>
+            <Container sx={containerSX} disableGutters maxWidth={false}>
+              <TableActionRow />
+            </Container>
+
+            <ExpensesTable />
+          </>
         ) : (
-          <ExpensesTable />
+          <>
+            <Container sx={adminRowContainerSX} disableGutters maxWidth={false}>
+              <AdminActionRow />
+            </Container>
+            <AdminPanel />
+          </>
         )}
       </Stack>
     </>

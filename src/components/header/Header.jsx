@@ -5,7 +5,6 @@ import {
   Button,
   Container,
   Divider,
-  FormControl,
   Menu,
   MenuItem,
   TextField,
@@ -19,6 +18,7 @@ import {
 } from '../../reducers/usersSlice';
 import * as SX from './headerSX';
 import { useSelector } from 'react-redux';
+import { openPageSelected } from '../../reducers/appSettingsSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -42,6 +42,10 @@ const Header = () => {
 
   const handleAvatarClick = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = (e) => setAnchorEl(null);
+  const handleAdminOpen = (e) => {
+    handleMenuClose();
+    dispatch(openPageSelected('admin'));
+  };
 
   return (
     <>
@@ -72,7 +76,13 @@ const Header = () => {
             }}
           >
             {user.isAdmin && (
-              <MenuItem onClick={(e) => {}}>Admin Panel</MenuItem>
+              <MenuItem
+                onClick={(e) => {
+                  handleAdminOpen(e);
+                }}
+              >
+                Admin Panel
+              </MenuItem>
             )}
             {user.isAdmin && <Divider />}
             <MenuItem

@@ -5,7 +5,7 @@ import { selectUsers } from './usersSlice';
 const initialState = {
   activeMonth: getMonthName(new Date().getMonth()),
   activeYear: new Date().getFullYear().toString(),
-  sheetTypeSelectValue: 'Entries',
+  openPage: 'Entries',
   employeeSelectValue: '',
   activeEmployeeId: 0,
   activeModal: 'none',
@@ -23,9 +23,9 @@ const appSettingsSlice = createSlice({
       const year = action.payload;
       state.activeYear = year;
     },
-    sheetTypeSelectValueSelected(state, action) {
-      const newSheetTypeSelectValue = action.payload;
-      state.sheetTypeSelectValue = newSheetTypeSelectValue;
+    openPageSelected(state, action) {
+      const openPage = action.payload;
+      state.openPage = openPage;
     },
     employeeSelectValueSelected(state, action) {
       const newEmployeeSelectValue = action.payload;
@@ -44,12 +44,16 @@ const appSettingsSlice = createSlice({
 // selectors
 export const selectActiveMonth = (state) => state.appSettings.activeMonth;
 export const selectActiveYear = (state) => state.appSettings.activeYear;
-export const selectSheetTypeSelectValue = (state) =>
-  state.appSettings.sheetTypeSelectValue;
+export const selectOpenPage = (state) => state.appSettings.openPage;
 export const selectEmployeeSelectValue = (state) =>
   state.appSettings.employeeSelectValue;
 export const selectActiveModal = (state) => state.appSettings.activeModal;
 export const selectActiveUser = (state) => state.appSettings.activeUser;
+
+export const selectSheetType = createSelector(selectOpenPage, (openPage) => {
+  if ((openPage === 'Entries') | (openPage === 'Expenses')) return openPage;
+  else return 'Entries';
+});
 
 export const selectEmployee = createSelector(
   selectEmployeeSelectValue,
@@ -66,7 +70,7 @@ export const {
   monthSelected,
   modalOpened,
   modalClosed,
-  sheetTypeSelectValueSelected,
+  openPageSelected,
   employeeSelectValueSelected,
   yearSelected,
 } = appSettingsSlice.actions;

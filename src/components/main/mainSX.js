@@ -5,6 +5,13 @@ export const containerSX = {
   width: '90%',
 };
 
+export const adminRowContainerSX = {
+  display: 'flex',
+  justifyContent: 'center',
+  paddingBottom: '10px',
+  width: '90%',
+};
+
 export const tableSX = {
   width: '90%',
   margin: 'auto',
