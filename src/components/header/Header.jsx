@@ -95,6 +95,7 @@ const Header = () => {
             <MenuItem
               onClick={(e) => {
                 handleMenuClose(e);
+                dispatch(openPageSelected('Entries'));
                 dispatch(userLoggedOut());
               }}
             >
