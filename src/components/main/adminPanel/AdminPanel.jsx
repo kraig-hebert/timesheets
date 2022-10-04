@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../reducers/usersSlice';
 import RowButton from '../rowButton/RowButton';
 
@@ -19,7 +19,6 @@ import {
 } from '@mui/icons-material';
 
 const AdminPanel = () => {
-  const dispatch = useDispatch();
   const users = useSelector(selectUsers);
 
   // table row constructor

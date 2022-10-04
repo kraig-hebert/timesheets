@@ -28,6 +28,20 @@ export const fetchUsers = createAsyncThunk(
   async () => await client.get('users')
 );
 
+// save new user to db.json and update state.users.entities
+export const saveNewUser = createAsyncThunk(
+  'users/saveNewUser',
+  async (user, { getState }) => {
+    const state = getState();
+    const newUser = {
+      ...user,
+      id: getID(Object.values(state.users.entities)),
+    };
+    const response = await client.post(newUser, 'users');
+    if (response.status === 201) return newUser;
+  }
+);
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -41,13 +55,18 @@ const usersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      const newUsers = {};
-      action.payload.forEach((user) => {
-        newUsers[user.id] = user;
+    builder
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        const newUsers = {};
+        action.payload.forEach((user) => {
+          newUsers[user.id] = user;
+        });
+        state.entities = newUsers;
+      })
+      .addCase(saveNewUser.fulfilled, (state, action) => {
+        const user = action.payload;
+        state.entities[user.id] = user;
       });
-      state.entities = newUsers;
-    });
   },
 });
 

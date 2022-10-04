@@ -150,6 +150,15 @@
       "lastName": "Smith",
       "isAdmin": true,
       "hasCellPhone": false
+    },
+    {
+      "username": "timbrown@gmail.com",
+      "password": "password",
+      "firstName": "Tim",
+      "lastName": "Brown",
+      "isAdmin": false,
+      "hasCellPhone": true,
+      "id": 4
     }
   ]
 }
