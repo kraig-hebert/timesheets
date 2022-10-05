@@ -63,7 +63,7 @@ const AddUserModal = () => {
       onClose={handleModalClose}
       sx={SX.modalSX}
     >
-      <DialogTitle>Add New Entry</DialogTitle>
+      <DialogTitle>Add New User</DialogTitle>
       <Divider sx={SX.dividerSX} />
       <DialogContent sx={SX.dialogContentSX}>
         <Stack spacing={1}>

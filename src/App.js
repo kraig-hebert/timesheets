@@ -15,6 +15,7 @@ import AddEntryModal from './components/modals/addModals/AddEntryModal';
 import EditExpensesModal from './components/modals/editModals/editExpenseModal/EditExpensesModal';
 import EditEntryModal from './components/modals/editModals/EditEntryModal';
 import AddUserModal from './components/modals/addModals/AddUserModal';
+import EditUserModal from './components/modals/editModals/EditUserModal';
 // import date picker dependancies
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -52,6 +53,7 @@ function App() {
           <AddEntryModal />
           <EditEntryModal />
           <AddUserModal />
+          <EditUserModal />
         </Container>
       </LocalizationProvider>
     </ThemeProvider>

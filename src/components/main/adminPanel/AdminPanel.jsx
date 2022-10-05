@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUsers } from '../../../reducers/usersSlice';
 import RowButton from '../rowButton/RowButton';
 
@@ -17,9 +17,15 @@ import {
   CheckBox,
   PersonAddAlt,
 } from '@mui/icons-material';
+import { modalOpened } from '../../../reducers/appSettingsSlice';
 
 const AdminPanel = () => {
+  const dispatch = useDispatch();
   const users = useSelector(selectUsers);
+
+  const handleRowClick = (id) => {
+    dispatch(modalOpened('edit-users'));
+  };
 
   // table row constructor
   const createData = (
@@ -62,7 +68,13 @@ const AdminPanel = () => {
   });
 
   const renderedRowList = rows.map((row) => (
-    <TableRow key={row.id} sx={SX.tableRowSX(row.style)}>
+    <TableRow
+      key={row.id}
+      sx={SX.tableRowSX(row.style)}
+      onClick={(e) => {
+        handleRowClick(row.id);
+      }}
+    >
       <TableCell align="center" sx={{ width: '15%' }}>
         {row.username}
       </TableCell>

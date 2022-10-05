@@ -42,6 +42,18 @@ export const saveNewUser = createAsyncThunk(
   }
 );
 
+// edit user in db and update state.users.entities
+export const editUser = createAsyncThunk('users/editUser', async (user) => {
+  const response = await client.patch(user, 'esuers');
+  if (response.status === 200) return user;
+});
+
+// delete user in db and update state.users.entities
+export const deleteUser = createAsyncThunk('users/deleteUser', async (id) => {
+  const response = await client.remove(id, 'users');
+  if (response.status === 200) return id;
+});
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -66,6 +78,18 @@ const usersSlice = createSlice({
       .addCase(saveNewUser.fulfilled, (state, action) => {
         const user = action.payload;
         state.entities[user.id] = user;
+      })
+      .addCase(editUser.fulfilled, (state, action) => {
+        const user = action.payload;
+        state.entities[user.id] = user;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        const id = action.payload;
+        const newUsers = {};
+        Object.values(state.entities).forEach((user) => {
+          if (id != user.id) newUsers[user.id] = user;
+        });
+        state.entities = newUsers;
       });
   },
 });
