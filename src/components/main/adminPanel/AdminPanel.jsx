@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUsers } from '../../../reducers/usersSlice';
+import { employeeRowClicked, selectUsers } from '../../../reducers/usersSlice';
 import RowButton from '../rowButton/RowButton';
 
 import {
@@ -25,6 +25,7 @@ const AdminPanel = () => {
 
   const handleRowClick = (id) => {
     dispatch(modalOpened('edit-users'));
+    dispatch(employeeRowClicked(id));
   };
 
   // table row constructor

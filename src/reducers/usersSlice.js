@@ -16,6 +16,7 @@ const initialState = {
     isAdmin: true,
     hasCellPhone: true,
   },
+  editUserID: '',
 };
 
 // return next Available id
@@ -44,7 +45,7 @@ export const saveNewUser = createAsyncThunk(
 
 // edit user in db and update state.users.entities
 export const editUser = createAsyncThunk('users/editUser', async (user) => {
-  const response = await client.patch(user, 'esuers');
+  const response = await client.patch(user, 'users');
   if (response.status === 200) return user;
 });
 
@@ -64,6 +65,10 @@ const usersSlice = createSlice({
     },
     userLoggedOut(state) {
       state.activeUser = '';
+    },
+    employeeRowClicked(state, action) {
+      const id = action.payload;
+      state.editUserID = id;
     },
   },
   extraReducers: (builder) => {
@@ -94,11 +99,13 @@ const usersSlice = createSlice({
   },
 });
 
-export const {} = usersSlice.actions;
+export const { employeeRowClicked, userLoggedIn, userLoggedOut } =
+  usersSlice.actions;
 
 // selectors
 export const selectUserEntities = (state) => state.users.entities;
 export const selectActiveUser = (state) => state.users.activeUser;
+export const selectEditUserID = (state) => state.users.editUserID;
 
 export const selectUnfilteredUsers = createSelector(
   selectUserEntities,
@@ -116,6 +123,13 @@ export const selectUsers = createSelector(
   }
 );
 
-export const { userLoggedIn, userLoggedOut } = usersSlice.actions;
+export const selectEditUser = createSelector(
+  selectEditUserID,
+  selectUsers,
+  (id, users) => {
+    const editUsersList = users.filter((user) => user.id === id);
+    return editUsersList[0];
+  }
+);
 
 export default usersSlice.reducer;

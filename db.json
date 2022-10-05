@@ -154,9 +154,9 @@
     {
       "username": "timbrown@gmail.com",
       "password": "password",
-      "firstName": "Tim",
+      "firstName": "Timothy",
       "lastName": "Brown",
-      "isAdmin": false,
+      "isAdmin": true,
       "hasCellPhone": true,
       "id": 4
     }
