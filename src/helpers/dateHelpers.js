@@ -13,8 +13,15 @@ export const MONTHS = [
   'December',
 ];
 
-export const YEARS = ['2022', '2021', '2020'];
-
+// return list of years from current year to 3 years prior
+export const getYears = () => {
+  const newDate = new Date();
+  return [
+    newDate.getFullYear(),
+    newDate.getFullYear() - 1,
+    newDate.getFullYear() - 2,
+  ];
+};
 // return month name from dateObject.getMonth()
 export const getMonthName = (monthIndex) => MONTHS[monthIndex];
 

@@ -2,11 +2,11 @@ import React from 'react';
 import YearButton from './yearButton/YearButton';
 import { stackSX } from './sideBarSX';
 import { Stack } from '@mui/material';
-import { YEARS } from '../../helpers/dateHelpers';
+import { getYears } from '../../helpers/dateHelpers';
 
 const SideBar = () => {
-  const renderedYearList = YEARS.map((year) => {
-    return <YearButton year={year} key={year} />;
+  const renderedYearList = getYears().map((year) => {
+    return <YearButton year={year.toString()} key={year} />;
   });
 
   return (
