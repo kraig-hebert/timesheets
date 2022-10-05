@@ -151,6 +151,7 @@ const TableActionRow = () => {
             dispatch(openPageSelected(e.target.value));
           }}
           sx={SX.selectSX}
+          disabled={entrySearchActive | expenseSearchActive}
         >
           <MenuItem value="Entries">Entries</MenuItem>
           <MenuItem value="Expenses">Expenses</MenuItem>
