@@ -26,7 +26,7 @@ export const getTimeString = (dateObject) => {
   const pieces = dateObject.toLocaleTimeString().split(':');
   const lastItem = pieces[pieces.length - 1];
   const amOrPm = lastItem.slice(lastItem.length - 3, lastItem.length);
-  return `${pieces[0]} : ${pieces[1]} ${amOrPm}`;
+  return `${pieces[0]}:${pieces[1]} ${amOrPm}`;
 };
 
 // changes memory object to Date.JSON or returns Date.JSON
@@ -55,9 +55,11 @@ export const forceDateTimeString = (dateObj) => {
   if (dateObj.hasOwnProperty('_isAMomentObject')) {
     const newDateObj = dateObj.toDate();
     newDateObj.setSeconds(0);
+    newDateObj.setMilliseconds(0);
     return newDateObj.toJSON();
   } else {
     dateObj.setSeconds(0);
+    dateObj.setMilliseconds(0);
     return dateObj.toJSON();
   }
 };
