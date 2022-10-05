@@ -13,7 +13,7 @@ export const MONTHS = [
   'December',
 ];
 
-// return list of years from current year to 3 years prior
+// return list of years from current year to 2 years prior
 export const getYears = () => {
   const newDate = new Date();
   return [
