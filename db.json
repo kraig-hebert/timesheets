@@ -1,7 +1,35 @@
 {
-  "entries": [
+  "entries": [],
+  "expenses": [
+    {
+      "date": "2022-10-05T04:00:00.000Z",
+      "expense": "Test Destination",
+      "miles": 10,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "date": "2022-10-05T04:00:00.000Z",
+      "expense": "Test 2 ",
+      "miles": 12,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "date": "2022-10-05T04:00:00.000Z",
+      "expense": "New Item",
+      "cost": 10,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "date": "2022-10-05T04:00:00.000Z",
+      "expense": "New Item 2",
+      "cost": 10,
+      "userId": 1,
+      "id": 4
+    }
   ],
-  "expenses": [],
   "users": [
     {
       "id": 1,

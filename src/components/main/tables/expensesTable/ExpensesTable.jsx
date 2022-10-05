@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   expenseMilesRowClicked,
   expenseRowClicked,
   selectFilteredExpenses,
+  selectFilteredSearchExpenses,
+  selectExpenseSearchActive,
 } from '../../../../reducers/expensesSlice';
-import { modalOpened } from '../../../../reducers/appSettingsSlice';
+import {
+  modalOpened,
+  selectEmployee,
+} from '../../../../reducers/appSettingsSlice';
 import { setTableDate } from '../../../../helpers/dateHelpers';
 import RowButton from '../../rowButton/RowButton';
 
@@ -23,6 +28,10 @@ import { PaidTwoTone } from '@mui/icons-material';
 const ExpensesTable = () => {
   const dispatch = useDispatch();
   const filteredExpenses = useSelector(selectFilteredExpenses);
+  const employee = useSelector(selectEmployee);
+  const expenseSearchActive = useSelector(selectExpenseSearchActive);
+  const filteredSearchExpenses = useSelector(selectFilteredSearchExpenses);
+  const [expenses, setExpenses] = useState([]);
 
   const handleRowClick = (date, sortBy) => {
     dispatch(modalOpened('edit-expenses'));
@@ -49,7 +58,7 @@ const ExpensesTable = () => {
     else return 'type2';
   };
   const setCost = (miles) => parseFloat(miles * 0.7).toFixed(2);
-  const rows = filteredExpenses.map((expense, index) => {
+  const rows = expenses.map((expense, index) => {
     if (!expense.miles) {
       return createData(
         expense.id,
@@ -93,6 +102,45 @@ const ExpensesTable = () => {
       </TableCell>
     </TableRow>
   ));
+
+  useEffect(() => {
+    let tempDict = {};
+
+    if (expenseSearchActive) setExpenses(filteredSearchExpenses);
+    else {
+      if (employee.hasCellPhone) {
+        const newExpense = {
+          id: 0,
+          expense: 'Cell Phone',
+          cost: 50.0,
+        };
+        tempDict['0'] = newExpense;
+      }
+      // combine expenses by date and separate item expenses from miles expenses
+      // set item expenses to tempDict[1] so they show up before all of the miles expenses
+      filteredExpenses.forEach((expense, index) => {
+        if (expense.hasOwnProperty('cost')) {
+          if (Object.keys(tempDict).includes('1')) {
+            tempDict[1] = {
+              ...tempDict[1],
+              expense: `${tempDict[1].expense} / ${expense.expense}`,
+              cost: tempDict[1].cost + expense.cost,
+            };
+          } else tempDict[1] = expense;
+        } else if (Object.keys(tempDict).includes(expense.date.toString())) {
+          tempDict[expense.date.toString()] = {
+            ...tempDict[expense.date],
+            expense: `${tempDict[expense.date.toString()].expense} / ${
+              expense.expense
+            }`,
+            miles: tempDict[expense.date.toString()].miles + expense.miles,
+          };
+        } else tempDict[expense.date] = expense;
+      });
+
+      setExpenses(Object.values(tempDict));
+    }
+  }, [filteredExpenses, expenseSearchActive]);
 
   return (
     <>

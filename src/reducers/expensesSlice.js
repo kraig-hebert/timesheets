@@ -11,6 +11,8 @@ const initialState = {
   entities: {},
   editMilesExpenseRowDate: [],
   sortEditableBy: 'miles',
+  expenseSearchValue: '',
+  expenseSearchActive: false,
 };
 
 // return next available id
@@ -67,6 +69,13 @@ const expensesSlice = createSlice({
       const date = action.payload;
       state.editMilesExpenseRowDate = date;
     },
+    expenseSearchValueChanged(state, action) {
+      const newValue = action.payload;
+      state.expenseSearchValue = newValue;
+    },
+    expenseSearchToggled(state) {
+      state.expenseSearchActive = !state.expenseSearchActive;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -96,14 +105,22 @@ const expensesSlice = createSlice({
   },
 });
 
-export const { expenseRowClicked, expenseMilesRowClicked } =
-  expensesSlice.actions;
+export const {
+  expenseRowClicked,
+  expenseMilesRowClicked,
+  expenseSearchValueChanged,
+  expenseSearchToggled,
+} = expensesSlice.actions;
 
 // selectors
 export const selectExpenseEntities = (state) => state.expenses.entities;
 export const selectSortEditableBy = (state) => state.expenses.sortEditableBy;
 export const selectMilesEditExpenseRowDate = (state) =>
   state.expenses.editMilesExpenseRowDate;
+export const selectExpenseSearchValue = (state) =>
+  state.expenses.expenseSearchValue;
+export const selectExpenseSearchActive = (state) =>
+  state.expenses.expenseSearchActive;
 
 // selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
@@ -156,9 +173,7 @@ export const selectEditExpenses = createSelector(
   }
 );
 
-// select expenses filtered by month and year
-// expeneses with the same date will be combined into 1 expense
-// disdplay as: "destination / destination" and miles are added together
+// select expenses filtered by month and year and employee
 export const selectFilteredExpenses = createSelector(
   selectActiveMonth,
   selectActiveYear,
@@ -168,45 +183,27 @@ export const selectFilteredExpenses = createSelector(
     // skips error when no employee exists on initial page load
     if (!employee) return [];
 
-    let tempDict = {};
-    if (employee.hasCellPhone) {
-      const newExpense = {
-        id: 0,
-        expense: 'Cell Phone',
-        cost: 50.0,
-      };
-      tempDict['0'] = newExpense;
-    }
-
     const filteredExpenses = expenses.filter(
       (expense) =>
         MONTHS[expense.date.getMonth()] === activeMonth &&
         expense.date.getFullYear().toString() === activeYear &&
         expense.userId === employee.id
     );
+    return filteredExpenses;
+  }
+);
 
-    // combine expenses by date and separate item expenses from miles expenses
-    // set item expenses to tempDict[1] so they show up before all of the miles expenses
-    filteredExpenses.forEach((expense, index) => {
-      if (expense.hasOwnProperty('cost')) {
-        if (Object.keys(tempDict).includes('1')) {
-          tempDict[1] = {
-            ...tempDict[1],
-            expense: `${tempDict[1].expense} / ${expense.expense}`,
-            cost: tempDict[1].cost + expense.cost,
-          };
-        } else tempDict[1] = expense;
-      } else if (Object.keys(tempDict).includes(expense.date.toString())) {
-        tempDict[expense.date.toString()] = {
-          ...tempDict[expense.date],
-          expense: `${tempDict[expense.date.toString()].expense} / ${
-            expense.expense
-          }`,
-          miles: tempDict[expense.date.toString()].miles + expense.miles,
-        };
-      } else tempDict[expense.date] = expense;
-    });
-    return Object.values(tempDict);
+// select filtered expenses and than filter again by search bar criteria
+export const selectFilteredSearchExpenses = createSelector(
+  selectFilteredExpenses,
+  selectExpenseSearchValue,
+  selectExpenseSearchActive,
+  (expenses, searchValue, isActive) => {
+    if (isActive) {
+      return expenses.filter((expense) =>
+        expense.expense.includes(searchValue)
+      );
+    }
   }
 );
 

@@ -5,7 +5,7 @@ import TableActionRow from './actionRow/TableActionRow';
 import AdminActionRow from './actionRow/AdminActionRow';
 import EntriesTable from './tables/entriesTable/EntriesTable';
 import ExpensesTable from './tables/expensesTable/ExpensesTable';
-import { adminRowContainerSX, containerSX } from './mainSX';
+import { adminRowContainerSX, tableContainerSX } from './mainSX';
 import { Container, Stack } from '@mui/material';
 import AdminPanel from './adminPanel/AdminPanel';
 
@@ -17,14 +17,14 @@ const Main = () => {
       <Stack>
         {openPage === 'Entries' ? (
           <>
-            <Container sx={containerSX} disableGutters maxWidth={false}>
+            <Container sx={tableContainerSX} disableGutters maxWidth={false}>
               <TableActionRow />
             </Container>
             <EntriesTable />
           </>
         ) : openPage === 'Expenses' ? (
           <>
-            <Container sx={containerSX} disableGutters maxWidth={false}>
+            <Container sx={tableContainerSX} disableGutters maxWidth={false}>
               <TableActionRow />
             </Container>
 

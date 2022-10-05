@@ -10,6 +10,11 @@ import {
   selectEntrySearchValue,
   entrySearchValueChanged,
 } from '../../../reducers/entriesSlice';
+import {
+  selectExpenseSearchValue,
+  expenseSearchValueChanged,
+  expenseSearchToggled,
+} from '../../../reducers/expensesSlice';
 import * as SX from './actionRowSX';
 import { Search } from '@mui/icons-material';
 
@@ -28,6 +33,7 @@ const TableActionRow = () => {
   const dispatch = useDispatch();
   const sheetType = useSelector(selectSheetType);
   const entrySearchValue = useSelector(selectEntrySearchValue);
+  const expenseSearchValue = useSelector(selectExpenseSearchValue);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
   const users = useSelector(selectUsers);
 
@@ -55,12 +61,25 @@ const TableActionRow = () => {
       <TextField
         label={`Search ${sheetType}`}
         size="small"
-        value={entrySearchValue}
-        onChange={(e) => dispatch(entrySearchValueChanged(e.target.value))}
+        value={sheetType === 'Entries' ? entrySearchValue : expenseSearchValue}
+        onChange={(e) => {
+          if (sheetType === 'Entries')
+            dispatch(entrySearchValueChanged(e.target.value));
+          else dispatch(expenseSearchValueChanged(e.target.value));
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton color="secondary">
+              <IconButton
+                color="secondary"
+                onClick={(e) => {
+                  if (sheetType === 'Entries') {
+                    console.log('entries');
+                  } else {
+                    dispatch(expenseSearchToggled());
+                  }
+                }}
+              >
                 <Search />
               </IconButton>
             </InputAdornment>

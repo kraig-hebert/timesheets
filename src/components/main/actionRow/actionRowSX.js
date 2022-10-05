@@ -1,5 +1,5 @@
 export const textFieldSX = {
-  width: '500px',
+  width: '400px',
   color: 'secondary.main',
   input: {
     color: 'secondary.main',

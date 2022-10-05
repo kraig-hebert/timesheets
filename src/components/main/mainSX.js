@@ -1,4 +1,4 @@
-export const containerSX = {
+export const tableContainerSX = {
   display: 'flex',
   justifyContent: 'space-between',
   paddingBottom: '10px',
