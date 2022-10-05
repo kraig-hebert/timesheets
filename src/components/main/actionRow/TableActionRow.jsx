@@ -9,6 +9,8 @@ import {
 import {
   selectEntrySearchValue,
   entrySearchValueChanged,
+  selectEntrySearchActive,
+  entrySearchToggled,
 } from '../../../reducers/entriesSlice';
 import {
   selectExpenseSearchValue,
@@ -37,6 +39,7 @@ const TableActionRow = () => {
   const dispatch = useDispatch();
   const sheetType = useSelector(selectSheetType);
   const entrySearchValue = useSelector(selectEntrySearchValue);
+  const entrySearchActive = useSelector(selectEntrySearchActive);
   const expenseSearchValue = useSelector(selectExpenseSearchValue);
   const expenseSearchActive = useSelector(selectExpenseSearchActive);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
@@ -44,6 +47,11 @@ const TableActionRow = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const handleEntrySearchIconClick = (e) => {
+    dispatch(entrySearchToggled());
+    if (!entrySearchActive) setAnchorEl(e.currentTarget);
+    else setAnchorEl(null);
+  };
   const handleExpenseSearchIconClick = (e) => {
     dispatch(expenseSearchToggled());
     if (!expenseSearchActive) setAnchorEl(e.currentTarget);
@@ -87,7 +95,7 @@ const TableActionRow = () => {
                 color="secondary"
                 onClick={(e) => {
                   if (sheetType === 'Entries') {
-                    console.log('entries');
+                    handleEntrySearchIconClick(e);
                   } else {
                     handleExpenseSearchIconClick(e);
                   }

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   entryRowClicked,
   selectFilteredEntries,
+  selectFilteredSearchEntries,
+  selectEntrySearchActive,
 } from '../../../../reducers/entriesSlice';
 import { modalOpened } from '../../../../reducers/appSettingsSlice';
 import * as dh from '../../../../helpers/dateHelpers';
@@ -23,6 +25,9 @@ const EntriesTable = () => {
   const dispatch = useDispatch();
   let lastStyle = 'type2';
   const filteredEntries = useSelector(selectFilteredEntries);
+  const entrySearchActive = useSelector(selectEntrySearchActive);
+  const filteredSearchEntries = useSelector(selectFilteredSearchEntries);
+  const [entries, setEntries] = useState([]);
 
   // table row data constructor
   const createData = (
@@ -67,7 +72,7 @@ const EntriesTable = () => {
       }
     }
   };
-  const rows = filteredEntries.map((entry, index) =>
+  const rows = entries.map((entry, index) =>
     createData(
       entry.id,
       entry.date,
@@ -114,6 +119,11 @@ const EntriesTable = () => {
       </TableCell>
     </TableRow>
   ));
+
+  useEffect(() => {
+    if (entrySearchActive) setEntries(filteredSearchEntries);
+    else setEntries(filteredEntries);
+  }, [filteredEntries, entrySearchActive]);
 
   return (
     <>

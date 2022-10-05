@@ -7,7 +7,12 @@ import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
 import { selectEmployee } from './appSettingsSlice';
 
-const initialState = { entities: {}, editEntryRowID: '', entrySearchValue: '' };
+const initialState = {
+  entities: {},
+  editEntryRowID: '',
+  entrySearchValue: '',
+  entrySearchActive: false,
+};
 
 // return next available id
 const getID = (entryList) =>
@@ -63,6 +68,9 @@ const entriesSlice = createSlice({
       const newValue = action.payload;
       state.entrySearchValue = newValue;
     },
+    entrySearchToggled(state) {
+      state.entrySearchActive = !state.entrySearchActive;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -93,13 +101,15 @@ const entriesSlice = createSlice({
   },
 });
 
-export const { entryRowClicked, entrySearchValueChanged } =
+export const { entryRowClicked, entrySearchValueChanged, entrySearchToggled } =
   entriesSlice.actions;
 
 // selectors
 export const selectEntryEntities = (state) => state.entries.entities;
 export const selectEditEntryRowID = (state) => state.entries.editEntryRowID;
 export const selectEntrySearchValue = (state) => state.entries.entrySearchValue;
+export const selectEntrySearchActive = (state) =>
+  state.entries.entrySearchActive;
 
 // selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
@@ -146,6 +156,18 @@ export const selectFilteredEntries = createSelector(
         entry.userId === employee.id
     );
     return filteredEntries;
+  }
+);
+
+// select filtered enties and than filter agasin by search bar criteria
+export const selectFilteredSearchEntries = createSelector(
+  selectFilteredEntries,
+  selectEntrySearchValue,
+  selectEntrySearchActive,
+  (entries, searchValue, isActive) => {
+    if (isActive) {
+      return entries.filter((entry) => entry.location.includes(searchValue));
+    }
   }
 );
 
