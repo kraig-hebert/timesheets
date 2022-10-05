@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   openPageSelected,
@@ -13,6 +13,7 @@ import {
 import {
   selectExpenseSearchValue,
   expenseSearchValueChanged,
+  selectExpenseSearchActive,
   expenseSearchToggled,
 } from '../../../reducers/expensesSlice';
 import * as SX from './actionRowSX';
@@ -24,8 +25,11 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
+  Popover,
   Select,
+  Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import { selectUsers } from '../../../reducers/usersSlice';
 
@@ -34,8 +38,17 @@ const TableActionRow = () => {
   const sheetType = useSelector(selectSheetType);
   const entrySearchValue = useSelector(selectEntrySearchValue);
   const expenseSearchValue = useSelector(selectExpenseSearchValue);
+  const expenseSearchActive = useSelector(selectExpenseSearchActive);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
   const users = useSelector(selectUsers);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleExpenseSearchIconClick = (e) => {
+    dispatch(expenseSearchToggled());
+    if (!expenseSearchActive) setAnchorEl(e.currentTarget);
+    else setAnchorEl(null);
+  };
 
   let renderedUserMenuItems = [];
   if (users[0] != '') {
@@ -76,7 +89,7 @@ const TableActionRow = () => {
                   if (sheetType === 'Entries') {
                     console.log('entries');
                   } else {
-                    dispatch(expenseSearchToggled());
+                    handleExpenseSearchIconClick(e);
                   }
                 }}
               >
@@ -87,6 +100,34 @@ const TableActionRow = () => {
         }}
         sx={SX.textFieldSX}
       />
+      <Popover
+        id="mouse-over-popover"
+        sx={SX.popoverSX}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 10,
+          horizontal: -20,
+        }}
+        onClose={(e) => {
+          setAnchorEl(null);
+        }}
+        elevation={0}
+      >
+        <Stack
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
+          sx={{ width: '100px' }}
+        >
+          <Typography varaint="h7">Search Active</Typography>
+        </Stack>
+      </Popover>
+
       <FormControl>
         <InputLabel id="sheet-selector-label" sx={SX.labelSX}>
           Sheet Type

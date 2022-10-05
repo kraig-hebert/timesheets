@@ -38,3 +38,12 @@ export const selectSX = {
     color: 'secondary.main',
   },
 };
+
+export const popoverSX = {
+  pointerEvents: 'none',
+
+  '& .MuiPopover-paper': {
+    backgroundColor: 'transparent',
+    color: '#fff',
+  },
+};
