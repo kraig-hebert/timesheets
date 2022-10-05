@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   openPageSelected,
@@ -6,6 +6,10 @@ import {
   selectEmployeeSelectValue,
   employeeSelectValueSelected,
 } from '../../../reducers/appSettingsSlice';
+import {
+  selectEntrySearchValue,
+  entrySearchValueChanged,
+} from '../../../reducers/entriesSlice';
 import * as SX from './actionRowSX';
 import { Search } from '@mui/icons-material';
 
@@ -23,9 +27,9 @@ import { selectUsers } from '../../../reducers/usersSlice';
 const TableActionRow = () => {
   const dispatch = useDispatch();
   const sheetType = useSelector(selectSheetType);
+  const entrySearchValue = useSelector(selectEntrySearchValue);
   const employeeSelectValue = useSelector(selectEmployeeSelectValue);
   const users = useSelector(selectUsers);
-  const [searchValue, setSearchValue] = useState('');
 
   let renderedUserMenuItems = [];
   if (users[0] != '') {
@@ -51,8 +55,8 @@ const TableActionRow = () => {
       <TextField
         label={`Search ${sheetType}`}
         size="small"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={entrySearchValue}
+        onChange={(e) => dispatch(entrySearchValueChanged(e.target.value))}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

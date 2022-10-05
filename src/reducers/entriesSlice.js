@@ -7,7 +7,7 @@ import * as client from '../api/client';
 import { MONTHS } from '../helpers/dateHelpers';
 import { selectEmployee } from './appSettingsSlice';
 
-const initialState = { entities: {}, editEntryRowID: '' };
+const initialState = { entities: {}, editEntryRowID: '', entrySearchValue: '' };
 
 // return next available id
 const getID = (entryList) =>
@@ -59,6 +59,10 @@ const entriesSlice = createSlice({
       const id = action.payload;
       state.editEntryRowID = id;
     },
+    entrySearchValueChanged(state, action) {
+      const newValue = action.payload;
+      state.entrySearchValue = newValue;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,12 +93,13 @@ const entriesSlice = createSlice({
   },
 });
 
-export const { entryRowClicked } = entriesSlice.actions;
+export const { entryRowClicked, entrySearchValueChanged } =
+  entriesSlice.actions;
 
 // selectors
 export const selectEntryEntities = (state) => state.entries.entities;
-
 export const selectEditEntryRowID = (state) => state.entries.editEntryRowID;
+export const selectEntrySearchValue = (state) => state.entries.entrySearchValue;
 
 // selectors from appSettingsSlice
 const selectActiveMonth = (state) => state.appSettings.activeMonth;
