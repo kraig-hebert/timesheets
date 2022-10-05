@@ -22,7 +22,12 @@ export const getMonthName = (monthIndex) => MONTHS[monthIndex];
 export const getMonthIndex = (monthName) => MONTHS.indexOf(monthName);
 
 // return formatted time string for table
-export const getTimeString = (dateObject) => dateObject.toLocaleTimeString();
+export const getTimeString = (dateObject) => {
+  const pieces = dateObject.toLocaleTimeString().split(':');
+  const lastItem = pieces[pieces.length - 1];
+  const amOrPm = lastItem.slice(lastItem.length - 3, lastItem.length);
+  return `${pieces[0]} : ${pieces[1]} ${amOrPm}`;
+};
 
 // changes memory object to Date.JSON or returns Date.JSON
 // this will have onlt the DATE as part of the Date Object
